@@ -1,4 +1,0 @@
-1. 새로운 브랜치를 생성 및 이동
-2. 커밋
-3. 생성한 브랜치를 remote Repository로 push
-4. Pull Request로 dev와 merge 해주세요.
