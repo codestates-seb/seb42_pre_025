@@ -34,6 +34,8 @@ public class SecurityConfig {
                 .formLogin()
                 .permitAll();
         http
+                .cors(httpSecurityCorsConfigurer -> corsConfigurationSource());
+        http
                 .csrf().disable();
         http
                 .headers().frameOptions().sameOrigin();
@@ -46,7 +48,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("*"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
