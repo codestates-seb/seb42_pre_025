@@ -1,6 +1,5 @@
 {
     "singleQuote": true,
-    "tabWidth": 4,
-    "defaultFormatter": "esbenp.prettier-vscode",
-    "formatOnSave": true 
+    "jsxSingleQuote": true, 
+    "trailingComma": "none"
 }
