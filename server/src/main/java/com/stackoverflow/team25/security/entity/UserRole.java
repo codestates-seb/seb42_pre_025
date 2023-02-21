@@ -1,6 +1,5 @@
 package com.stackoverflow.team25.security.entity;
 
-import com.stackoverflow.team25.security.entity.Role;
 import com.stackoverflow.team25.user.entity.User;
 import lombok.Getter;
 import lombok.Setter;
