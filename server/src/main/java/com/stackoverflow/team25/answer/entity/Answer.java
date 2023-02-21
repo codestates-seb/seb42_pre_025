@@ -15,11 +15,9 @@ public class Answer extends Auditable {
     @Id
     @GeneratedValue
     private Long answerId;
-
     //Todo: 사용자 객체
 //    @Column(nullable = false)
 //    private Owner owner;
-
     //Todo: 외래키
 //    @ManyToOne
 //    @JoinColumn(name = "questionId")
@@ -27,7 +25,6 @@ public class Answer extends Auditable {
     private Long score;
     @Column(name = "isAccepted")
     private Boolean isAccepted;
-
     @Lob // Large Object
     @Column(nullable = false)
     private String content;
