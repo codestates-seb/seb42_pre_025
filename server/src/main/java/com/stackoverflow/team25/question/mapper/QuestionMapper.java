@@ -1,8 +1,8 @@
-package com.stackoverflow.team25.Question.mapper;
+package com.stackoverflow.team25.question.mapper;
 
-import com.stackoverflow.team25.Question.dto.QuestionPatchDto;
-import com.stackoverflow.team25.Question.dto.QuestionResponseDto;
-import com.stackoverflow.team25.Question.entity.Question;
+import com.stackoverflow.team25.question.dto.QuestionPatchDto;
+import com.stackoverflow.team25.question.dto.QuestionResponseDto;
+import com.stackoverflow.team25.question.entity.Question;
 import org.mapstruct.Mapper;
 
 import javax.validation.Valid;

@@ -5,7 +5,6 @@ spring:
 spring:
   profiles: postgres
   datasource:
-#    url: jdbc:postgresql://newjeans-database.ctqi1goelh1j.ap-northeast-2.rds.amazonaws.com:5432/newjeans_database
     url: jdbc:postgresql://localhost:5432/springboot
     password: ${POSTGRESQL_PASSWORD}
     username: ${POSTGRESQL_USERNAME}

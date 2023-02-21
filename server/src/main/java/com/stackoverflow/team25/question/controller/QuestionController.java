@@ -1,12 +1,13 @@
-package com.stackoverflow.team25.Question.controller;
+package com.stackoverflow.team25.question.controller;
 
-import com.stackoverflow.team25.Question.dto.QuestionPatchDto;
-import com.stackoverflow.team25.Question.entity.Question;
-import com.stackoverflow.team25.Question.mapper.QuestionMapper;
-import com.stackoverflow.team25.Question.service.QuestionService;
-import com.stackoverflow.team25.Utils.UriCreator;
+import com.stackoverflow.team25.question.dto.QuestionPatchDto;
+import com.stackoverflow.team25.question.entity.Question;
+import com.stackoverflow.team25.question.mapper.QuestionMapper;
+import com.stackoverflow.team25.question.service.QuestionService;
+import com.stackoverflow.team25.utils.UriCreator;
 import com.stackoverflow.team25.dto.MultiResponseDto;
 import com.stackoverflow.team25.dto.SingleResponseDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,15 +22,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/questions")
 @Validated
+@RequiredArgsConstructor
 public class QuestionController {
     private final static String question_DEFAULT_URL = "/questions";
-    private QuestionService questionService;
-    private QuestionMapper mapper;
-
-    public QuestionController(QuestionService questionService, QuestionMapper questionMapper) {
-        this.questionService = questionService;
-        this.mapper = questionMapper;
-    }
+    private final QuestionService questionService;
+    private final QuestionMapper mapper;
 
     @PostMapping
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionPatchDto questionPostDto) {

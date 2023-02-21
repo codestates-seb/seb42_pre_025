@@ -1,6 +1,5 @@
 package com.stackoverflow.team25.dto;
 
-import com.stackoverflow.team25.Question.dto.QuestionResponseDto;
 import lombok.Getter;
 import org.springframework.data.domain.Page;
 

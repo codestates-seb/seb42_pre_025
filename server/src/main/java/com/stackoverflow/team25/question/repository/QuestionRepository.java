@@ -1,6 +1,6 @@
-package com.stackoverflow.team25.Question.repository;
+package com.stackoverflow.team25.question.repository;
 
-import com.stackoverflow.team25.Question.entity.Question;
+import com.stackoverflow.team25.question.entity.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

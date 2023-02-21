@@ -1,10 +1,8 @@
-package com.stackoverflow.team25.Question.entity;
+package com.stackoverflow.team25.question.entity;
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 @Entity
 @Table(name = "questions")

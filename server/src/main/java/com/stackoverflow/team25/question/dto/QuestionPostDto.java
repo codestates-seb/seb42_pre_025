@@ -1,4 +1,4 @@
-package com.stackoverflow.team25.Question.dto;
+package com.stackoverflow.team25.question.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
