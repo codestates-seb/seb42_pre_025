@@ -1,21 +1,26 @@
 import { useEffect, useState } from 'react';
 
 const { REACT_APP_BASE_URL } = process.env;
-const URL = `${REACT_APP_BASE_URL}/api/hello`;
-//   console.log(URL);
+const URL = `${REACT_APP_BASE_URL}/api/users`;
+console.log(URL);
 
 function Input() {
-  const [inputValue, setInputValue] = useState('');
+  const [userNameValue, setUserNameValue] = useState('');
+  const [emailValue, setEmailValue] = useState('');
 
-  const handleInput = (e) => {
-    setInputValue(e.target.value);
+  const handleUserNameValue = (e) => {
+    setUserNameValue(e.target.value);
+  };
+  const handleEmailValue = (e) => {
+    setEmailValue(e.target.value);
   };
 
   const postData = async () => {
-    if (inputValue === '') return;
+    if (userNameValue === '' || emailValue === '') return;
 
     const newData = {
-      text: inputValue
+      displayName: userNameValue,
+      email: emailValue
     };
 
     try {
@@ -35,36 +40,48 @@ function Input() {
 
   return (
     <form style={{ marginBottom: '8px' }}>
+      <label htmlFor='userName'>Display Name</label>
       <input
+        id='userName'
         type='text'
-        placeholder='텍스트를 입력하세요'
-        value={inputValue}
-        onChange={handleInput}
+        placeholder='이름을 입력하세요'
+        value={userNameValue}
+        onChange={handleUserNameValue}
       ></input>
+      <br></br>
+      <label htmlFor='email'>Email</label>
+      <input
+        id='email'
+        type='email'
+        placeholder='이메일을 입력하세요'
+        value={emailValue}
+        onChange={handleEmailValue}
+      ></input>
+      <br></br>
       <button onClick={postData}>제출</button>
     </form>
   );
 }
 
 function API_TEST() {
-  const [data, setData] = useState('');
+  const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await fetch(URL);
+        const res = await fetch(`${URL}/1`);
         const data = await res.json();
         // console.log(data);
         // console.log(typeof data);
-        setData(data.data);
+        setUserInfo(data.data);
       } catch (error) {
         console.error(error);
       }
     };
     getData();
   }, []);
-  //   console.log('state data:');
-  console.log(data);
+
+  console.log(userInfo);
 
   const deleteData = async (id) => {
     try {
@@ -81,19 +98,16 @@ function API_TEST() {
 
   return (
     <>
-      {/* <p>여기에 데이터 나오면 성공</p>
-      <p>{data}</p> */}
       <Input />
+      <hr></hr>
       <ul>
-        {data &&
-          data.map((obj) => (
-            <li key={obj.id}>
-              <span>{obj.text}</span>
-              <button style={{ marginLeft: '4px' }} onClick={() => deleteData(obj.id)}>
-                삭제
-              </button>
-            </li>
-          ))}
+        <li>
+          <p>이름: {userInfo && userInfo.displayName}</p>
+          <p>이메일: {userInfo && userInfo.email}</p>
+          <button style={{ marginLeft: '4px' }} onClick={() => deleteData(userInfo.userId)}>
+            삭제
+          </button>
+        </li>
       </ul>
     </>
   );
