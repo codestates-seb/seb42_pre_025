@@ -28,6 +28,13 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus = UserStatus.USER_ACTIVATE;
 
+    public void setUserRole(UserRole userRole) {
+        this.userRoles.add(userRole);
+        if (userRole.getUser() != this) {
+            userRole.setUser(this);
+        }
+    }
+
     @Getter
     public enum UserStatus {
         USER_ACTIVATE(1, "활동중"),
