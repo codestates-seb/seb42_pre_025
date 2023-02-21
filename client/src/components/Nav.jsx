@@ -1,8 +1,8 @@
 import styles from './Nav.module.css';
 import navExploreLogo from '../assets/navExplore.png';
 import navILogo from '../assets/navCollectives.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; //폰트어썸 임포트
-import { faEarthAmericas } from '@fortawesome/free-solid-svg-icons'; //폰트어썸 내의 아메리카 이모지 임포트
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; //폰트어썸 임포트
+// import { faEarthAmericas } from '@fortawesome/free-solid-svg-icons'; //폰트어썸 내의 아메리카 이모지 임포트
 
 function Nav() {
   return (
@@ -14,7 +14,7 @@ function Nav() {
           <li>
             <ol>
               <li id={styles.li2}>
-                <FontAwesomeIcon icon={faEarthAmericas} />
+                {/* <FontAwesomeIcon icon={faEarthAmericas} /> */}
                 Questions
               </li>
               <li id={styles.li3}>Tags</li>
