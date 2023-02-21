@@ -28,15 +28,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createUser(User user) {
         verifyUserByEmail(user);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        Role role = roleRepository.findByRoleName("ROLE_USER");
-        UserRole userRole = new UserRole();
-        userRole.setRole(role);
-        user.setUserRole(userRole);
+        setEncodedPassword(user);
+        setDefaultUserRole(user);
 
         return userRepository.save(user);
     }
+
 
     @Override
     public User updateUser(User user) {
@@ -75,6 +72,17 @@ public class UserServiceImpl implements UserService {
         verifyDeleteUser(user);
         user.setUserStatus(User.UserStatus.USER_DELETE);
         userRepository.save(user);
+    }
+
+    private void setDefaultUserRole(User user) {
+        Role role = roleRepository.findByRoleName("ROLE_USER");
+        UserRole userRole = new UserRole();
+        userRole.setRole(role);
+        user.setUserRole(userRole);
+    }
+
+    private void setEncodedPassword(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
     }
 
     private void verifyUserByEmail(User user) {
