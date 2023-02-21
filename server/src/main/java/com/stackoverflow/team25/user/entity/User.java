@@ -21,10 +21,13 @@ public class User {
     private String password;
     private String email;
     private String displayName;
+    @Builder.Default
     private String aboutMe = "About ME!";
     private double acceptRate;
+    @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<UserRole> userRoles = new ArrayList<>();
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus = UserStatus.USER_ACTIVATE;
 
