@@ -1,5 +1,8 @@
 package com.stackoverflow.team25.user.service.impl;
 
+import com.stackoverflow.team25.security.entity.Role;
+import com.stackoverflow.team25.security.entity.UserRole;
+import com.stackoverflow.team25.security.repository.RoleRepository;
 import com.stackoverflow.team25.user.entity.User;
 import com.stackoverflow.team25.user.repository.UserRepository;
 import com.stackoverflow.team25.user.service.UserService;
@@ -19,11 +22,18 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
+
 
     @Override
     public User createUser(User user) {
         verifyUserByEmail(user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        Role role = roleRepository.findByRoleName("ROLE_USER");
+        UserRole userRole = new UserRole();
+        userRole.setRole(role);
+        user.setUserRole(userRole);
 
         return userRepository.save(user);
     }
