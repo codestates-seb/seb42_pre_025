@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 
-const BASE_URL = 'http://ec2-15-165-216-129.ap-northeast-2.compute.amazonaws.com:8080';
+const { REACT_APP_BASE_URL } = process.env;
+const URL = `${REACT_APP_BASE_URL}/api/hello`;
+//   console.log(URL);
 
 function Input() {
   const [inputValue, setInputValue] = useState('');
@@ -17,7 +19,7 @@ function Input() {
     };
 
     try {
-      const res = await fetch(BASE_URL, {
+      const res = await fetch(URL, {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -45,26 +47,28 @@ function Input() {
 }
 
 function API_TEST() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState('');
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await fetch(BASE_URL);
+        const res = await fetch(URL);
         const data = await res.json();
         // console.log(data);
-        setData(data);
+        // console.log(typeof data);
+        setData(data.data);
       } catch (error) {
         console.error(error);
       }
     };
     getData();
   }, []);
+  //   console.log('state data:');
   console.log(data);
 
   const deleteData = async (id) => {
     try {
-      const res = await fetch(`${BASE_URL}/${id}`, {
+      const res = await fetch(`${URL}/${id}`, {
         method: 'DELETE',
         mode: 'cors'
       });
@@ -77,16 +81,19 @@ function API_TEST() {
 
   return (
     <>
+      {/* <p>여기에 데이터 나오면 성공</p>
+      <p>{data}</p> */}
       <Input />
       <ul>
-        {data.map((obj) => (
-          <li key={obj.id}>
-            <span>{obj.text}</span>
-            <button style={{ marginLeft: '4px' }} onClick={() => deleteData(obj.id)}>
-              삭제
-            </button>
-          </li>
-        ))}
+        {data &&
+          data.map((obj) => (
+            <li key={obj.id}>
+              <span>{obj.text}</span>
+              <button style={{ marginLeft: '4px' }} onClick={() => deleteData(obj.id)}>
+                삭제
+              </button>
+            </li>
+          ))}
       </ul>
     </>
   );
