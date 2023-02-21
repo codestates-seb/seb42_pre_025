@@ -1,6 +1,10 @@
 package com.stackoverflow.team25.question.controller;
 
-import com.stackoverflow.team25.question.dto.QuestionPatchDto;
+import com.stackoverflow.team25.answer.dto.AnswerDto;
+import com.stackoverflow.team25.answer.entity.Answer;
+import com.stackoverflow.team25.answer.mapper.AnswerMapper;
+import com.stackoverflow.team25.answer.service.AnswerService;
+import com.stackoverflow.team25.question.dto.QuestionDto;
 import com.stackoverflow.team25.question.entity.Question;
 import com.stackoverflow.team25.question.mapper.QuestionMapper;
 import com.stackoverflow.team25.question.service.QuestionService;
@@ -8,7 +12,9 @@ import com.stackoverflow.team25.utils.UriCreator;
 import com.stackoverflow.team25.dto.MultiResponseDto;
 import com.stackoverflow.team25.dto.SingleResponseDto;
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.jar.asm.commons.Remapper;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -24,48 +30,45 @@ import java.util.List;
 @Validated
 @RequiredArgsConstructor
 public class QuestionController {
-    private final static String question_DEFAULT_URL = "/questions";
+    private final static String QUESTION_DEFAULT_URL = "/questions";
     private final QuestionService questionService;
     private final QuestionMapper mapper;
+    private final AnswerService answerService;
+    private final AnswerMapper answerMapper;
 
     @PostMapping
-    public ResponseEntity postQuestion(@Valid @RequestBody QuestionPatchDto questionPostDto) {
+    public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.QuestionPostDto questionPostDto) {
         Question question = questionService.createQuestion(mapper.questionPostDtoToQuestion(questionPostDto));
-        URI location = UriCreator.createUri(question_DEFAULT_URL, question.getQuestionId());
+        URI location = UriCreator.createUri(QUESTION_DEFAULT_URL, question.getQuestionId());
 
         return ResponseEntity.created(location).build();
     }
 
     @PatchMapping("/{question-id}")
     public ResponseEntity patchQuestion(@PathVariable("question-id") @Positive long questionId,
-                                      @Valid @RequestBody QuestionPatchDto questionPatchDto) {
+                                      @Valid @RequestBody QuestionDto.QuestionPatchDto questionPatchDto) {
         questionPatchDto.setQuestionId(questionId);
         Question question = questionService.updateQuestion(mapper.questionPatchDtoToQuestion(questionPatchDto));
+        QuestionDto.QuestionResponseDto response = mapper.questionToQuestionResponseDto(question);
 
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.questionsToQuestionResponseDtos((List<Question>) question)),
-                HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }
 
     @GetMapping("/{question-id}")
     public ResponseEntity getQuestion(@PathVariable("question-id") long questionId) {
         Question question = questionService.findQuestion(questionId);
+        QuestionDto.QuestionResponseDto response = mapper.questionToQuestionResponseDto(question);
 
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.questionToQuestionResponseDto(question)),
-                HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseDto<>(response),HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity getQuestions(@Positive @RequestParam int page,
-                                     @Positive @RequestParam int size) {
-        Page<Question> pageQuestions = questionService.findQuestions(page - 1, size);
+    public ResponseEntity getQuestions(Pageable pageable) {
+        Page<Question> pageQuestions = questionService.findQuestions(pageable);
         List<Question> questions = pageQuestions.getContent();
+        List<QuestionDto.QuestionResponseDto> responses = mapper.questionsToQuestionResponseDtos(questions);
 
-        return new ResponseEntity<>(
-                new MultiResponseDto<>(mapper.questionsToQuestionResponseDtos(questions),
-                        pageQuestions),
-                HttpStatus.OK);
+        return new ResponseEntity<>(new MultiResponseDto<>(responses,pageQuestions),HttpStatus.OK);
     }
 
     @DeleteMapping("/{question-id}")
@@ -74,7 +77,13 @@ public class QuestionController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    
 
+    @PostMapping("/{question-id}/add")
+    public ResponseEntity postAnswer(@PathVariable("question-id") Long questionId,
+                                     @RequestBody AnswerDto.Post postDto) {
+        Answer findAnswer = answerService.createAnswer(answerMapper.answerPostDtoToAnswer(postDto));
 
+        URI location = UriCreator.createUri(QUESTION_DEFAULT_URL + "/" + questionId + "/add", findAnswer.getAnswerId());
+        return ResponseEntity.created(location).build();
+    }
 }
