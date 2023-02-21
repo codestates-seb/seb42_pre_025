@@ -1,0 +1,60 @@
+spring:
+  profiles:
+    active: postgres
+---
+spring:
+  profiles: postgres
+  datasource:
+#    url: jdbc:postgresql://newjeans-database.ctqi1goelh1j.ap-northeast-2.rds.amazonaws.com:5432/newjeans_database
+    url: jdbc:postgresql://localhost:5432/springboot
+    password: ${POSTGRESQL_PASSWORD}
+    username: ${POSTGRESQL_USERNAME}
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        highlight_sql: true
+        format_sql: true
+        show_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  output:
+    ansi:
+      enabled: always
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${GITHUB_CLIENT_ID}
+            client-secret: ${GITHUB_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
+---
+spring:
+  profiles: h2
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
