@@ -1,4 +1,4 @@
-package com.stackoverflow.team25.Utils;
+package com.stackoverflow.team25.utils;
 
 import org.springframework.web.util.UriComponentsBuilder;
 

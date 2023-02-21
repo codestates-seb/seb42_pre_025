@@ -1,11 +1,7 @@
-package com.stackoverflow.team25.Question.service;
+package com.stackoverflow.team25.question.service;
 
-import com.stackoverflow.team25.Question.dto.QuestionPatchDto;
-import com.stackoverflow.team25.Question.dto.QuestionPostDto;
-import com.stackoverflow.team25.Question.dto.QuestionResponseDto;
-import com.stackoverflow.team25.Question.entity.Question;
-import com.stackoverflow.team25.Question.mapper.QuestionMapper;
-import com.stackoverflow.team25.Question.repository.QuestionRepository;
+import com.stackoverflow.team25.question.entity.Question;
+import com.stackoverflow.team25.question.repository.QuestionRepository;
 import com.stackoverflow.team25.exception.BusinessLogicException;
 import com.stackoverflow.team25.exception.ExceptionCode;
 
@@ -15,7 +11,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 
@@ -71,7 +66,6 @@ public class QuestionService {
     }
 //u
     public Question updateQuestion(Question question) {
-        // 조회하려는 커피가 검증된 커피인지 확인(존재하는 커피인지 확인 등)
         Question findQuestion = findVerifiedQuestion(question.getQuestionId());
 
         return questionRepository.save(findQuestion);
