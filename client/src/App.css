@@ -1,1 +1,4 @@
-/* css reset 필요 */
+/* layout */
+.main-container {
+  display: flex;
+}
