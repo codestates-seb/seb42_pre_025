@@ -12,5 +12,8 @@
         <module name="team25.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="team25" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
