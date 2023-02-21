@@ -1,33 +1,29 @@
 import { useState } from 'react';
-// import API_TEST from './API_TEST.jsx';
+import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header.jsx';
-import Nav from './components/Nav.jsx';
-import Footer from './components/Footer.jsx';
 import QuestionList from './pages/QuestionList.jsx';
 import Home from './pages/Home.jsx';
+import Login from './pages/Login.jsx';
+import Signup from './pages/Signup.jsx';
 import GlobalStyles from './GlobalStyles';
 import './App.css';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   console.log(setIsLoggedIn);
 
   return (
     <>
       <GlobalStyles />
       <Header />
-      {isLoggedIn ? (
-        <div className='main-container'>
-          <Nav />
-          <QuestionList />
-        </div>
-      ) : (
-        <Home />
-      )}
-      <Footer />
+      <Routes>
+        <Route path='/' element={isLoggedIn ? <QuestionList /> : <Home />} />
+        <Route path='/questions' element={<QuestionList />} />
+        <Route path='/users/login' element={<Login />} />
+        <Route path='/users/signup' element={<Signup />} />
+      </Routes>
     </>
   );
-  // return <API_TEST />;
 }
 
 export default App;

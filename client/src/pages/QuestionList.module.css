@@ -1,3 +1,7 @@
+.container {
+  display: flex;
+}
+
 #list {
   height: 100vh;
   flex-grow: 1;
