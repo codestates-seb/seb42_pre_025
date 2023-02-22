@@ -1,4 +1,5 @@
 package com.stackoverflow.team25.answer.dto;
+import com.stackoverflow.team25.question.entity.Question;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,12 +25,15 @@ public class AnswerDto {
         private Long answerId;
         //Todo: 사용자 객체
 //    private Owner owner;
-        //Todo: 외래키
-//    private Long questionId;
+        private Long questionId;
         private Long score;
         private Boolean isAccepted;
         private String content;
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
+
+        public void setQuestion(Question question){
+            this.questionId = question.getQuestionId();
+        }
     }
 }

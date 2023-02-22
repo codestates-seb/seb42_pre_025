@@ -1,0 +1,32 @@
+.page {
+  display: flex;
+  height: 94px;
+  padding-left: 20px;
+}
+
+.pageButton {
+  text-align: center;
+  height: 27px;
+  width: 26px;
+  line-height: 29px;
+  margin-top: 20px;
+  margin-left: 3px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+}
+
+.pagedot {
+  margin-top: 30px;
+  margin-left: 10px;
+}
+
+.pageNext {
+  text-align: center;
+  height: 27px;
+  width: 46px;
+  line-height: 29px;
+  margin-top: 20px;
+  margin-left: 10px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+}

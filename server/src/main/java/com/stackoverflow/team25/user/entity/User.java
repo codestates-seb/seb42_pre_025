@@ -1,14 +1,19 @@
 package com.stackoverflow.team25.user.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.stackoverflow.team25.security.entity.UserRole;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue
@@ -16,10 +21,22 @@ public class User {
     private String password;
     private String email;
     private String displayName;
+    @Builder.Default
     private String aboutMe = "About ME!";
     private double acceptRate;
+    @Builder.Default
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    private List<UserRole> userRoles = new ArrayList<>();
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus = UserStatus.USER_ACTIVATE;
+
+    public void setUserRole(UserRole userRole) {
+        this.userRoles.add(userRole);
+        if (userRole.getUser() != this) {
+            userRole.setUser(this);
+        }
+    }
 
     @Getter
     public enum UserStatus {

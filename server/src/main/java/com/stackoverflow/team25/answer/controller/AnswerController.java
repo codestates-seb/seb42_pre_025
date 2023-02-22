@@ -22,25 +22,6 @@ import java.util.List;
 public class AnswerController {
     private final AnswerService answerService;
     private final AnswerMapper answerMapper;
-
-    @PostMapping
-    public ResponseEntity postAnswer(@RequestBody AnswerDto.Post postDto){
-        Answer findAnswer = answerService.createAnswer(answerMapper.answerPostDtoToAnswer(postDto));
-        AnswerDto.Response response = answerMapper.answerToAnswerResponseDto(findAnswer);
-
-
-        return new ResponseEntity(response, HttpStatus.CREATED);
-    }
-
-//    @PostMapping("/{question-id}/add")
-//    public ResponseEntity postAnswer(@PathVariable("question-id") Long questionId,
-//                                     @RequestBody AnswerDto.Post postDto) {
-//        Answer findAnswer = answerService.createAnswer(answerMapper.answerPostDtoToAnswer(postDto));
-//
-//        URI location = UriCreator.createUri(QUESTION_DEFAULT_URL + "/" + questionId + "/add", findAnswer.getAnswerId());
-//        return ResponseEntity.created(location).build();
-//    }
-
     @PatchMapping("/{answer-id}")
     public ResponseEntity patchAnswer(@PathVariable("answer-id") long answerId,
                                       @RequestBody AnswerDto.Patch patchDto){

@@ -15,7 +15,7 @@ spring:
     properties:
       hibernate:
         highlight_sql: true
-        format_sql: true
+#        format_sql: true
         show_sql: true
         jdbc:
           lob:
@@ -39,6 +39,38 @@ spring:
             scope:
               - email
               - profile
+server:
+  servlet:
+    session:
+      cookie:
+        same-site: none
+        secure: true
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: TRACE
+      springframework:
+        orm:
+          jpa: DEBUG
+mail:
+  smtp:
+    host: smtp.gmail.com
+    port: 587
+    username: ${GMAIL_USERNAME}
+    password: ${GMAIL_PASSWORD}
+    auth: true
+    starttls:
+      enable: true
+  subject:
+    user:
+      registration: Thank you for registration!
+  template:
+    name:
+      user:
+        join: email-registration-member
 ---
 spring:
   profiles: h2
@@ -57,3 +89,54 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  output:
+    ansi:
+      enabled: always
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${GITHUB_CLIENT_ID}
+            client-secret: ${GITHUB_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
+server:
+  servlet:
+    session:
+      cookie:
+        same-site: none
+        secure: true
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: TRACE
+      springframework:
+        orm:
+          jpa: DEBUG
+mail:
+  smtp:
+    host: smtp.gmail.com
+    port: 587
+    username: ${GMAIL_USERNAME}
+    password: ${GMAIL_PASSWORD}
+    auth: true
+    starttls:
+      enable: true
+  subject:
+    user:
+      registration: Thank you for registration!
+  template:
+    name:
+      user:
+        join: email-registration-member
