@@ -3,6 +3,7 @@ package com.stackoverflow.team25.answer.service;
 import com.stackoverflow.team25.answer.entity.Answer;
 import com.stackoverflow.team25.answer.repository.AnswerRepository;
 import com.stackoverflow.team25.question.entity.Question;
+import com.stackoverflow.team25.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,15 +19,19 @@ import java.util.Optional;
 public class AnswerServiceImpl implements AnswerService{
     private final AnswerRepository answerRepository;
 
-    public Answer createAnswer(Answer answer, Long questionId){
+    public Answer createAnswer(Answer answer){
         /**
-         * 외래키 정보를 넣어줍니다.
+         * 편의 메서드를 이용해 외래키 필드(question, owner) 를 넣어줍니다.
          */
         Question question = new Question();
-        question.setQuestionId(questionId);
-        answer.setQuestion(question);
+        question.setQuestionId(answer.getQuestion().getQuestionId());
+        answer.addQuestion(question);
+
+//        User user = new User();
+//        user.setUserId(answer.getUser().getUserId());
+//        answer.addUser(user);
         /**
-         * Score 와 isAccepted가 Null로 들어오는 경우, Null 값이 아닌 다음의 초기값을 가지도록 한다.
+         * Score와 isAccepted 필드에 Null이 아닌 초기값을 저장하도록 설정
          */
         answer.setScore(0L);
         answer.setIsAccepted(false);

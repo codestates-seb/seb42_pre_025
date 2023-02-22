@@ -80,7 +80,8 @@ public class QuestionController {
     @PostMapping("/{question-id}/add")
     public ResponseEntity postAnswer(@PathVariable("question-id") Long questionId,
                                      @RequestBody AnswerDto.Post postDto) {
-        Answer findAnswer = answerService.createAnswer(answerMapper.answerPostDtoToAnswer(postDto), questionId);
+        postDto.setQuestionId(questionId);
+        Answer findAnswer = answerService.createAnswer(answerMapper.answerPostDtoToAnswer(postDto));
 
         URI location = UriCreator.createUri(QUESTION_DEFAULT_URL + "/" + questionId + "/add", findAnswer.getAnswerId());
         return ResponseEntity.created(location).build();

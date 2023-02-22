@@ -1,5 +1,6 @@
 package com.stackoverflow.team25.user.entity;
 
+import com.stackoverflow.team25.answer.entity.Answer;
 import com.stackoverflow.team25.security.entity.UserRole;
 import lombok.*;
 
@@ -30,6 +31,8 @@ public class User {
     @Builder.Default
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus = UserStatus.USER_ACTIVATE;
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+//    private List<Answer> answers = new ArrayList<>();
 
     public void setUserRole(UserRole userRole) {
         this.userRoles.add(userRole);
@@ -37,6 +40,13 @@ public class User {
             userRole.setUser(this);
         }
     }
+    // Answer 편의 메서드
+//    public void addAnswer(Answer answer){
+//        answers.add(answer);
+//        if(answer.getUser() != this){
+//            answer.addUser(this);
+//        }
+//    }
 
     @Getter
     public enum UserStatus {

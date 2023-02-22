@@ -1,8 +1,11 @@
 package com.stackoverflow.team25.question.dto;
 
+import com.stackoverflow.team25.answer.dto.AnswerDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 public class QuestionDto {
 
@@ -27,7 +30,7 @@ public class QuestionDto {
             private Long questionId;
             private String title;
             private String content;
-
+            private List<AnswerDto.Response> answers;
         }
 
 }

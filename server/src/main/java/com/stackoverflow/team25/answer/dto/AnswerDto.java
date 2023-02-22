@@ -4,11 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class AnswerDto {
+    @Setter
     @Getter
     public static class Post{
+//        @NotNull(message = "userId가 없습니다.")
+//        private Long userId;
+        private Long questionId;
         private Long score;
         private Boolean isAccepted;
         private String content;

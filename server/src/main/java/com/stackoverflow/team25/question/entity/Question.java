@@ -31,4 +31,11 @@ public class Question extends Auditable {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
  */
+
+    public void addAnswer(Answer answer){
+        answers.add(answer);
+        if(answer.getQuestion() != this){
+            answer.addQuestion(this);
+        }
+    }
 }
