@@ -6,7 +6,7 @@ const StyledButton = styled.button`
   padding: ${(props) => props.padding || '8px 10px'};
   background-color: ${(props) => props.bgColor || 'var(--button-primary-bg-color)'};
   color: ${(props) => props.color || 'var(--white)'};
-  border-style: ${(props) => (props.bdColor ? 'solid' : 'none')};
+  border: ${(props) => (props.bdColor ? 'solid 1px' : 'none')};
   border-color: ${(props) => props.bdColor || 'none'};
   border-radius: 4px;
   font-size: 13px;
