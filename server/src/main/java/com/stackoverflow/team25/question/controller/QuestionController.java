@@ -12,7 +12,6 @@ import com.stackoverflow.team25.utils.UriCreator;
 import com.stackoverflow.team25.dto.MultiResponseDto;
 import com.stackoverflow.team25.dto.SingleResponseDto;
 import lombok.RequiredArgsConstructor;
-import net.bytebuddy.jar.asm.commons.Remapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -81,7 +80,7 @@ public class QuestionController {
     @PostMapping("/{question-id}/add")
     public ResponseEntity postAnswer(@PathVariable("question-id") Long questionId,
                                      @RequestBody AnswerDto.Post postDto) {
-        Answer findAnswer = answerService.createAnswer(answerMapper.answerPostDtoToAnswer(postDto));
+        Answer findAnswer = answerService.createAnswer(answerMapper.answerPostDtoToAnswer(postDto), questionId);
 
         URI location = UriCreator.createUri(QUESTION_DEFAULT_URL + "/" + questionId + "/add", findAnswer.getAnswerId());
         return ResponseEntity.created(location).build();

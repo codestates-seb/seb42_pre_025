@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface AnswerService {
-    Answer createAnswer(Answer answer);
+    Answer createAnswer(Answer answer, Long questionId);
     Answer updateAnswer(Answer answer);
     Answer findAnswer(long answerId);
     Page<Answer> findAnswers(Pageable pageable);
