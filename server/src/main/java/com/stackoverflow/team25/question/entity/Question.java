@@ -1,8 +1,11 @@
 package com.stackoverflow.team25.question.entity;
 
+import com.stackoverflow.team25.answer.entity.Answer;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "questions")
@@ -20,14 +23,9 @@ public class Question {
     @Column(nullable = false)
     private String title;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
-    private String text;
-/*  @Column(nullable = false)
-    private LocalDateTime createdAt;
-
     @Column(nullable = false)
-    private LocalDateTime updatedAt;
-
+    private String content;
+/*
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Answer> answers = new ArrayList<>();
 
