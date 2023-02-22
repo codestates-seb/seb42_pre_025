@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import Button from './UI/Button.jsx';
 import styles from './Header.module.css';
 
 function Header() {
@@ -10,11 +11,18 @@ function Header() {
 
   return (
     <header id={styles.header}>
-      <p>HEADER</p>
       <button onClick={() => goTo('/')}>스택오버플로우 로고</button>
       <button onClick={() => goTo('/questions')}>Questions</button>
-      <button onClick={() => goTo('/users/login')}>Log in</button>
-      <button onClick={() => goTo('/users/signup')}>Sign up</button>
+      <Button
+        text='Log in'
+        path='/users/login'
+        addStyle={{
+          borderColor: 'var(--button-bd-color)',
+          backgroundColor: 'var(--button-secondary-bg-color)',
+          color: 'var(--button-filled-color)'
+        }}
+      />
+      <Button text='Sign up' path='/users/signup' />
     </header>
   );
 }
