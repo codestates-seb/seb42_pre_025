@@ -1,9 +1,85 @@
 .container {
   display: flex;
+  /* border-left: 1px solid black; */
 }
 
-#list {
+.div {
   height: 100vh;
-  flex-grow: 1;
-  background-color: violet;
+  flex-basis: 1000px;
+  border-left: 1px solid lightgrey;
+}
+
+.border {
+  margin: 20px 20px 0px 20px;
+}
+
+.allQuestionsBox {
+  display: flex;
+  height: 50px;
+  font-size: 27px;
+  padding-top: 10px;
+}
+
+.askQuesion {
+  height: 37px;
+  width: 103px;
+  margin-left: 708px;
+  background-color: #0095ff;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+}
+
+.div2 {
+  height: 50px;
+  font-size: 17px;
+  font-weight: 520;
+  line-height: 50px;
+}
+
+.questionList {
+  height: 77vh;
+  margin-right: 20px;
+  border-top: 1px solid lightgrey;
+}
+
+.question {
+  /* background-color: coral; */
+  padding: 16px;
+  height: 137px;
+  border-top: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
+}
+.page {
+  display: flex;
+  height: 94px;
+  padding-left: 20px;
+  border-top: 1px solid lightgrey;
+}
+
+.pageButton {
+  text-align: center;
+  height: 27px;
+  width: 26px;
+  line-height: 29px;
+  margin-top: 20px;
+  margin-left: 3px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+}
+
+.pagedot {
+  margin-top: 30px;
+  margin-left: 10px;
+}
+
+.pageNext {
+  text-align: center;
+  height: 27px;
+  width: 46px;
+  line-height: 29px;
+  margin-top: 20px;
+  margin-left: 10px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
 }
