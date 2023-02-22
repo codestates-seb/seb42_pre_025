@@ -2,8 +2,36 @@
   display: flex;
 }
 
-#list {
+.div {
   height: 100vh;
-  flex-grow: 1;
-  background-color: violet;
+  flex-basis: 1000px;
+  border-left: 1px solid lightgrey;
+}
+
+.border {
+  margin: 20px 20px 0px 20px;
+}
+
+.allQuestionsBox {
+  display: flex;
+  height: 50px;
+  font-size: 27px;
+  padding-top: 10px;
+}
+
+.askQuesion {
+  height: 37px;
+  width: 103px;
+  margin-left: 708px;
+  background-color: #0095ff;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+}
+
+.questionNumber {
+  height: 50px;
+  font-size: 17px;
+  font-weight: 520;
+  line-height: 50px;
 }

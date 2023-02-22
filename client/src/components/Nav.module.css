@@ -23,7 +23,6 @@
 
 .li1 {
   font-size: 13px;
-  line-height: 34px;
   padding-left: 10px;
   height: 34px;
   text-align: start;
@@ -35,9 +34,4 @@
   padding-left: 28px;
   height: 34px;
   text-align: start;
-}
-
-.span {
-  padding-bottom: 10px;
-  line-height: 34px;
 }

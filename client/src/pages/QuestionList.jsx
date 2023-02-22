@@ -1,5 +1,7 @@
 import Nav from '../components/Nav.jsx';
 import Footer from '../components/Footer.jsx';
+import Questions from '../components/Questions.jsx';
+import Pagination from '../components/Pagination.jsx';
 import styles from './QuestionList.module.css';
 
 function QuestionList() {
@@ -7,11 +9,17 @@ function QuestionList() {
     <>
       <div className={styles.container}>
         <Nav />
-        <ul id={styles.list}>
-          <li>아이템 1</li>
-          <li>아이템 2</li>
-          <li>아이템 3</li>
-        </ul>
+        <div className={styles.div}>
+          <div className={styles.border}>
+            <div className={styles.allQuestionsBox}>
+              <div className={styles.allQuestions}>All Questions</div>
+              <button className={styles.askQuesion}>Ask Question</button>
+            </div>
+            <div className={styles.questionNumber}>23,510,472 questions</div>
+          </div>
+          <Questions />
+          <Pagination />
+        </div>
       </div>
       <Footer />
     </>
