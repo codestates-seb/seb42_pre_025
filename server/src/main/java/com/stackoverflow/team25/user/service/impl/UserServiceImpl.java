@@ -1,5 +1,6 @@
 package com.stackoverflow.team25.user.service.impl;
 
+import com.stackoverflow.team25.mail.event.UserRegistrationApplicationEvnet;
 import com.stackoverflow.team25.security.entity.Role;
 import com.stackoverflow.team25.security.entity.UserRole;
 import com.stackoverflow.team25.security.repository.RoleRepository;
@@ -7,6 +8,7 @@ import com.stackoverflow.team25.user.entity.User;
 import com.stackoverflow.team25.user.repository.UserRepository;
 import com.stackoverflow.team25.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +25,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
-
+    private final ApplicationEventPublisher publisher;
 
     @Override
     public User createUser(User user) {
@@ -31,9 +33,11 @@ public class UserServiceImpl implements UserService {
         setEncodedPassword(user);
         setDefaultUserRole(user);
 
-        return userRepository.save(user);
-    }
+        User savedUser = userRepository.save(user);
+        sendRegistrationEmail(savedUser);
 
+        return savedUser;
+    }
 
     @Override
     public User updateUser(User user) {
@@ -83,6 +87,10 @@ public class UserServiceImpl implements UserService {
 
     private void setEncodedPassword(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+    }
+
+    private void sendRegistrationEmail(User savedUser) {
+        publisher.publishEvent(new UserRegistrationApplicationEvnet(this, savedUser));
     }
 
     private void verifyUserByEmail(User user) {
