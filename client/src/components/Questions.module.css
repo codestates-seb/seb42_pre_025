@@ -1,0 +1,11 @@
+.questionList {
+  height: 77vh;
+  margin-right: 20px;
+  border-bottom: 1px solid lightgrey;
+}
+
+.question {
+  padding: 16px;
+  height: 137px;
+  border-top: 1px solid lightgrey;
+}

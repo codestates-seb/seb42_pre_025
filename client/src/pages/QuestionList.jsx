@@ -1,5 +1,6 @@
 import Nav from '../components/Nav.jsx';
 import Footer from '../components/Footer.jsx';
+import Questions from '../components/Questions.jsx';
 import Pagination from '../components/Pagination.jsx';
 import styles from './QuestionList.module.css';
 
@@ -14,15 +15,9 @@ function QuestionList() {
               <div className={styles.allQuestions}>All Questions</div>
               <button className={styles.askQuesion}>Ask Question</button>
             </div>
-            <div className={styles.div2}>23,510,472 questions</div>
+            <div className={styles.questionNumber}>23,510,472 questions</div>
           </div>
-          <div className={styles.questionList}>
-            질문목록
-            <div className={styles.question}>
-              <div></div>
-              <div className={styles.content}></div>
-            </div>
-          </div>
+          <Questions />
           <Pagination />
         </div>
       </div>
