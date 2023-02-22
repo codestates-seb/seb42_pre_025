@@ -6,8 +6,10 @@ import com.stackoverflow.team25.exception.BusinessLogicException;
 import com.stackoverflow.team25.exception.ExceptionCode;
 
 
+import com.stackoverflow.team25.user.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,7 @@ public class QuestionService {
     public QuestionService(QuestionRepository questionRepository)  {
         this.questionRepository = questionRepository;
     }
-//c
+
     public Question createQuestion(Question question) {
         String title = question.getTitle();
         verifyExistQuestion(title);
@@ -38,7 +40,7 @@ public class QuestionService {
         if(question.isPresent())
             throw new BusinessLogicException(ExceptionCode.TITLE_EXISTS);
     }
-//r
+
     public Question findVerifiedQuestion(long questionId) {
         Optional<Question> optionalQuestion = questionRepository.findById(questionId);
         Question findQuestion =
@@ -52,7 +54,7 @@ public class QuestionService {
         return findVerifiedQuestionByQuery(questionId);
     }
     private Question findVerifiedQuestionByQuery(long questionId) {
-        Optional<Question> optionalQuestion = questionRepository.findByQuestion(questionId);
+        Optional<Question> optionalQuestion = questionRepository.findById(questionId);
         Question findQuestion =
                 optionalQuestion.orElseThrow(() ->
                         new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
@@ -60,22 +62,36 @@ public class QuestionService {
         return findQuestion;
     }
 
-    public Page<Question> findQuestions(int page, int size) {
-        return questionRepository.findAll(PageRequest.of(page, size,
-                Sort.by("questionId").descending()));
+    public Page<Question> findQuestions(Pageable pageable) {
+        PageRequest of = PageRequest.of(pageable.getPageNumber() - 1,
+                pageable.getPageSize(),
+                pageable.getSort());
+
+        return questionRepository.findAll(of);
     }
-//u
+
     public Question updateQuestion(Question question) {
+        Long questionId = question.getQuestionId();
         Question findQuestion = findVerifiedQuestion(question.getQuestionId());
+        Question verifiedQuestion = verifyQuestionById(questionId);
+
+        Optional.ofNullable(question.getTitle())
+                .ifPresent(verifiedQuestion::setTitle);
+        Optional.ofNullable(question.getContent())
+                .ifPresent(verifiedQuestion::setContent);
 
         return questionRepository.save(findQuestion);
     }
+    private Question verifyQuestionById(Long questionId) {
+        return questionRepository.findById(questionId)
+                .orElseThrow(() -> {
+                    throw new RuntimeException("해당 질문이 존재 하지 않음");
+                });
+    }
 
-
-//d
     public void deleteQuestion(Long questionId) {
         questionRepository.deleteById(questionId);
     }
-     
- 
+
+
 }
