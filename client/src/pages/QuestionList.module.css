@@ -9,7 +9,7 @@
 }
 
 .border {
-  margin: 20px 20px 0px 20px;
+  margin: 25px 25px 0px 25px;
 }
 
 .allQuestionsBox {
@@ -17,6 +17,11 @@
   height: 50px;
   font-size: 27px;
   padding-top: 10px;
+  font-weight: 450;
+}
+
+.allQuestions {
+  width: 160px;
 }
 
 .askQuesion {

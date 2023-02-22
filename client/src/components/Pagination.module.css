@@ -10,9 +10,10 @@
   width: 26px;
   line-height: 29px;
   margin-top: 20px;
-  margin-left: 3px;
+  margin-left: 4px;
   border: 1px solid lightgrey;
   border-radius: 3px;
+  font-size: 13px;
 }
 
 .pagedot {
@@ -29,4 +30,5 @@
   margin-left: 10px;
   border: 1px solid lightgrey;
   border-radius: 3px;
+  font-size: 13px;
 }
