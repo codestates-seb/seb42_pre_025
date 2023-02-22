@@ -1,5 +1,46 @@
 #header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 48px;
-  background-color: grey;
-  color: #fff;
+  background-color: var(--black-025);
+}
+
+.container {
+  width: 90%;
+  max-width: 1264px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  margin-right: 1rem;
+  width: 150px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+}
+.logoImg {
+  transform: scale(0.9);
+}
+
+.navigation {
+  /* margin: 0 12px; */
+}
+
+.searchBar {
+  margin: 0 1rem;
+  flex-grow: 1;
+  /* background-color: aquamarine; */
+}
+.searchBar input {
+  width: 100%;
+}
+
+.menubar {
+  width: 124px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

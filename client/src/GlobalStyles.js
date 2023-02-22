@@ -11,6 +11,16 @@ const GlobalStyles = createGlobalStyle`
     border-radius:0; 
     cursor:pointer
   }
+
+  a {
+    color: var(--black);
+    text-decoration: none;
+    outline: none
+  }
+  a:hover, a:active {
+    color: initial;
+    text-decoration: none;
+  }
 `;
 
 export default GlobalStyles;
