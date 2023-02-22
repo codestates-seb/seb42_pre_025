@@ -20,9 +20,14 @@ public class Question {
     @Column(nullable = false)
     private String title;
 
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String text;
+/*  @Column(nullable = false)
+    private LocalDateTime createdAt;
+
     @Column(nullable = false)
-    private String content;
-/*
+    private LocalDateTime updatedAt;
+
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Answer> answers = new ArrayList<>();
 

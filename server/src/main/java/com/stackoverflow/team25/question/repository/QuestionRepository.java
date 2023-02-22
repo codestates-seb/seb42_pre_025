@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
-    @Query("SELECT c FROM Question c WHERE c.title LIKE %:title%")
     Optional<Question> findByTitle(String title);
-
+    @Query(value = "SELECT c FROM Question c WHERE c.questionId = :questionId")
+    Optional<Question> findByQuestion(long questionId);
 }
