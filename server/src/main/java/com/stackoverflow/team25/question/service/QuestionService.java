@@ -8,7 +8,6 @@ import com.stackoverflow.team25.exception.ExceptionCode;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +52,7 @@ public class QuestionService {
         return findVerifiedQuestionByQuery(questionId);
     }
     private Question findVerifiedQuestionByQuery(long questionId) {
-        Optional<Question> optionalQuestion = questionRepository.findById(questionId);
+        Optional<Question> optionalQuestion = questionRepository.findByQuestion(questionId);
         Question findQuestion =
                 optionalQuestion.orElseThrow(() ->
                         new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
@@ -61,12 +60,9 @@ public class QuestionService {
         return findQuestion;
     }
 
-    public Page<Question> findQuestions(Pageable pageable) {
-        PageRequest of = PageRequest.of(pageable.getPageNumber() - 1,
-                pageable.getPageSize(),
-                pageable.getSort());
-
-        return questionRepository.findAll(of);
+    public Page<Question> findQuestions(int page, int size) {
+        return questionRepository.findAll(PageRequest.of(page, size,
+                Sort.by("questionId").descending()));
     }
 //u
     public Question updateQuestion(Question question) {
