@@ -1,6 +1,7 @@
 package com.stackoverflow.team25.answer.entity;
 
 import com.stackoverflow.team25.audit.Auditable;
+import com.stackoverflow.team25.question.entity.Question;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,12 +19,10 @@ public class Answer extends Auditable {
     //Todo: 사용자 객체
 //    @Column(nullable = false)
 //    private Owner owner;
-    //Todo: 외래키
-//    @ManyToOne
-//    @JoinColumn(name = "questionId")
-//    private Question question;
+    @ManyToOne
+    @JoinColumn(name = "question_id")
+    private Question question;
     private Long score;
-    @Column(name = "isAccepted")
     private Boolean isAccepted;
     @Lob // Large Object
     @Column(nullable = false)
