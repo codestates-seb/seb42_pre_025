@@ -43,9 +43,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         UserRole managerUserRole = createUserRole(managerRole);
         UserRole userUserRole = createUserRole(userRole);
 
-        createUserIfNotFound("admin@test.com", "1111", adminUserRole);
-        createUserIfNotFound("manager@test.com", "1111", managerUserRole);
-        createUserIfNotFound("user@test.com", "1111", userUserRole);
+        createUserIfNotFound("admin@test.com", "1111", "관리자", adminUserRole);
+        createUserIfNotFound("manager@test.com", "1111", "매니저", managerUserRole);
+        createUserIfNotFound("user@test.com", "1111", "유저", userUserRole);
     }
 
     @Transactional
@@ -62,7 +62,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     }
 
     @Transactional
-    public void createUserIfNotFound(String email, String password, UserRole userRole) {
+    public void createUserIfNotFound(String email, String password, String displayName, UserRole userRole) {
         Optional<User> optionalUser = userRepository.findByEmail(email);
 
         String encodedPassword = passwordEncoder.encode(password);
@@ -70,6 +70,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         User user = optionalUser.orElse(
                 User.builder()
                         .email(email)
+                        .displayName(displayName)
                         .password(encodedPassword)
                         .userRoles(List.of(userRole))
                         .build()
