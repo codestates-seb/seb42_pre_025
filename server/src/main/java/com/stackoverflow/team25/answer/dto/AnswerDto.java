@@ -31,9 +31,5 @@ public class AnswerDto {
         private String content;
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
-
-        public void setQuestion(Question question){
-            this.questionId = question.getQuestionId();
-        }
     }
 }

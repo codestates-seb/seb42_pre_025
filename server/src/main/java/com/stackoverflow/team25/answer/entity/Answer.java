@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Getter
 public class Answer extends Auditable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
     //Todo: 사용자 객체
 //    @Column(nullable = false)
