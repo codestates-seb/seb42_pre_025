@@ -4,7 +4,7 @@
 this repository is for pre- project for SEB-42-pre025 BE team
 
 =================================================================
-Java Spring info
+### Java Spring info
 -
 - Language : Java
 - Spring Boot ver : 2.7.8
