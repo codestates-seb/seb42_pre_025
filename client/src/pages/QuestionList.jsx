@@ -23,15 +23,6 @@ function QuestionList() {
               <div className={styles.content}></div>
             </div>
           </div>
-          {/* <div className={styles.page}>
-            <div className={styles.pageButton}>1</div>
-            <div className={styles.pageButton}>2</div>
-            <div className={styles.pageButton}>3</div>
-            <div className={styles.pageButton}>4</div>
-            <div className={styles.pageButton}>5</div>
-            <div className={styles.pagedot}>....</div>
-            <div className={styles.pageNext}>Next</div>
-          </div> */}
           <Pagination />
         </div>
       </div>
