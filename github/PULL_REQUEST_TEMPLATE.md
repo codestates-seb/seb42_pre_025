@@ -4,10 +4,10 @@
 
 ### 작업 카테고리
 
-- [x] issue or bug fix
-- [ ] feature implementation
-- [ ] review or testing
-- [ ] etc.
+- [x] Issue or Bug Fix
+- [ ] Feature Implementation
+- [ ] Review or Testing
+- [ ] Refactoring
 
 ### Issue or Bug Fix
 
