@@ -1,22 +1,21 @@
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 const StyledButton = styled.button`
-  width: ${(props) => props.width || 'inherit'};
-  padding: ${(props) => props.padding || '8px 10px'};
-  background-color: ${(props) => props.bgColor || 'var(--button-primary-bg-color)'};
-  color: ${(props) => props.color || 'var(--white)'};
-  border: ${(props) => (props.bdColor ? 'solid 1px' : 'none')};
-  border-color: ${(props) => props.bdColor || 'none'};
+  width: ${(props) => props.width || "inherit"};
+  padding: ${(props) => props.padding || "8px 10px"};
+  background-color: ${(props) => props.bgColor || "var(--blue-500)"};
+  color: ${(props) => props.color || "var(--white)"};
+  border: ${(props) => (props.bdColor ? "solid 1px" : "none")};
+  border-color: ${(props) => props.bdColor || "none"};
   border-radius: 4px;
   font-size: 13px;
 `;
 
-function Button({ text, path = '', addStyle = {} }) {
+function Button({ text, path = "", addStyle = {} }) {
   const navigate = useNavigate();
   const { backgroundColor, color, borderColor, padding, width } = addStyle;
-  console.log(addStyle);
-  console.log(borderColor);
+
   const goTo = (path) => {
     navigate(path);
   };

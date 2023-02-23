@@ -99,54 +99,32 @@
   --bronze: hsl(28, 38%, 67%);
   --bronze-lighter: hsl(28, 40%, 92%);
   --bronze-darker: hsl(28, 31%, 52%);
+
   /* --bc-lightest: var(--black-025);
-  --bc-lighter: var(--black-050);
-  --bc-light: var(--black-075);
-  --bc-medium: var(--black-100);
-  --bc-dark: var(--black-150);
-  --bc-darker: var(--black-200);
+    --bc-lighter: var(--black-050);
+    --bc-light: var(--black-075);
+    --bc-medium: var(--black-100);
+    --bc-dark: var(--black-150);
+    --bc-darker: var(--black-200);
+  
+    --highlight-bg: hsl(0, 0%, 96.5%);
+    --highlight-color: var(--black-750);
+    --highlight-comment: hsl(210, 8%, 43.5%);
+    --highlight-punctuation: var(--black-600);
+    --highlight-namespace: hsl(27, 99%, 36%);
+    --highlight-attribute: hsl(206, 98.5%, 29%);
+    --highlight-literal: hsl(27, 99%, 36%);
+    --highlight-symbol: hsl(306, 43%, 35%);
+    --highlight-keyword: hsl(206, 98.5%, 29%);
+    --highlight-variable: hsl(80, 80.5%, 26.5%);
+    --highlight-addition: var(--green-700);
+    --highlight-deletion: var(--red-600); */
+
+  /* Font */
+  --main-font: Arial, Helvetica, sans-serif;
+
+  /* FONT COLOR */
   --fc-dark: hsl(210, 8%, 5%);
   --fc-medium: hsl(210, 8%, 25%);
   --fc-light: hsl(210, 8%, 45%);
-  --highlight-bg: hsl(0, 0%, 96.5%);
-  --highlight-color: var(--black-750);
-  --highlight-comment: hsl(210, 8%, 43.5%);
-  --highlight-punctuation: var(--black-600);
-  --highlight-namespace: hsl(27, 99%, 36%);
-  --highlight-attribute: hsl(206, 98.5%, 29%);
-  --highlight-literal: hsl(27, 99%, 36%);
-  --highlight-symbol: hsl(306, 43%, 35%);
-  --highlight-keyword: hsl(206, 98.5%, 29%);
-  --highlight-variable: hsl(80, 80.5%, 26.5%);
-  --highlight-addition: var(--green-700);
-  --highlight-deletion: var(--red-600); */
-
-  /* THEME COLOR */
-  --button-primary-bg-color: var(--blue-500);
-  --button-secondary-bg-color: var(--powder-100);
-  --button-filled-color: var(--powder-700);
-  --button-bd-color: var(--powder-500);
-
-  /* --theme-button-color: var(--blue-600);
-  --theme-button-hover-color: var(--blue-700);
-  --theme-button-hover-background-color: var(--blue-050);
-  --theme-button-active-background-color: var(--blue-100);
-  --theme-button-selected-color: var(--blue-900);
-  --theme-button-selected-background-color: var(--blue-200);
-  --theme-button-filled-color: var(--powder-700);
-  --theme-button-filled-background-color: var(--powder-100);
-  --theme-button-filled-border-color: var(--powder-500);
-  --theme-button-filled-hover-color: var(--powder-800);
-  --theme-button-filled-hover-background-color: var(--powder-300);
-  --theme-button-filled-active-background-color: var(--powder-400);
-  --theme-button-filled-active-border-color: var(--powder-600);
-  --theme-button-filled-selected-color: var(--powder-900);
-  --theme-button-filled-selected-background-color: var(--powder-300);
-  --theme-button-filled-selected-border-color: var(--powder-700);
-  --theme-button-outlined-border-color: var(--blue-400);
-  --theme-button-outlined-selected-border-color: var(--blue-600);
-  --theme-button-primary-background-color: var(--blue-500);
-  --theme-button-primary-hover-background-color: var(--blue-600);
-  --theme-button-primary-active-background-color: var(--blue-700);
-  --theme-button-primary-selected-background-color: var(--blue-800); */
 }
