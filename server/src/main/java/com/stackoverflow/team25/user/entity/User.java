@@ -1,5 +1,6 @@
 package com.stackoverflow.team25.user.entity;
 
+import com.stackoverflow.team25.answer.entity.Answer;
 import com.stackoverflow.team25.security.entity.UserRole;
 import lombok.*;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String password;
     private String email;
@@ -30,11 +31,20 @@ public class User {
     @Builder.Default
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus = UserStatus.USER_ACTIVATE;
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Answer> answers = new ArrayList<>();
 
     public void setUserRole(UserRole userRole) {
         this.userRoles.add(userRole);
         if (userRole.getUser() != this) {
             userRole.setUser(this);
+        }
+    }
+    // Answer 편의 메서드
+    public void addAnswer(Answer answer){
+        answers.add(answer);
+        if(answer.getOwner() != this){
+            answer.addUser(this);
         }
     }
 

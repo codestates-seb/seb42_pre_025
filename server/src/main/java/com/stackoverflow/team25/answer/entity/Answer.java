@@ -2,6 +2,7 @@ package com.stackoverflow.team25.answer.entity;
 
 import com.stackoverflow.team25.audit.Auditable;
 import com.stackoverflow.team25.question.entity.Question;
+import com.stackoverflow.team25.user.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,11 +15,11 @@ import javax.persistence.*;
 @Getter
 public class Answer extends Auditable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
-    //Todo: 사용자 객체
-//    @Column(nullable = false)
-//    private Owner owner;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User owner;
     @ManyToOne
     @JoinColumn(name = "question_id")
     private Question question;
@@ -28,4 +29,18 @@ public class Answer extends Auditable {
     @Column(nullable = false)
     private String content;
 
+    // 편의 메서드를 setter로 이름 지을시 Mapstruct에서 문제 발생!!
+    public void addQuestion(Question question){
+        this.question = question;
+        if(!this.question.getAnswers().contains(this)){
+            this.question.addAnswer(this);
+        }
+    }
+
+    public void addUser(User user){
+        this.owner = user;
+        if(!this.owner.getAnswers().contains(this)){
+            this.owner.addAnswer(this);
+        }
+    }
 }
