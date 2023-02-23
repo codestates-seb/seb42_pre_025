@@ -4,7 +4,7 @@
 
 .div {
   height: 100vh;
-  flex-basis: 1000px;
+  width: 75%;
   border-left: 1px solid var(--black-100);
 }
 
