@@ -43,8 +43,8 @@ function Signup() {
               </p>
             </label>
           )}
-          <button type='submit' className='authBtn'>
-            {isSignup ? 'Sign up' : 'Log in'}
+          <button type='submit' className={styles.authBtn}>
+            sign up
           </button>
           {isSignup && (
             <p>
