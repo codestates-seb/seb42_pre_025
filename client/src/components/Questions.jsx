@@ -7,7 +7,7 @@ function Questions() {
         <div className={styles.content}>
           <div className={styles.contentDetail}>
             <div className={styles.vote}>10 votes</div>
-            <div className={styles.vote}>88 answers</div>
+            <div className={styles.vote}>8 answers</div>
           </div>
           <div>
             <div className={styles.contentHead}>
