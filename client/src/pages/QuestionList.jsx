@@ -3,6 +3,7 @@ import Footer from '../components/Footer.jsx';
 import Questions from '../components/Questions.jsx';
 import Pagination from '../components/Pagination.jsx';
 import styles from './QuestionList.module.css';
+import Button from '../components/UI/Button.jsx';
 
 function QuestionList() {
   return (
@@ -13,7 +14,14 @@ function QuestionList() {
           <div className={styles.border}>
             <div className={styles.allQuestionsBox}>
               <div className={styles.allQuestions}>All Questions</div>
-              <button className={styles.askQuesion}>Ask Question</button>
+              {/* <button className={styles.askQuesion}>Ask Question</button> */}
+              <Button
+                text='Ask Question'
+                addStyle={{
+                  width: '103px',
+                  padding: '10px'
+                }}
+              />
             </div>
             <div className={styles.questionNumber}>23,510,472 questions</div>
           </div>
