@@ -16,6 +16,7 @@ function QuestionList() {
               <div className={styles.allQuestions}>All Questions</div>
               <Button
                 text='Ask Question'
+                path='/questions/ask'
                 addStyle={{
                   width: '103px',
                   padding: '10px'
