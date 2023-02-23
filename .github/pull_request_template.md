@@ -1,13 +1,13 @@
-# 요청 보내는  branch 확인 !
-![example.png](example.png)
-[ ]☑  pr 요청을 보내는 branch 를 확인하였습니다
+# <span style="color:red">요청 보내는  branch 확인 !</span>
+
+- [ ]  pr 요청을 보내는 branch 를 확인하였습니다
 
 ### 작업 카테고리
-☑
-[ ] issue or bug fix
-[ ] feature implementation
-[ ] review or testing
-[ ] etc.
+
+- [x] Issue or Bug Fix
+- [ ] Feature Implementation
+- [ ] Review or Testing
+- [ ] Refactoring
 
 ### Issue or Bug Fix
 

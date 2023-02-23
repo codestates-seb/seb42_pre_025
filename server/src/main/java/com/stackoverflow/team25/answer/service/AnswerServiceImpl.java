@@ -2,6 +2,7 @@ package com.stackoverflow.team25.answer.service;
 
 import com.stackoverflow.team25.answer.entity.Answer;
 import com.stackoverflow.team25.answer.repository.AnswerRepository;
+import com.stackoverflow.team25.question.entity.Question;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,18 +18,18 @@ import java.util.Optional;
 public class AnswerServiceImpl implements AnswerService{
     private final AnswerRepository answerRepository;
 
-    public Answer createAnswer(Answer answer){
+    public Answer createAnswer(Answer answer, Long questionId){
+        /**
+         * 외래키 정보를 넣어줍니다.
+         */
+        Question question = new Question();
+        question.setQuestionId(questionId);
+        answer.setQuestion(question);
         /**
          * Score 와 isAccepted가 Null로 들어오는 경우, Null 값이 아닌 다음의 초기값을 가지도록 한다.
          */
-        answer.setScore(
-                Optional.ofNullable(answer.getScore())
-                        .orElse(0L)
-        );
-        answer.setIsAccepted(
-                Optional.ofNullable(answer.getIsAccepted())
-                        .orElse(false)
-        );
+        answer.setScore(0L);
+        answer.setIsAccepted(false);
 
         return answerRepository.save(answer);
     }
@@ -41,7 +42,7 @@ public class AnswerServiceImpl implements AnswerService{
          *      2. null 이 아닌 값이 들어오면, 수정 된다.
          */
         Optional.ofNullable(answer.getScore())
-                .ifPresent(isAccepted -> findAnswer.setScore(isAccepted));
+                .ifPresent(score -> findAnswer.setScore(score));
         Optional.ofNullable(answer.getIsAccepted())
                 .ifPresent(isAccepted -> findAnswer.setIsAccepted(isAccepted));
         Optional.ofNullable(answer.getContent())
