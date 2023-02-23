@@ -1,3 +1,4 @@
+import Editor from '../components/UI/Editor.jsx';
 import Footer from '../components/Footer.jsx';
 import styles from './CreateQuestion.module.css';
 
@@ -50,7 +51,16 @@ function CreateQuestion() {
                   placeholder='e.g. Is there an R function for finding the index of an element in a vector?'
                 ></input>
               </div>
-              <div className={`${styles.bodyBox} ${styles.boxBorder}`}></div>
+              <div className={`${styles.bodyBox} ${styles.boxBorder}`}>
+                <label htmlFor='body' className={styles.labelTitle}>
+                  What are the details of your problem?
+                </label>
+                <label htmlFor='body' className={styles.description}>
+                  Introduce the problem and expand on what you put in the title. Minimum 20
+                  characters.
+                </label>
+                <Editor />
+              </div>
               <div className={`${styles.tagBox} ${styles.boxBorder}`}>
                 <label htmlFor='tag' className={styles.labelTitle}>
                   Tags
