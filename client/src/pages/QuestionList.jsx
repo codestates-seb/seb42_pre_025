@@ -14,9 +14,9 @@ function QuestionList() {
           <div className={styles.border}>
             <div className={styles.allQuestionsBox}>
               <div className={styles.allQuestions}>All Questions</div>
-              {/* <button className={styles.askQuesion}>Ask Question</button> */}
               <Button
                 text='Ask Question'
+                path='/questions/ask'
                 addStyle={{
                   width: '103px',
                   padding: '10px'

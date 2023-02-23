@@ -4,7 +4,7 @@
 
 .div {
   height: 100vh;
-  flex-basis: 1000px;
+  flex-basis: 800px;
   border-left: 1px solid lightgrey;
 }
 
@@ -14,6 +14,7 @@
 
 .allQuestionsBox {
   display: flex;
+  justify-content: space-between;
   height: 50px;
   font-size: 27px;
   padding-top: 10px;

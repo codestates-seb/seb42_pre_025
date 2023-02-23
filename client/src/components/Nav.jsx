@@ -1,6 +1,8 @@
 import styles from './Nav.module.css';
 import navExploreLogo from '../assets/navExplore.png';
-import navILogo from '../assets/navCollectives.png';
+// import navILogo from '../assets/navCollectives.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 function Nav() {
   return (
@@ -16,12 +18,13 @@ function Nav() {
               <li className={styles.li2}>Users</li>
               <li className={styles.li2}>Companies</li>
               <li className={styles.li1}>
-                COLLECTIVES
-                <img className={styles.imgI} src={navILogo} alt='navCollectives' />
+                <div className={styles.collectives}>COLLECTIVES</div>
+                <FontAwesomeIcon className={styles.imgI} icon={faInfoCircle} />
               </li>
-              <li className={styles.li1}>
+              <li className={styles.li3}>
                 <img className={styles.img} src={navExploreLogo} alt='navExploreLogo' />
-                <span>Explore Collectives</span>
+                {/* <div className={styles.explore}>Explore Collectives</div> */}
+                Explore Collectives
               </li>
             </ol>
           </li>
