@@ -22,11 +22,12 @@ import java.util.List;
 public class AnswerController {
     private final AnswerService answerService;
     private final AnswerMapper answerMapper;
+
     @PatchMapping("/{answer-id}")
     public ResponseEntity patchAnswer(@PathVariable("answer-id") long answerId,
                                       @RequestBody AnswerDto.Patch patchDto){
+        patchDto.setAnswerId(answerId);
         Answer answer = answerMapper.answerPatchDtoToAnswer(patchDto);
-        answer.setAnswerId(answerId);
         Answer updatedAnswer = answerService.updateAnswer(answer);
         AnswerDto.Response response = answerMapper.answerToAnswerResponseDto(updatedAnswer);
 
