@@ -4,8 +4,8 @@
 
 .div {
   height: 100vh;
-  flex-basis: 800px;
-  border-left: 1px solid lightgrey;
+  flex-basis: 1000px;
+  border-left: 1px solid var(--black-100);
 }
 
 .border {
@@ -29,7 +29,6 @@
   height: 37px;
   width: 103px;
   margin-left: 708px;
-  background-color: #0095ff;
   border-radius: 5px;
   border: none;
   color: #fff;
