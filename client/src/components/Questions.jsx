@@ -6,8 +6,8 @@ function Questions() {
       <div className={styles.question}>
         <div className={styles.content}>
           <div className={styles.contentDetail}>
-            <div>10 votes</div>
-            <div>88 answers</div>
+            <div className={styles.vote}>10 votes</div>
+            <div className={styles.vote}>88 answers</div>
           </div>
           <div>
             <div className={styles.contentHead}>
@@ -18,8 +18,14 @@ function Questions() {
               controller, not in the View. But, but there is a problem that SearchFilterSettings is
               not valid. What should I do
             </div>
-            <div className={styles.contentTag}>tag</div>
-            <div className={styles.contentUser}>사용자Rand Random</div>
+            <div className={styles.contentTagUser}>
+              <div className={styles.contentTag}>
+                <button>tag</button>
+              </div>
+              <div className={styles.contentUser}>
+                <span>Benidene</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
