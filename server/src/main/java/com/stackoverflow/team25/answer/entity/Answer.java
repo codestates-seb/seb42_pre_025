@@ -17,9 +17,9 @@ public class Answer extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
-//    @ManyToOne
-//    @JoinColumn(name = "user")
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User owner;
     @ManyToOne
     @JoinColumn(name = "question_id")
     private Question question;
@@ -37,10 +37,10 @@ public class Answer extends Auditable {
         }
     }
 
-//    public void addUser(User user){
-//        this.user = user;
-//        if(!this.user.getAnswers().contains(this)){
-//            this.user.addAnswer(this);
-//        }
-//    }
+    public void addUser(User user){
+        this.owner = user;
+        if(!this.owner.getAnswers().contains(this)){
+            this.owner.addAnswer(this);
+        }
+    }
 }

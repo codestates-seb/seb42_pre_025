@@ -28,6 +28,7 @@ public class QuestionDto {
         @Builder
         public static class QuestionResponseDto {
             private Long questionId;
+            private Integer answerCount;
             private String title;
             private String content;
             private List<AnswerDto.Response> answers;

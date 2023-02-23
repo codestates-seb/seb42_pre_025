@@ -3,7 +3,9 @@ package com.stackoverflow.team25.answer.service;
 import com.stackoverflow.team25.answer.entity.Answer;
 import com.stackoverflow.team25.answer.repository.AnswerRepository;
 import com.stackoverflow.team25.question.entity.Question;
+import com.stackoverflow.team25.question.service.QuestionService;
 import com.stackoverflow.team25.user.entity.User;
+import com.stackoverflow.team25.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,23 +20,22 @@ import java.util.Optional;
 @Transactional
 public class AnswerServiceImpl implements AnswerService{
     private final AnswerRepository answerRepository;
-
+    private final QuestionService questionService;
+    private final UserService userService;
     public Answer createAnswer(Answer answer){
-        /**
-         * 편의 메서드를 이용해 외래키 필드(question, owner) 를 넣어줍니다.
-         */
-        Question question = new Question();
-        question.setQuestionId(answer.getQuestion().getQuestionId());
-        answer.addQuestion(question);
-
-//        User user = new User();
-//        user.setUserId(answer.getUser().getUserId());
-//        answer.addUser(user);
         /**
          * Score와 isAccepted 필드에 Null이 아닌 초기값을 저장하도록 설정
          */
         answer.setScore(0L);
         answer.setIsAccepted(false);
+
+        /**
+         * 1. 받아온 questionId를 가진 Question이 존재하는 지 검증
+         * 2. Answer를 추가할수록, Question의 answerCount가 증가함.
+         */
+        Question forPatchingQuestion = questionService.findVerifiedQuestion(answer.getQuestion().getQuestionId());
+        forPatchingQuestion.setAnswerCount(forPatchingQuestion.getAnswerCount()+1);
+        questionService.updateQuestion(forPatchingQuestion);
 
         return answerRepository.save(answer);
     }
@@ -72,7 +73,12 @@ public class AnswerServiceImpl implements AnswerService{
 
     public void removeAnswer(long answerId){
         Answer findAnswer = findVerifiedAnswer(answerId);
-
+        /**
+         * 질문 삭제시, Question의 AnswerCount 개수를 한개 줄인다.
+         */
+        Question forPatchingQuestion = questionService.findVerifiedQuestion(findAnswer.getQuestion().getQuestionId());
+        forPatchingQuestion.setAnswerCount(forPatchingQuestion.getAnswerCount()-1);
+        questionService.updateQuestion(forPatchingQuestion);
         answerRepository.delete(findAnswer);
     }
 

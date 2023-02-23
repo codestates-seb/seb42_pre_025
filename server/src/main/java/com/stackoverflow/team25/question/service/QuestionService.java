@@ -31,7 +31,7 @@ public class QuestionService {
         String title = question.getTitle();
         verifyExistQuestion(title);
         question.setTitle(title);
-
+        question.setAnswerCount(0);
         return questionRepository.save(question);
     }
 
@@ -79,7 +79,8 @@ public class QuestionService {
                 .ifPresent(verifiedQuestion::setTitle);
         Optional.ofNullable(question.getContent())
                 .ifPresent(verifiedQuestion::setContent);
-
+        Optional.ofNullable(question.getAnswerCount())
+                .ifPresent(verifiedQuestion::setAnswerCount);
         return questionRepository.save(findQuestion);
     }
     private Question verifyQuestionById(Long questionId) {

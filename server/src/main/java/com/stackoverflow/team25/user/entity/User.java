@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String password;
     private String email;
@@ -31,8 +31,8 @@ public class User {
     @Builder.Default
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus = UserStatus.USER_ACTIVATE;
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-//    private List<Answer> answers = new ArrayList<>();
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Answer> answers = new ArrayList<>();
 
     public void setUserRole(UserRole userRole) {
         this.userRoles.add(userRole);
@@ -41,12 +41,12 @@ public class User {
         }
     }
     // Answer 편의 메서드
-//    public void addAnswer(Answer answer){
-//        answers.add(answer);
-//        if(answer.getUser() != this){
-//            answer.addUser(this);
-//        }
-//    }
+    public void addAnswer(Answer answer){
+        answers.add(answer);
+        if(answer.getOwner() != this){
+            answer.addUser(this);
+        }
+    }
 
     @Getter
     public enum UserStatus {

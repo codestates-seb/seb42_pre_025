@@ -1,5 +1,8 @@
 package com.stackoverflow.team25.answer.dto;
 import com.stackoverflow.team25.question.entity.Question;
+import com.stackoverflow.team25.user.dto.UserDto;
+import com.stackoverflow.team25.user.entity.User;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,25 +14,26 @@ public class AnswerDto {
     @Setter
     @Getter
     public static class Post{
-//        @NotNull(message = "userId가 없습니다.")
-//        private Long userId;
+        private Long userId;
         private Long questionId;
         private Long score;
         private Boolean isAccepted;
         private String content;
     }
+    @Setter
     @Getter
     public static class Patch{
+        private Long answerId;
         @NotBlank
         private String content;
     }
 
-    @Setter
+
     @Getter
+    @Builder
     public static class Response{
         private Long answerId;
-        //Todo: 사용자 객체
-//    private Owner owner;
+        private UserDto.Response owner;
         private Long questionId;
         private Long score;
         private Boolean isAccepted;

@@ -12,11 +12,14 @@ import java.util.List;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE
         ,uses = UserMapper.class)
 public interface AnswerMapper {
-//    @Mapping(source = "userId", target = "user.userId")
+    @Mapping(source = "userId", target = "owner.userId")
     @Mapping(source = "questionId", target = "question.questionId")
     Answer answerPostDtoToAnswer(AnswerDto.Post requestBody);
+
     Answer answerPatchDtoToAnswer(AnswerDto.Patch requestBody);
+
     @Mapping(source = "question.questionId", target = "questionId")
     AnswerDto.Response answerToAnswerResponseDto(Answer answer);
+
     List<AnswerDto.Response> answersToAnswerResponseDtos(List<Answer> answers);
 }
