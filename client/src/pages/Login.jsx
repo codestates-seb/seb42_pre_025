@@ -5,7 +5,7 @@ import styles from './Login.module.css';
 function Login() {
   const [data, setData] = useState([]);
   const { REACT_APP_URL: BASE_URL } = process.env;
-  const URL = `${BASE_URL}/api/users?page=1&size=5&sort=userId,desc`;
+  const URL = `${BASE_URL}/users?page=1&size=5&sort=userId,desc`;
 
   console.log(URL);
 
@@ -15,7 +15,7 @@ function Login() {
 
   console.log(data);
 
-  return <main id={styles.main}>로그인 페이지 환경변수명 바꿔서 도전</main>;
+  return <main id={styles.main}>로그인 페이지 환경변수명 바꿔서 2차 도전</main>;
 }
 
 export default Login;
