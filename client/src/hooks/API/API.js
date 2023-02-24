@@ -1,11 +1,11 @@
-const getData = async (url, setState) => {
+const getFetch = async (url, setState) => {
   try {
     const res = await fetch(url, {
       method: 'GET',
-      mode: 'cors',
-      headers: {
-        Accept: 'application/json'
-      }
+      mode: 'cors'
+      //   headers: {
+      //     Accept: 'application/json'
+      //   }
     });
     const data = await res.json();
     console.log(typeof data);
@@ -16,7 +16,7 @@ const getData = async (url, setState) => {
   }
 };
 
-const postData = async (url, newData) => {
+const postFetch = async (url, newData) => {
   // ! 빈 문자열 들어올 때 처리해줘야 함
   // if (userNameValue === '' || emailValue === '') return;
 
@@ -35,7 +35,7 @@ const postData = async (url, newData) => {
   }
 };
 
-const deleteData = async (url, id) => {
+const deleteFetch = async (url, id) => {
   try {
     const res = await fetch(`${url}/${id}`, {
       method: 'DELETE',
@@ -49,4 +49,4 @@ const deleteData = async (url, id) => {
   }
 };
 
-export { getData, postData, deleteData };
+export { getFetch, postFetch, deleteFetch };

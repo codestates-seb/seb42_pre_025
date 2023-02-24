@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getData } from '../hooks/API/API';
+import { getFetch } from '../hooks/API/API';
 import styles from './Login.module.css';
 
 function Login() {
@@ -10,7 +10,7 @@ function Login() {
   console.log(URL);
 
   useEffect(() => {
-    getData(URL, setData);
+    getFetch(URL, setData);
   }, []);
 
   console.log(data);
@@ -18,8 +18,18 @@ function Login() {
   return (
     <main id={styles.main}>
       로그인 페이지
-      <p>3차 도전: 버셀 환경 3개 다 체크 production, preview, deployment</p>
-      <p>4차 도전: fetch api에 header Accept 설정 추가 - syntax 에러 방지 위해 </p>
+      <p>3차: 버셀 환경 3개 다 체크 production, preview, deployment</p>
+      <p>
+        4차: fetch api에 header Accept 설정 추가 - 결과: 헤더 설정 추가해도 syntax 에러 안사라짐
+      </p>
+      <p>5차: try catch에서 err 일단 지워보기</p>
+      <p>6차: 버셀 배포 브랜치 dev에서 feat으로 변경</p>
+      <p>
+        7차: 버셀 환경 3개 다 체크한 것이 왜인지 풀려있고, 프로덕션만 체크 되어 있어서 다시 세 개 다
+        체크
+      </p>
+      <p>8차: try catch 다시 되살림</p>
+      <p>9차: fetch api에 header Accept 설정 삭제</p>
     </main>
   );
 }
