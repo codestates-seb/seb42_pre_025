@@ -7,18 +7,20 @@ import com.stackoverflow.team25.exception.ExceptionCode;
 
 
 import com.stackoverflow.team25.user.entity.User;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 
-
-
 @Service
+
 public class QuestionService {
     private final QuestionRepository questionRepository;
 
@@ -27,11 +29,16 @@ public class QuestionService {
         this.questionRepository = questionRepository;
     }
 
-    public Question createQuestion(Question question) {
+    public Question createQuestion(Question question, Long userId) {
         String title = question.getTitle();
-        verifyExistQuestion(title);
+//       verifyExistQuestion(title);
         question.setTitle(title);
         question.setAnswerCount(0);
+
+        User user = new User();
+        user.setUserId(userId);
+        question.setUser(user);
+
         return questionRepository.save(question);
     }
 
@@ -51,15 +58,7 @@ public class QuestionService {
     }
 
     public Question findQuestion(long questionId) {
-        return findVerifiedQuestionByQuery(questionId);
-    }
-    private Question findVerifiedQuestionByQuery(long questionId) {
-        Optional<Question> optionalQuestion = questionRepository.findById(questionId);
-        Question findQuestion =
-                optionalQuestion.orElseThrow(() ->
-                        new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
-
-        return findQuestion;
+        return findVerifiedQuestion(questionId);
     }
 
     public Page<Question> findQuestions(Pageable pageable) {
