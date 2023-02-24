@@ -29,6 +29,7 @@ function Login() {
         체크
       </p>
       <p>8차: try catch 다시 되살림</p>
+      <p>9차: fetch api에 header Accept 설정 삭제</p>
     </main>
   );
 }
