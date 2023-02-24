@@ -48,13 +48,17 @@
   justify-content: space-between;
 }
 
-.contentTagBox {
+.contentTagAndBox {
   height: 38px;
 }
 
 .contentTag {
   padding: 4.8px 6px;
-  margin: 2px 20px 2px 0px;
+  margin: 2px 5px 2px 0px;
+  width: inherit;
+  border-radius: 4px;
+  background-color: var(--powder-100);
+  color: var(--powder-700);
 }
 
 .contentUser {
