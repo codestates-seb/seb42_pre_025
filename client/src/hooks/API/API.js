@@ -1,30 +1,19 @@
 const getData = async (url, setState) => {
-  const res = await fetch(url, {
-    method: 'GET',
-    mode: 'cors',
-    headers: {
-      Accept: 'application/json'
-    }
-  });
-  const data = await res.json();
-  console.log(typeof data);
-  console.log(data);
-  setState(data.data);
-  //   try {
-  //     const res = await fetch(url, {
-  //       method: 'GET',
-  //       mode: 'cors',
-  //       headers: {
-  //         Accept: 'application/json'
-  //       }
-  //     });
-  //     const data = await res.json();
-  //     console.log(typeof data);
-  //     console.log(data);
-  //     setState(data.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
+  try {
+    const res = await fetch(url, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        Accept: 'application/json'
+      }
+    });
+    const data = await res.json();
+    console.log(typeof data);
+    console.log(data);
+    setState(data.data);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const postData = async (url, newData) => {
