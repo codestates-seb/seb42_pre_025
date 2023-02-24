@@ -20,8 +20,7 @@ function QuestionDetail() {
                 text='Ask Question'
                 path='/questions/ask'
                 addStyle={{
-                  width: '103px',
-                  padding: '10px'
+                  padding: '11px'
                 }}
               />
             </li>
