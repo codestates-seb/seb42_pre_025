@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { postFetch } from '../hooks/API/API.js';
 import Editor from '../components/UI/Editor.jsx';
 import Button from '../components/UI/Button.jsx';
 import Footer from '../components/Footer.jsx';
@@ -16,25 +17,33 @@ function CreateQuestion() {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
   };
-  // console.log(inputs);
-  // {title: 'title', content: '', tag: 'ios, js'}
 
-  // ! tag 스트링 값 배열(string)로 바꿔줘야함
-  // post 요청시
-  //     if (name === 'tag') {
-  //   console.log(value);
-  //   const arr = value.split(',');
-  //   setInputs({ ...inputs, tag: arr });
-  // }
-  console.log(inputs.tag);
-  const tagArr = inputs.tag.split(',');
-  console.log(tagArr);
+  const URL = `${process.env.REACT_APP_URL}/questions`;
+
+  // ! input 값에 빈 문자열 들어올 때 처리해줘야 함
+  // ! post 요청 보낸 이후 응답 값 받아서 처리하는 코드 미작성
+  const onSubmit = () => {
+    // ? tag 값 없을 때 서버에 어떻게 보낼지? : []
+    let tag;
+    if (inputs.tag.split(',').length === 1 && inputs.tag.split(',')[0] === '') {
+      tag = [];
+    } else tag = inputs.tag.split(',');
+
+    const newData = {
+      title: inputs.title,
+      content: inputs.content,
+      tag
+    };
+    console.log(newData);
+
+    postFetch(URL, newData);
+  };
 
   return (
     <>
       <div className={styles.container}>
         <div className={styles.content}>
-          <form id={styles.postForm}>
+          <form id={styles.postForm} onSubmit={onSubmit}>
             <main id={styles.questionForm}>
               <div className={styles.writeQuestionNotice}>
                 <div className={styles.headline}>
