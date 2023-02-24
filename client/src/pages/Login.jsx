@@ -15,7 +15,12 @@ function Login() {
 
   console.log(data);
 
-  return <main id={styles.main}>로그인 페이지 환경변수명 바꿔서 2차 도전</main>;
+  return (
+    <main id={styles.main}>
+      로그인 페이지
+      <p>3차 도전: 버셀 환경 3개 다 체크 production, preview, deployment</p>
+    </main>
+  );
 }
 
 export default Login;
