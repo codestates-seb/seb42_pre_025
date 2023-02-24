@@ -29,6 +29,8 @@ public class Question extends Auditable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+    @ElementCollection
+    private List<String> tags;
 
     public void addAnswer(Answer answer){
         answers.add(answer);
