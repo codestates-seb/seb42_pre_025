@@ -58,7 +58,8 @@ public class QuestionController {
         questionPatchDto.setQuestionId(questionId);
         Question question = questionService.updateQuestion(mapper.questionPatchDtoToQuestion(questionPatchDto));
         QuestionDto.QuestionResponseDto response = mapper.questionToQuestionResponseDto(question);
-        response.setUserDto(UserDto.Response.builder().user(question.getUser()).build());
+        User user = question.getUser();
+        response.setUserDto(userMapper.userToResponse(user));
 
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }
@@ -67,7 +68,8 @@ public class QuestionController {
     public ResponseEntity getQuestion(@PathVariable("question-id") long questionId) {
         Question question = questionService.findQuestion(questionId);
         QuestionDto.QuestionResponseDto response = mapper.questionToQuestionResponseDto(question);
-        response.setUserDto(UserDto.Response.builder().user(question.getUser()).build());
+        User user = question.getUser();
+        response.setUserDto(userMapper.userToResponse(user));
 
         return new ResponseEntity<>(new SingleResponseDto<>(response),HttpStatus.OK);
     }
@@ -79,7 +81,8 @@ public class QuestionController {
         List<QuestionDto.QuestionResponseDto> responses = mapper.questionsToQuestionResponseDtos(questions);
         for (QuestionDto.QuestionResponseDto response : responses) {
             Question question = questionService.findQuestion(response.getQuestionId());
-            response.setUserDto(UserDto.Response.builder().user(question.getUser()).build());
+            User user = question.getUser();
+            response.setUserDto(userMapper.userToResponse(user));
         }
 
         return new ResponseEntity<>(new MultiResponseDto<>(responses,pageQuestions),HttpStatus.OK);
