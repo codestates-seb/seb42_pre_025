@@ -19,6 +19,7 @@ function Login() {
     <main id={styles.main}>
       로그인 페이지
       <p>3차 도전: 버셀 환경 3개 다 체크 production, preview, deployment</p>
+      <p>4차 도전: fetch api에 header Accept 설정 추가 - syntax 에러 방지 위해 </p>
     </main>
   );
 }

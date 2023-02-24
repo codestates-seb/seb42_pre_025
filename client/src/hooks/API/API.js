@@ -2,7 +2,10 @@ const getData = async (url, setState) => {
   try {
     const res = await fetch(url, {
       method: 'GET',
-      mode: 'cors'
+      mode: 'cors',
+      headers: {
+        Accept: 'application/json'
+      }
     });
     const data = await res.json();
     console.log(typeof data);
