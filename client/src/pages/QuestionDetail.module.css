@@ -5,7 +5,7 @@
 .detailBox {
   width: 76%;
   padding: 24px;
-  border: 1px solid var(--black-100);
+  border-left: 1px solid var(--black-100);
 }
 
 .questionHead {
@@ -25,7 +25,7 @@
 
 .questionBody {
   display: flex;
-  width: 100%;
+  width: 70%;
   margin-top: 16px;
   height: 70vh;
 }
@@ -49,6 +49,8 @@
   height: 54px;
   width: 200px;
   padding: 5px 6px 7px 7px;
+  background-color: var(--blue-100);
+  border-radius: 3px;
 }
 
 .userImg {

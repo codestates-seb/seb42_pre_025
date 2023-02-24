@@ -3,7 +3,7 @@ import Nav from '../components/Nav.jsx';
 import Footer from '../components/Footer.jsx';
 import Button from '../components/UI/Button.jsx';
 import Vote from '../components/Vote.jsx';
-import navILogo from '../assets/navCollectives.png';
+import UserLogo from '../assets/logo.png';
 
 function QuestionDetail() {
   return (
@@ -54,7 +54,7 @@ function QuestionDetail() {
                   <div>Edit Delete</div>
                   <div className={styles.user}>
                     <div className={styles.userImg}>
-                      <img className={styles.img} src={navILogo} alt='navILogo' />
+                      <img className={styles.img} src={UserLogo} alt='navILogo' />
                     </div>
                     <div className={styles.userName}>Benidene</div>
                   </div>
