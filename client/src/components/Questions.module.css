@@ -1,19 +1,19 @@
 .questionList {
   height: 77vh;
   margin-right: 20px;
-  border-bottom: 1px solid lightgrey;
+  border-bottom: 1px solid var(--black-100);
 }
 
 .question {
   padding: 16px;
   height: 120px;
-  border-top: 1px solid lightgrey;
-  border-bottom: 1px solid lightgrey;
+  border-top: 1px solid var(--black-100);
+  border-bottom: 1px solid var(--black-100);
 }
 
 .content {
   display: flex;
-  margin: 16px;
+  margin: 16px 0px 0px 0px;
 }
 
 .contentDetail {

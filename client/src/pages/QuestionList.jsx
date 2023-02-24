@@ -19,7 +19,7 @@ function QuestionList() {
                 path='/questions/ask'
                 addStyle={{
                   width: '103px',
-                  padding: '10px'
+                  padding: '0px 10px'
                 }}
               />
             </div>
