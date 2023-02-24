@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getData } from '../hooks/API/API';
+import { getFetch } from '../hooks/API/API';
 import styles from './Login.module.css';
 
 function Login() {
@@ -10,7 +10,7 @@ function Login() {
   console.log(URL);
 
   useEffect(() => {
-    getData(URL, setData);
+    getFetch(URL, setData);
   }, []);
 
   console.log(data);
