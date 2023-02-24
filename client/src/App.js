@@ -6,6 +6,7 @@ import CreateQuestion from './pages/CreateQuestion.jsx';
 import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
+import QuestionDetail from './pages/QuestionDetail.jsx';
 import GlobalStyles from './GlobalStyles';
 import './App.css';
 
@@ -23,6 +24,7 @@ function App() {
         <Route path='/questions/ask' element={<CreateQuestion />} />
         <Route path='/users/login' element={<Login />} />
         <Route path='/users/signup' element={<Signup />} />
+        <Route path='/questions/detail' element={<QuestionDetail />} />
       </Routes>
     </>
   );

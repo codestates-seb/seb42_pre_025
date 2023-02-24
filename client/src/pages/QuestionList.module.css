@@ -4,12 +4,12 @@
 
 .div {
   height: 100vh;
-  flex-basis: 800px;
-  border-left: 1px solid lightgrey;
+  width: 75%;
+  border-left: 1px solid var(--black-100);
 }
 
 .border {
-  margin: 25px 25px 0px 25px;
+  padding: 25px 25px 0px 25px;
 }
 
 .allQuestionsBox {
@@ -29,7 +29,6 @@
   height: 37px;
   width: 103px;
   margin-left: 708px;
-  background-color: #0095ff;
   border-radius: 5px;
   border: none;
   color: #fff;

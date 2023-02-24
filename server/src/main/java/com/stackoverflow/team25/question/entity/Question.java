@@ -2,6 +2,7 @@ package com.stackoverflow.team25.question.entity;
 
 import com.stackoverflow.team25.answer.entity.Answer;
 import com.stackoverflow.team25.audit.Auditable;
+import com.stackoverflow.team25.user.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,12 +26,11 @@ public class Question extends Auditable {
     private String content;
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Answer> answers = new ArrayList<>();
-
-/*
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id")
     private User user;
- */
+    @ElementCollection
+    private List<String> tags;
 
     public void addAnswer(Answer answer){
         answers.add(answer);

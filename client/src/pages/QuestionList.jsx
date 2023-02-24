@@ -6,6 +6,60 @@ import styles from './QuestionList.module.css';
 import Button from '../components/UI/Button.jsx';
 
 function QuestionList() {
+  const QuestionData = [
+    {
+      questionid: 1,
+      owner: {
+        displayName: 'Kelly Bundy',
+        profileImage: 'www.ddddd.ssss',
+        aboutMe: 'Helllo'
+      },
+      isanswered: true,
+      acceptedanswerid: 1,
+      answercount: 3,
+      score: 0,
+      createdAt: '0000-00-00T00:00:00.0000000',
+      modifiedAt: '0000-00-00T00:00:00.0000000',
+      title: 'How can I set the default json object in the controller method?',
+      content: ' content of the question',
+      tag: ['tag1', 'tag2']
+    },
+    {
+      questionid: 2,
+      owner: {
+        displayName: 'Kelly Bundy',
+        profileImage: 'www.ddddd.ssss',
+        aboutMe: 'Helllo'
+      },
+      isanswered: true,
+      acceptedanswerid: 1,
+      answercount: 3,
+      score: 0,
+      createdAt: '0000-00-00T00:00:00.0000000',
+      modifiedAt: '0000-00-00T00:00:00.0000000',
+      title: 'How can I set the default ',
+      content: ' content of the question',
+      tag: ['tag']
+    },
+    {
+      questionid: 3,
+      owner: {
+        displayName: 'Kelly Bundy',
+        profileImage: 'www.ddddd.ssss',
+        aboutMe: 'Helllo'
+      },
+      isanswered: true,
+      acceptedanswerid: 1,
+      answercount: 3,
+      score: 0,
+      createdAt: '0000-00-00T00:00:00.0000000',
+      modifiedAt: '0000-00-00T00:00:00.0000000',
+      title: ' kladkandoas controller method?',
+      content: ' content of the question',
+      tag: ['tag1', 'tag2', 'tag3']
+    }
+  ];
+
   return (
     <>
       <div className={styles.container}>
@@ -14,18 +68,21 @@ function QuestionList() {
           <div className={styles.border}>
             <div className={styles.allQuestionsBox}>
               <div className={styles.allQuestions}>All Questions</div>
-              <Button
-                text='Ask Question'
-                path='/questions/ask'
-                addStyle={{
-                  width: '103px',
-                  padding: '10px'
-                }}
-              />
+              <div>
+                <Button
+                  text='Ask Question'
+                  path='/questions/ask'
+                  addStyle={{
+                    padding: '11px'
+                  }}
+                />
+              </div>
             </div>
             <div className={styles.questionNumber}>23,510,472 questions</div>
           </div>
-          <Questions />
+          {QuestionData.map((Question) => (
+            <Questions key={Question.questionid} Question={Question} />
+          ))}
           <Pagination />
         </div>
       </div>
