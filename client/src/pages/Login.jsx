@@ -23,6 +23,7 @@ function Login() {
         4차: fetch api에 header Accept 설정 추가 - 결과: 헤더 설정 추가해도 syntax 에러 안사라짐
       </p>
       <p>5차: try catch에서 err 일단 지워보기</p>
+      <p>6차: 버셀 배포 브랜치 dev에서 feat으로 변경</p>
     </main>
   );
 }
