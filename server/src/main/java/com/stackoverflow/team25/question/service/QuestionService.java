@@ -1,5 +1,7 @@
 package com.stackoverflow.team25.question.service;
 
+import com.stackoverflow.team25.post.entity.Post;
+import com.stackoverflow.team25.post.service.PostServiceImpl;
 import com.stackoverflow.team25.question.entity.Question;
 import com.stackoverflow.team25.question.repository.QuestionRepository;
 import com.stackoverflow.team25.exception.BusinessLogicException;
@@ -7,29 +9,34 @@ import com.stackoverflow.team25.exception.ExceptionCode;
 
 
 import com.stackoverflow.team25.user.entity.User;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 
 @Service
-
+@RequiredArgsConstructor
 public class QuestionService {
     private final QuestionRepository questionRepository;
-
-
-    public QuestionService(QuestionRepository questionRepository)  {
-        this.questionRepository = questionRepository;
-    }
+    private final PostServiceImpl postServiceImpl;
 
     public Question createQuestion(Question question, Long userId) {
+        /**
+         * Post 등록하기
+         */
+        Post post = new Post();
+        post.setPostType("q");
+        Post savedPost = postServiceImpl.createPost(post);
+
+        /**
+         * Question 등록하기
+         * - postId == questionId
+         */
+        question.setQuestionId(savedPost.getPostId());
         String title = question.getTitle();
 //       verifyExistQuestion(title);
         question.setTitle(title);
