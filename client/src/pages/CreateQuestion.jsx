@@ -1,8 +1,32 @@
+import { useState } from 'react';
 import Editor from '../components/UI/Editor.jsx';
+import Button from '../components/UI/Button.jsx';
 import Footer from '../components/Footer.jsx';
 import styles from './CreateQuestion.module.css';
 
 function CreateQuestion() {
+  const [inputs, setInputs] = useState({
+    title: '',
+    content: '',
+    tag: ''
+  });
+
+  const { title, tag } = inputs;
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setInputs({ ...inputs, [name]: value });
+  };
+
+  const getContentTextFromEditor = (text) => {
+    // console.log(text);
+    setInputs({ ...inputs, content: text });
+  };
+
+  console.log(inputs);
+  // ! tag 스트링 값 배열(string)로 바꿔줘야함
+  // {title: 'title', content: '', tag: 'ios, js'}
+
   return (
     <>
       <div className={styles.container}>
@@ -44,6 +68,8 @@ function CreateQuestion() {
                 </label>
                 <input
                   className={styles.input}
+                  value={title}
+                  onChange={onChange}
                   id='title'
                   name='title'
                   type='text'
@@ -59,7 +85,7 @@ function CreateQuestion() {
                   Introduce the problem and expand on what you put in the title. Minimum 20
                   characters.
                 </label>
-                <Editor />
+                <Editor sendContentText={getContentTextFromEditor} />
               </div>
               <div className={`${styles.tagBox} ${styles.boxBorder}`}>
                 <label htmlFor='tag' className={styles.labelTitle}>
@@ -70,6 +96,8 @@ function CreateQuestion() {
                 </label>
                 <input
                   className={styles.input}
+                  value={tag}
+                  onChange={onChange}
                   id='tag'
                   name='tag'
                   type='text'
@@ -77,7 +105,9 @@ function CreateQuestion() {
                   placeholder='e.g. (json, node.js, python)'
                 ></input>
               </div>
-              <div className={styles.formSubmit}></div>
+              <div className={styles.formSubmit}>
+                <Button text='Post your question' />
+              </div>
             </main>
           </form>
         </div>

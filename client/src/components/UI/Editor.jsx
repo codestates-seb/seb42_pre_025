@@ -3,7 +3,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './Editor.css';
 
-function Editor() {
+function Editor({ sendContentText }) {
   const [text, setText] = useState('');
 
   const modules = {
@@ -39,7 +39,8 @@ function Editor() {
   const handleText = (value) => {
     setText(value);
   };
-  console.log(text);
+  //   console.log(text);
+  sendContentText(text);
 
   return <ReactQuill modules={modules} formats={formats} value={text} onChange={handleText} />;
 }
