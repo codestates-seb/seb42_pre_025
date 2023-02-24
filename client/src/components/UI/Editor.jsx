@@ -1,11 +1,8 @@
-import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './Editor.css';
 
-function Editor({ sendContentText }) {
-  const [text, setText] = useState('');
-
+function Editor({ content, inputs, setInputs }) {
   const modules = {
     toolbar: [
       //   [{ font: [] }],
@@ -36,13 +33,11 @@ function Editor({ sendContentText }) {
     'background'
   ];
 
-  const handleText = (value) => {
-    setText(value);
+  const handleText = (content) => {
+    setInputs({ ...inputs, content });
   };
-  //   console.log(text);
-  sendContentText(text);
 
-  return <ReactQuill modules={modules} formats={formats} value={text} onChange={handleText} />;
+  return <ReactQuill modules={modules} formats={formats} value={content} onChange={handleText} />;
 }
 
 export default Editor;

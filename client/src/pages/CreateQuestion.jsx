@@ -10,22 +10,25 @@ function CreateQuestion() {
     content: '',
     tag: ''
   });
-
-  const { title, tag } = inputs;
+  const { title, content, tag } = inputs;
 
   const onChange = (e) => {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
   };
-
-  const getContentTextFromEditor = (text) => {
-    // console.log(text);
-    setInputs({ ...inputs, content: text });
-  };
-
-  console.log(inputs);
-  // ! tag 스트링 값 배열(string)로 바꿔줘야함
+  // console.log(inputs);
   // {title: 'title', content: '', tag: 'ios, js'}
+
+  // ! tag 스트링 값 배열(string)로 바꿔줘야함
+  // post 요청시
+  //     if (name === 'tag') {
+  //   console.log(value);
+  //   const arr = value.split(',');
+  //   setInputs({ ...inputs, tag: arr });
+  // }
+  console.log(inputs.tag);
+  const tagArr = inputs.tag.split(',');
+  console.log(tagArr);
 
   return (
     <>
@@ -85,7 +88,7 @@ function CreateQuestion() {
                   Introduce the problem and expand on what you put in the title. Minimum 20
                   characters.
                 </label>
-                <Editor sendContentText={getContentTextFromEditor} />
+                <Editor content={content} inputs={inputs} setInputs={setInputs} />
               </div>
               <div className={`${styles.tagBox} ${styles.boxBorder}`}>
                 <label htmlFor='tag' className={styles.labelTitle}>
