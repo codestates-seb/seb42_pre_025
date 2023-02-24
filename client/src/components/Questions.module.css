@@ -1,14 +1,11 @@
 .questionList {
-  height: 77vh;
   margin-right: 20px;
-  border-bottom: 1px solid var(--black-100);
 }
 
 .question {
   padding: 16px;
   height: 120px;
   border-top: 1px solid var(--black-100);
-  border-bottom: 1px solid var(--black-100);
 }
 
 .content {
@@ -24,15 +21,19 @@
   text-align: end;
 }
 
-.vote {
+.voteAnswer {
   margin-bottom: 7px;
   font-size: 13px;
 }
 
-.contentHead {
+.contentHeadBox {
   padding-right: 24px;
   margin-bottom: 5px;
   font-size: 17px;
+}
+
+.contentHead {
+  color: var(--blue-600);
 }
 
 .contentBody {
@@ -47,8 +48,17 @@
   justify-content: space-between;
 }
 
-.contentTag {
+.contentTagAndBox {
   height: 38px;
+}
+
+.contentTag {
+  padding: 4.8px 6px;
+  margin: 2px 5px 2px 0px;
+  width: inherit;
+  border-radius: 4px;
+  background-color: var(--powder-100);
+  color: var(--powder-700);
 }
 
 .contentUser {
