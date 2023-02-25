@@ -22,7 +22,8 @@ function CreateQuestion() {
 
   // ! input 값에 빈 문자열 들어올 때 처리해줘야 함
   // ! post 요청 보낸 이후 응답 값 받아서 처리하는 코드 미작성
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     // ? tag 값 없을 때 서버에 어떻게 보낼지? : []
     let tag;
     if (inputs.tag.split(',').length === 1 && inputs.tag.split(',')[0] === '') {
@@ -30,11 +31,11 @@ function CreateQuestion() {
     } else tag = inputs.tag.split(',');
 
     const newData = {
-      title: inputs.title,
-      content: inputs.content,
+      title,
+      content,
       tag
     };
-    console.log(newData);
+    // console.log(newData);
 
     postFetch(URL, newData);
   };
