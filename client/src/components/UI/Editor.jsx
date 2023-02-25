@@ -36,6 +36,7 @@ function Editor({ content, inputs, setInputs }) {
     'underline',
     'strike',
     'blockquote',
+    'code-block',
     'list',
     'bullet',
     // 'indent',
