@@ -2,15 +2,28 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './Editor.css';
 
+// * 순정 editor
+// function Editor({ content, inputs, setInputs }) {
+//   const handleText = (content) => {
+//     setInputs({ ...inputs, content });
+//   };
+
+//   return <ReactQuill theme='snow' value={content} onChange={handleText} />;
+// }
+
+// * custom editor
 function Editor({ content, inputs, setInputs }) {
   const modules = {
     toolbar: [
       //   [{ font: [] }],
       [{ header: [1, 2, 3, false] }],
-      ['bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block'],
-      [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+      ['bold', 'italic', 'underline', 'strike'],
+      ['blockquote', 'code-block'],
+      // [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+      [{ list: 'ordered' }, { list: 'bullet' }],
       //   ['link', 'image'],
-      [{ align: [] }, { color: [] }, { background: [] }], // dropdown with defaults from theme
+      [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+      // [{ align: [] }, { color: [] }, { background: [] }], // dropdown with defaults from theme
       ['clean']
     ]
   };
@@ -25,10 +38,10 @@ function Editor({ content, inputs, setInputs }) {
     'blockquote',
     'list',
     'bullet',
-    'indent',
-    'link',
-    'image',
-    'align',
+    // 'indent',
+    // 'link',
+    // 'image',
+    // 'align',
     'color',
     'background'
   ];
@@ -37,7 +50,7 @@ function Editor({ content, inputs, setInputs }) {
     setInputs({ ...inputs, content });
   };
 
-  return <ReactQuill modules={modules} formats={formats} value={content} onChange={handleText} />;
+  return <ReactQuill formats={formats} modules={modules} value={content} onChange={handleText} />;
 }
 
 export default Editor;
