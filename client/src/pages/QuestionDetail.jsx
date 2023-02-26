@@ -12,7 +12,7 @@ function QuestionDetail() {
   const { id } = useParams();
   const [question, setQuestion] = useState({});
 
-  const QUESTION_DETAIL_GET_URL = `${process.env.REACT_APP_URL}/api/questions/${id}`;
+  const QUESTION_DETAIL_GET_URL = `${process.env.REACT_APP_URL}/questions/${id}`;
 
   useEffect(() => {
     getFetch(QUESTION_DETAIL_GET_URL, setQuestion);
