@@ -8,8 +8,8 @@ const getFetch = async (url, setState) => {
       //   }
     });
     const data = await res.json();
-    console.log(typeof data);
-    console.log(data);
+    // console.log(typeof data);
+    // console.log(data);
     setState(data.data);
   } catch (error) {
     console.error(error);
@@ -29,7 +29,13 @@ const postFetch = async (url, newData) => {
       },
       body: JSON.stringify(newData)
     });
-    return await res.json();
+
+    if (res.ok) {
+      return res;
+    }
+    // return await res.json();
+    // console.log(...res.headers);
+    // return res.headers.get('Location');
   } catch (err) {
     console.log(err);
   }
