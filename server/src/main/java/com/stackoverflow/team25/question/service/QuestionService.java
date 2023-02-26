@@ -7,6 +7,7 @@ import com.stackoverflow.team25.exception.ExceptionCode;
 
 
 import com.stackoverflow.team25.user.entity.User;
+import com.stackoverflow.team25.user.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -25,10 +26,12 @@ import java.util.Optional;
 
 public class QuestionService {
     private final QuestionRepository questionRepository;
+    private final UserRepository userRepository;
 
 
-    public QuestionService(QuestionRepository questionRepository)  {
+    public QuestionService(QuestionRepository questionRepository, UserRepository userRepository)  {
         this.questionRepository = questionRepository;
+        this.userRepository = userRepository;
     }
 
     public Question createQuestion(Question question, Long userId) {
@@ -36,13 +39,9 @@ public class QuestionService {
 //       verifyExistQuestion(title);
         question.setTitle(title);
         question.setAnswerCount(0);
-        List<String> tags = question.getTags();
-        question.setTags(tags);
+        question.setUser(userRepository.findById(userId).orElseThrow(() ->
+                        new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND)));
 
-
-        User user = new User();
-        user.setUserId(userId);
-        question.setUser(user);
 
         return questionRepository.save(question);
     }
@@ -85,8 +84,8 @@ public class QuestionService {
                 .ifPresent(verifiedQuestion::setContent);
         Optional.ofNullable(question.getAnswerCount())
                 .ifPresent(verifiedQuestion::setAnswerCount);
-        Optional.ofNullable(question.getTags())
-                .ifPresent(verifiedQuestion::setTags);
+  //    Optional.ofNullable(question.getTags())
+  //            .ifPresent(verifiedQuestion::setTags);
 
         return questionRepository.save(findQuestion);
     }
