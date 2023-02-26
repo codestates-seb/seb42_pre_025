@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { postFetch } from '../hooks/API/API.js';
 import Editor from '../components/UI/Editor.jsx';
 import Button from '../components/UI/Button.jsx';
@@ -6,6 +7,8 @@ import Footer from '../components/Footer.jsx';
 import styles from './CreateQuestion.module.css';
 
 function CreateQuestion() {
+  const navigate = useNavigate();
+
   const [inputs, setInputs] = useState({
     title: '',
     content: '',
@@ -18,13 +21,14 @@ function CreateQuestion() {
     setInputs({ ...inputs, [name]: value });
   };
 
-  const URL = `${process.env.REACT_APP_URL}/api/questions`;
+  const QUESTION_POST_URL = `${process.env.REACT_APP_URL}/api/questions`;
   // console.log(URL);
 
-  // ! input 값에 빈 문자열 들어올 때 처리해줘야 함
-  // ! post 요청 보낸 이후 응답 값 받아서 처리하는 코드 미작성
   const onSubmit = async (e) => {
     e.preventDefault();
+    // ! input 값에 빈 문자열 들어올 때 사용자에게 알림 처리해줘야 함
+    if (title === '' || content === '') return;
+
     let tags;
     if (inputs.tags.split(',').length === 1 && inputs.tags.split(',')[0] === '') {
       tags = [];
@@ -37,10 +41,14 @@ function CreateQuestion() {
       userId: 3,
       password: '1111'
     };
-    console.log(newData);
+    // console.log(newData);
 
-    const res = await postFetch(URL, newData);
-    console.log(res); // '/api/questions/1'
+    const res = await postFetch(QUESTION_POST_URL, newData);
+    const location = res.headers.get('Location'); // '/api/questions/1'
+
+    if (res) {
+      navigate(location);
+    }
   };
 
   return (
