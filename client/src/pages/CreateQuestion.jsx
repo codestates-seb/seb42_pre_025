@@ -22,7 +22,7 @@ function CreateQuestion() {
 
   // ! input 값에 빈 문자열 들어올 때 처리해줘야 함
   // ! post 요청 보낸 이후 응답 값 받아서 처리하는 코드 미작성
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     // ? tags 값 없을 때 서버에 어떻게 보낼지? : []
     let tags;
@@ -33,11 +33,14 @@ function CreateQuestion() {
     const newData = {
       title,
       content,
-      tags
+      tags,
+      userId: 3,
+      password: '1111'
     };
     console.log(newData);
 
-    postFetch(URL, newData);
+    const res = await postFetch(URL, newData);
+    console.log(res);
   };
 
   return (
