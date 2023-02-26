@@ -21,7 +21,7 @@ function CreateQuestion() {
     setInputs({ ...inputs, [name]: value });
   };
 
-  const QUESTION_POST_URL = `${process.env.REACT_APP_URL}/api/questions`;
+  const QUESTION_POST_URL = `${process.env.REACT_APP_URL}/questions`;
 
   const onSubmit = async (e) => {
     e.preventDefault();
