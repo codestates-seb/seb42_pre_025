@@ -22,7 +22,6 @@ function CreateQuestion() {
   };
 
   const QUESTION_POST_URL = `${process.env.REACT_APP_URL}/api/questions`;
-  // console.log(URL);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -44,7 +43,7 @@ function CreateQuestion() {
     // console.log(newData);
 
     const res = await postFetch(QUESTION_POST_URL, newData);
-    const location = res.headers.get('Location'); // '/api/questions/1'
+    const location = res.headers.get('Location');
 
     if (res) {
       navigate(location);
