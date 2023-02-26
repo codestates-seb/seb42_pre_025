@@ -29,7 +29,9 @@ const postFetch = async (url, newData) => {
       },
       body: JSON.stringify(newData)
     });
-    return await res.json();
+    // return await res.json();
+    // console.log(...res.headers);
+    return res.headers.get('Location');
   } catch (err) {
     console.log(err);
   }

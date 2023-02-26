@@ -18,13 +18,13 @@ function CreateQuestion() {
     setInputs({ ...inputs, [name]: value });
   };
 
-  const URL = `${process.env.REACT_APP_URL}/questions`;
+  const URL = `${process.env.REACT_APP_URL}/api/questions`;
+  // console.log(URL);
 
   // ! input 값에 빈 문자열 들어올 때 처리해줘야 함
   // ! post 요청 보낸 이후 응답 값 받아서 처리하는 코드 미작성
   const onSubmit = async (e) => {
     e.preventDefault();
-    // ? tags 값 없을 때 서버에 어떻게 보낼지? : []
     let tags;
     if (inputs.tags.split(',').length === 1 && inputs.tags.split(',')[0] === '') {
       tags = [];
@@ -40,7 +40,7 @@ function CreateQuestion() {
     console.log(newData);
 
     const res = await postFetch(URL, newData);
-    console.log(res);
+    console.log(res); // '/api/questions/1'
   };
 
   return (
