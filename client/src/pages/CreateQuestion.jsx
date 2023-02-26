@@ -9,9 +9,9 @@ function CreateQuestion() {
   const [inputs, setInputs] = useState({
     title: '',
     content: '',
-    tag: ''
+    tags: ''
   });
-  const { title, content, tag } = inputs;
+  const { title, content, tags } = inputs;
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -22,21 +22,25 @@ function CreateQuestion() {
 
   // ! input 값에 빈 문자열 들어올 때 처리해줘야 함
   // ! post 요청 보낸 이후 응답 값 받아서 처리하는 코드 미작성
-  const onSubmit = () => {
-    // ? tag 값 없을 때 서버에 어떻게 보낼지? : []
-    let tag;
-    if (inputs.tag.split(',').length === 1 && inputs.tag.split(',')[0] === '') {
-      tag = [];
-    } else tag = inputs.tag.split(',');
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    // ? tags 값 없을 때 서버에 어떻게 보낼지? : []
+    let tags;
+    if (inputs.tags.split(',').length === 1 && inputs.tags.split(',')[0] === '') {
+      tags = [];
+    } else tags = inputs.tags.split(',');
 
     const newData = {
-      title: inputs.title,
-      content: inputs.content,
-      tag
+      title,
+      content,
+      tags,
+      userId: 3,
+      password: '1111'
     };
     console.log(newData);
 
-    postFetch(URL, newData);
+    const res = await postFetch(URL, newData);
+    console.log(res);
   };
 
   return (
@@ -99,19 +103,19 @@ function CreateQuestion() {
                 </label>
                 <Editor content={content} inputs={inputs} setInputs={setInputs} />
               </div>
-              <div className={`${styles.tagBox} ${styles.boxBorder}`}>
-                <label htmlFor='tag' className={styles.labelTitle}>
+              <div className={`${styles.tagsBox} ${styles.boxBorder}`}>
+                <label htmlFor='tags' className={styles.labelTitle}>
                   Tags
                 </label>
-                <label htmlFor='tag' className={styles.description}>
+                <label htmlFor='tags' className={styles.description}>
                   Be specific and imagine you’re asking a question to another person.
                 </label>
                 <input
                   className={styles.input}
-                  value={tag}
+                  value={tags}
                   onChange={onChange}
-                  id='tag'
-                  name='tag'
+                  id='tags'
+                  name='tags'
                   type='text'
                   maxLength='300'
                   placeholder='e.g. (json, node.js, python)'
