@@ -1,13 +1,14 @@
-.signupSection {
+.signupContainer {
   min-height: 100vh;
-  margin: 0% auto;
+
   background-color: #f1f2f3;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  padding: 20px;
+  margin: 4px, 16px;
 }
 
-.signupContainer {
-  padding: 20px;
-  margin-right: 30px;
+.signupContent {
 }

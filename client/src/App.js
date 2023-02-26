@@ -24,7 +24,7 @@ function App() {
         <Route path='/questions/ask' element={<CreateQuestion />} />
         <Route path='/users/login' element={<Login />} />
         <Route path='/users/signup' element={<Signup />} />
-        <Route path='/questions/detail' element={<QuestionDetail />} />
+        <Route path='/api/questions/:id' element={<QuestionDetail />} />
       </Routes>
     </>
   );
