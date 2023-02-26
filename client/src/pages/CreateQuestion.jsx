@@ -43,7 +43,7 @@ function CreateQuestion() {
     // console.log(newData);
 
     const res = await postFetch(QUESTION_POST_URL, newData);
-    const location = res.headers.get('Location');
+    const location = res.headers.get('Location').slice(4);
 
     if (res) {
       navigate(location);
