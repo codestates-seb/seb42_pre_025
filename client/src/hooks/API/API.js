@@ -1,4 +1,4 @@
-const getFetch = async (url, setState) => {
+const getFetch = async (url, setState1, setState2, key) => {
   try {
     const res = await fetch(url, {
       method: 'GET',
@@ -8,9 +8,8 @@ const getFetch = async (url, setState) => {
       //   }
     });
     const data = await res.json();
-    // console.log(typeof data);
-    // console.log(data);
-    setState(data.data);
+    setState1(data.data);
+    setState2 && setState2(data[key]);
   } catch (error) {
     console.error(error);
   }

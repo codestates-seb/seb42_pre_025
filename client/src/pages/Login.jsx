@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '../components/UI/Button.jsx';
 import { Link } from 'react-router-dom';
 import styles from './Login.module.css';
 
 // import { getData } from '../hooks/API/API.js';
-// import { getFetch } from '../hooks/API/API.js';
+import { getFetch } from '../hooks/API/API.js';
 
 // import { useEffect, useState } from 'react';
 // function Login() {
@@ -12,6 +12,16 @@ import styles from './Login.module.css';
 function Login() {
   const [isSignup, setIsLoggedIn] = useState(true);
   console.log(setIsLoggedIn);
+
+  const [data, setData] = useState([]);
+  const { REACT_APP_URL: BASE_URL } = process.env;
+  const LOGIN_GET_URL = `${BASE_URL}/users?page=1&size=5&sort=userId,desc`;
+
+  useEffect(() => {
+    getFetch(LOGIN_GET_URL, setData);
+  }, []);
+
+  console.log(data);
 
   return (
     <div className={styles.loginAuth}>
