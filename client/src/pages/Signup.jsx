@@ -1,5 +1,6 @@
 import { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
+import { postFetch } from '../hooks/API/API';
 import styles from './Signup.module.css';
 // import icon from ''
 import AboutSignup from './AboutSignup.jsx';
@@ -7,15 +8,42 @@ import Button from '../components/UI/Button.jsx';
 // import { getData } from '../hooks/API/API';
 
 function Signup() {
-  const [isSignup] = useState(true);
+  // const [isSignup] = useState(true);
+  const navigate = useNavigate();
+  const [inputs, setInputs] = useState({
+    displayName: '',
+    email: '',
+    password: ''
+  });
+  const { displayName, email, password } = inputs;
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setInputs({ ...inputs, [name]: value });
+  };
+  // console.log(inputs);
+
+  const SIGNUP_POST_URL = `${process.env.REACT_APP_URL}/users`;
+
+  // ! 유효성 검사 추가
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    // ! input 값에 빈 문자열 들어올 때 사용자에게 알림 처리해줘야 함
+    if (displayName === '' || email === '' || password === '') return;
+
+    const res = await postFetch(SIGNUP_POST_URL, inputs);
+
+    if (res.ok) {
+      navigate('/questions');
+    }
+  };
 
   return (
     <section className={styles.signupContainer}>
-      {isSignup && <AboutSignup />}
+      <AboutSignup />
       <div className={styles.signupContent}>
-        {/* { !isSignup && <img src = {icon} alt = 'stack overflow' className='loginogo'/>} */}
-
-        <from>
+        {/* 소셜 로그인 버튼 */}
+        <div>
           <div>
             <Button
               text='Sign up with Google'
@@ -64,49 +92,54 @@ function Signup() {
               }}
             />
           </div>
+        </div>
 
-          {/* <button type='submit' className={styles.authBtn}>
+        {/* <button type='submit' className={styles.authBtn}>
             Sign up with GiHub
           </button> */}
 
-          {isSignup && (
-            <label htmlFor='name'>
-              <h4>Display Name</h4>
-              <input type='text' id='name' name='name' />
+        <form onSubmit={onSubmit}>
+          <label htmlFor='name' className={styles.label}>
+            Display Name
+          </label>
+          <input type='text' id='name' name='displayName' value={displayName} onChange={onChange} />
+
+          <label htmlFor='email' className={styles.label}>
+            Email
+          </label>
+          <input type='email' name='email' id='email' value={email} onChange={onChange} />
+          <label htmlFor='password' className={styles.label}>
+            Password
+          </label>
+          <input
+            type='password'
+            name='password'
+            id='password'
+            value={password}
+            onChange={onChange}
+          />
+          <p className={styles.desc}>
+            Passwords must contain at least eight
+            <br />
+            characters, including at least 1<br /> letter and 1 number.
+          </p>
+          {/* <div className={styles.checkBox}>
+            <label htmlFor='check'>
+              <div>
+                // 현 div는 새로로 쌓임, 부모태그인 라벨은 클래스가 없으므로 그위에 조상태그인
+                클래스인 .checkBox를 css에서 label로 불러주어 디스플레이 플렉스를 써서 가로로
+                플어지게 된것
+                <input type='checkbox' id='check' />
+              </div>
+              <div>
+                <p>
+                  Opt-in to receive occasional product
+                  <br /> updates, user research invitations,
+                  <br /> company announcements, and digests.
+                </p>
+              </div>
             </label>
-          )}
-          <label htmlFor='email'>
-            <h4>Email</h4>
-            <input type='email' name='email' id='email' />
-          </label>
-          <label htmlFor='password'>
-            <h4>Password</h4>
-            <input type='password' name='password' id='password' />
-            {isSignup && (
-              <p>
-                Passwords must contain at least eight
-                <br />
-                characters, including at least 1<br /> letter and 1 number.
-              </p>
-            )}
-          </label>
-          <div className={styles.checkBox}>
-            {isSignup && (
-              <label htmlFor='check'>
-                <div>
-                  {/* 현  div는 새로로 쌓임, 부모태그인 라벨은 클래스가 없으므로 그위에 조상태그인 클래스인 .checkBox를 css에서 label로 불러주어 디스플레이 플렉스를 써서 가로로 플어지게 된것 */}
-                  <input type='checkbox' id='check' />
-                </div>
-                <div>
-                  <p>
-                    Opt-in to receive occasional product
-                    <br /> updates, user research invitations,
-                    <br /> company announcements, and digests.
-                  </p>
-                </div>
-              </label>
-            )}
-          </div>
+          </div> */}
 
           <div className={styles.signupbtn}>
             <Button
@@ -127,14 +160,12 @@ function Signup() {
             />
           </div>
 
-          {isSignup && (
-            <p>
-              By clicking “Sign up”, you agree to our terms of
-              <br />
-              service, privacy policy and cookie policy
-            </p>
-          )}
-        </from>
+          <p>
+            By clicking “Sign up”, you agree to our terms of
+            <br />
+            service, privacy policy and cookie policy
+          </p>
+        </form>
       </div>
     </section>
   );
