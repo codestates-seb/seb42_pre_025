@@ -19,7 +19,7 @@ function QuestionList() {
   }, [currentPage]);
 
   const { totalElements } = pageInfo;
-  console.log(currentPage);
+  // console.log(currentPage);
 
   return (
     <>
