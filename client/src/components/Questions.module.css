@@ -44,6 +44,7 @@
   /* ellipsis */
   line-height: 1.5;
   max-height: calc(1.5 * 2);
+  /* max-height: line-height * line */
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
