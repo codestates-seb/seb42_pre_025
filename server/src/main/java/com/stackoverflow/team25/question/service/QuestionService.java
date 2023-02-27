@@ -34,16 +34,11 @@ public class QuestionService {
         Post post = new Post();
         post.setPostType("q");
         Post savedPost = postServiceImpl.createPost(post); // 이 시점에 postId 생성됨
-        Post renewed = postServiceImpl.findPost(savedPost.getPostId());
-
-//        Question fkQuestion = new Question();
-//        fkQuestion.setQuestionId(savedPost.getPostId());
-//        renewed.setQuestion(fkQuestion);
-//        postServiceImpl.createPost(renewed);
 
         /**
          * Question 등록하기
          * - postId == questionId
+         * - 등록한 Question을 Post에 넣어줍니다.
          */
         question.setQuestionId(savedPost.getPostId());
         String title = question.getTitle();
@@ -54,8 +49,13 @@ public class QuestionService {
         User user = new User();
         user.setUserId(userId);
         question.setUser(user);
-        
-        return questionRepository.save(question);
+
+        Question savedQuestion = questionRepository.save(question);
+
+        savedPost.setQuestion(savedQuestion);
+        postServiceImpl.createPost(savedPost);
+
+        return savedQuestion;
     }
 
     private void verifyExistQuestion(String title) {

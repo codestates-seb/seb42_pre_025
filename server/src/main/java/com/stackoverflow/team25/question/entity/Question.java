@@ -31,7 +31,7 @@ public class Question extends Auditable {
     @JoinColumn(name = "user_id")
     private User user;
     // PERSIST가 동작안함..
-    @OneToOne(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "question", fetch = FetchType.LAZY)
     private Post post_q;
 
     public void addAnswer(Answer answer){

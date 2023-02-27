@@ -47,8 +47,14 @@ public class AnswerServiceImpl implements AnswerService{
         Question forPatchingQuestion = questionService.findVerifiedQuestion(answer.getQuestion().getQuestionId());
         forPatchingQuestion.setAnswerCount(forPatchingQuestion.getAnswerCount()+1);
         questionService.updateQuestion(forPatchingQuestion);
+        /**
+         * DB에 저장한 Answer를 Post에 넣어줍니다.
+         */
+        Answer savedAnswer = answerRepository.save(answer);
+        savedPost.setAnswer(savedAnswer);
+        postServiceImpl.createPost(savedPost);
 
-        return answerRepository.save(answer);
+        return savedAnswer;
     }
 
     public Answer updateAnswer(Answer answer){
