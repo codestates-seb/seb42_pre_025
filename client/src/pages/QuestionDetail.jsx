@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import DOMPurify from 'dompurify';
 import { getFetch, deleteFetch } from '../hooks/API/API';
 import Nav from '../components/Nav.jsx';
 import Footer from '../components/Footer.jsx';
@@ -59,7 +60,7 @@ function QuestionDetail() {
             <Vote />
             <div className={styles.box}>
               <div
-                dangerouslySetInnerHTML={{ __html: content }}
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
                 className={styles.contentBox}
               ></div>
               <div className={styles.questionTag}>{tags && tags.map((tag) => tag)}</div>
