@@ -1,10 +1,22 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { postFetch } from '../hooks/API/API.js';
 import Button from './UI/Button.jsx';
 import styles from './Header.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 function Header() {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    console.log('로그아웃 클릭');
+    const LOGOUT_POST_URL = `${process.env.REACT_APP_URL}/users`;
+    const res = await postFetch(LOGOUT_POST_URL);
+    if (res.ok) {
+      navigate('/');
+    }
+  };
+
   return (
     <header id={styles.header}>
       <div className={styles.container}>
@@ -29,6 +41,17 @@ function Header() {
             <Button
               text='Log in'
               path='/users/login'
+              addStyle={{
+                borderColor: 'var(--powder-500)',
+                backgroundColor: 'var(--powder-100)',
+                color: 'var(--powder-700)'
+              }}
+            />
+          </li>
+          <li>
+            <Button
+              text='Log out'
+              handleClick={handleLogout}
               addStyle={{
                 borderColor: 'var(--powder-500)',
                 backgroundColor: 'var(--powder-100)',

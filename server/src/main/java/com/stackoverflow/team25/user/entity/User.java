@@ -1,6 +1,7 @@
 package com.stackoverflow.team25.user.entity;
 
 import com.stackoverflow.team25.answer.entity.Answer;
+import com.stackoverflow.team25.comment.entity.Comment;
 import com.stackoverflow.team25.security.entity.UserRole;
 import lombok.*;
 
@@ -33,6 +34,8 @@ public class User {
     private UserStatus userStatus = UserStatus.USER_ACTIVATE;
     @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Answer> answers = new ArrayList<>();
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Comment> comments = new ArrayList<>();
 
     public void setUserRole(UserRole userRole) {
         this.userRoles.add(userRole);

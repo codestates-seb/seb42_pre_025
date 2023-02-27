@@ -12,4 +12,12 @@ public class UriCreator {
                 .buildAndExpand(resourceId)
                 .toUri();
     }
+
+    public static URI createCommentUri(String defaultUrl, long resourceId){
+        return UriComponentsBuilder
+                .newInstance()
+                .path(defaultUrl + "/{resource-id}/comments")
+                .buildAndExpand(resourceId)
+                .toUri();
+    }
 }

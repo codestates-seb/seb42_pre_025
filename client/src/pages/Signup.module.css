@@ -16,3 +16,8 @@
 .checkBox label {
   display: flex;
 }
+
+.label {
+  display: block;
+  font-weight: 600;
+}

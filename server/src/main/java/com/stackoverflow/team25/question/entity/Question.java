@@ -2,6 +2,8 @@ package com.stackoverflow.team25.question.entity;
 
 import com.stackoverflow.team25.answer.entity.Answer;
 import com.stackoverflow.team25.audit.Auditable;
+import com.stackoverflow.team25.post.entity.Post;
+import com.stackoverflow.team25.tag.entity.Tag;
 import com.stackoverflow.team25.user.entity.User;
 import lombok.*;
 
@@ -17,7 +19,7 @@ import java.util.List;
 @Builder
 public class Question extends Auditable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questionId;
     private Integer answerCount;
     @Column(nullable = false)
@@ -29,13 +31,21 @@ public class Question extends Auditable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-    @ElementCollection
-    private List<String> tags;
+    @OneToOne(mappedBy = "question", fetch = FetchType.LAZY)
+    private Post post_q;
+    @ManyToMany
+    @JoinTable(name = "Question_Tag")
+    private List<Tag> tags;
+
 
     public void addAnswer(Answer answer){
         answers.add(answer);
         if(answer.getQuestion() != this){
             answer.addQuestion(this);
         }
+    }
+    public void removeTag(Tag tag) {
+        tags.remove(tag);
+        tag.getQuestions().remove(this);
     }
 }

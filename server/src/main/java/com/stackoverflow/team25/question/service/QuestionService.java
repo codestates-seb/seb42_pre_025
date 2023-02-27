@@ -1,19 +1,24 @@
 package com.stackoverflow.team25.question.service;
 
+import com.stackoverflow.team25.post.entity.Post;
+import com.stackoverflow.team25.post.service.PostServiceImpl;
 import com.stackoverflow.team25.question.entity.Question;
 import com.stackoverflow.team25.question.repository.QuestionRepository;
 import com.stackoverflow.team25.exception.BusinessLogicException;
 import com.stackoverflow.team25.exception.ExceptionCode;
 
 
+import com.stackoverflow.team25.tag.entity.Tag;
+import com.stackoverflow.team25.tag.repository.TagRepository;
+import com.stackoverflow.team25.tag.service.TagService;
 import com.stackoverflow.team25.user.entity.User;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.stackoverflow.team25.user.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -22,31 +27,58 @@ import java.util.Optional;
 
 
 @Service
-
+@RequiredArgsConstructor
 public class QuestionService {
     private final QuestionRepository questionRepository;
+    private final PostServiceImpl postServiceImpl;
+    private final UserRepository userRepository;
+    private final TagRepository tagRepository;
+    private final TagService tagService;
 
 
-    public QuestionService(QuestionRepository questionRepository)  {
-        this.questionRepository = questionRepository;
-    }
 
-    public Question createQuestion(Question question, Long userId) {
+
+    public Question createQuestion(Question question, Long userId,List<String> tagNames) {
+        /**
+         * Post 등록하기
+         */
+        // Todo: Post에 QuestionID , AnswerId 넣기
+            // (1) 여기서 처리하기
+            // (2) 커스텀 save 를 만들어 insert문 만들어주기
+        Post post = new Post();
+        post.setPostType("q");
+        Post savedPost = postServiceImpl.createPost(post); // 이 시점에 postId 생성됨
+
+        /**
+         * Question 등록하기
+         * - postId == questionId
+         * - 등록한 Question을 Post에 넣어줍니다.
+         */
+        question.setQuestionId(savedPost.getPostId());
         String title = question.getTitle();
 //       verifyExistQuestion(title);
         question.setTitle(title);
         question.setAnswerCount(0);
-        List<String> tags = question.getTags();
-        question.setTags(tags);
+        question.setUser(userRepository.findById(userId).orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND)));
+        if (tagNames != null && !tagNames.isEmpty()) {
+            verifyExistTag(tagNames);
+            List<Tag> tags = tagRepository.findAllByNameIn(tagNames);
+            question.setTags(tags);
+        }
+        Question savedQuestion = questionRepository.save(question);
 
+        savedPost.setQuestion(savedQuestion);
+        postServiceImpl.createPost(savedPost);
 
-        User user = new User();
-        user.setUserId(userId);
-        question.setUser(user);
-
-        return questionRepository.save(question);
+        return savedQuestion;
     }
-
+    private void verifyExistTag(List<String> tagNames) {
+        for (String tagName : tagNames) {
+            Optional<Tag> tag = tagRepository.findByName(tagName);
+            if(!tag.isPresent()) tagService.createTag(tagName);
+        }
+    }
     private void verifyExistQuestion(String title) {
         Optional<Question> question = questionRepository.findByTitle(title);
         if(question.isPresent())
