@@ -1,8 +1,18 @@
-.footer {
+#footer {
   display: flex;
+  justify-content: center;
+  align-items: center;
   height: 278px;
   background-color: var(--black-800);
-  padding: 32px 12px 12px 4px;
+  padding: 32px 0px 12px 0px;
+}
+
+.container {
+  width: 90%;
+  max-width: 1280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .firstBox {
@@ -62,7 +72,7 @@
 }
 
 .snsMargin {
-  margin-left: 14px;
+  margin-left: 15px;
 }
 
 .title {
