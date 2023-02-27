@@ -1,6 +1,6 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getFetch } from '../hooks/API/API';
+import { getFetch, deleteFetch } from '../hooks/API/API';
 import styles from './QuestionDetail.module.css';
 import Nav from '../components/Nav.jsx';
 import Footer from '../components/Footer.jsx';
@@ -10,17 +10,31 @@ import UserLogo from '../assets/logo.png';
 
 function QuestionDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [question, setQuestion] = useState({});
 
-  const QUESTION_DETAIL_GET_URL = `${process.env.REACT_APP_URL}/questions/${id}`;
+  const QUESTION_DETAIL_URL = `${process.env.REACT_APP_URL}/questions/${id}`;
 
   useEffect(() => {
-    getFetch(QUESTION_DETAIL_GET_URL, setQuestion);
+    getFetch(QUESTION_DETAIL_URL, setQuestion);
   }, []);
 
   // * answerCount 는 답변 컴포넌트 붙인 다음에 question에서 변수로 빼오기
   const { title, content, tags, userDto } = question;
   const userName = userDto && userDto.displayName;
+
+  // ! 작성자에게만 edit, delete 버튼이 뜨도록 해야함
+  const handleDelete = async () => {
+    const result = confirm('Delete this post?');
+
+    if (result === true) {
+      const res = await deleteFetch(QUESTION_DETAIL_URL);
+      // 상태 코드 204
+      if (res.ok) {
+        navigate('/questions');
+      }
+    }
+  };
 
   return (
     <>
@@ -48,7 +62,8 @@ function QuestionDetail() {
                 <div dangerouslySetInnerHTML={{ __html: content }}></div>
                 <div className={styles.questionTag}>{tags && tags.map((tag) => tag)}</div>
                 <div className={styles.questionOption}>
-                  <div>Edit Delete</div>
+                  <button>Edit</button>
+                  <button onClick={handleDelete}>Delete</button>
                   <div className={styles.user}>
                     <div className={styles.userImg}>
                       <img className={styles.img} src={UserLogo} alt='navILogo' />

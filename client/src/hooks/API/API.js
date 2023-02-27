@@ -1,4 +1,4 @@
-const getFetch = async (url, setState) => {
+const getFetch = async (url, setState1, setState2, key) => {
   try {
     const res = await fetch(url, {
       method: 'GET',
@@ -8,9 +8,8 @@ const getFetch = async (url, setState) => {
       //   }
     });
     const data = await res.json();
-    // console.log(typeof data);
-    // console.log(data);
-    setState(data.data);
+    setState1(data.data);
+    setState2 && setState2(data[key]);
   } catch (error) {
     console.error(error);
   }
@@ -41,15 +40,16 @@ const postFetch = async (url, newData) => {
   }
 };
 
-const deleteFetch = async (url, id) => {
+const deleteFetch = async (url) => {
   try {
-    const res = await fetch(`${url}/${id}`, {
+    const res = await fetch(url, {
       method: 'DELETE',
       mode: 'cors'
     });
     // ! 새로고침 여부 확인
-    window.location.reload();
-    return await res.json();
+    // window.location.reload();
+    // return await res.json();
+    return res;
   } catch (err) {
     console.log(err);
   }

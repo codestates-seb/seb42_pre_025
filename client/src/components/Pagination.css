@@ -1,4 +1,4 @@
-.page {
+.pagination {
   display: flex;
   height: 94px;
   padding-left: 20px;
@@ -6,7 +6,7 @@
   margin-right: 20px;
 }
 
-.pageButton {
+.pagination li {
   text-align: center;
   height: 27px;
   width: 26px;
@@ -18,7 +18,14 @@
   font-size: 13px;
 }
 
-.pagedot {
+.pagination .active {
+  background-color: var(--orange-400);
+}
+.active a {
+  color: var(--white);
+}
+
+/* .pagedot {
   margin-top: 30px;
   margin-left: 10px;
 }
@@ -33,4 +40,4 @@
   border: 1px solid var(--black-100);
   border-radius: 3px;
   font-size: 13px;
-}
+} */
