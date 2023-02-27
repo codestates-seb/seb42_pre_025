@@ -1,5 +1,7 @@
 package com.stackoverflow.team25.question.service;
 
+import com.stackoverflow.team25.post.entity.Post;
+import com.stackoverflow.team25.post.service.PostServiceImpl;
 import com.stackoverflow.team25.question.entity.Question;
 import com.stackoverflow.team25.question.repository.QuestionRepository;
 import com.stackoverflow.team25.exception.BusinessLogicException;
@@ -7,13 +9,12 @@ import com.stackoverflow.team25.exception.ExceptionCode;
 
 
 import com.stackoverflow.team25.user.entity.User;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -22,16 +23,28 @@ import java.util.Optional;
 
 
 @Service
-
+@RequiredArgsConstructor
 public class QuestionService {
     private final QuestionRepository questionRepository;
-
-
-    public QuestionService(QuestionRepository questionRepository)  {
-        this.questionRepository = questionRepository;
-    }
+    private final PostServiceImpl postServiceImpl;
 
     public Question createQuestion(Question question, Long userId) {
+        /**
+         * Post 등록하기
+         */
+        // Todo: Post에 QuestionID , AnswerId 넣기
+            // (1) 여기서 처리하기
+            // (2) 커스텀 save 를 만들어 insert문 만들어주기
+        Post post = new Post();
+        post.setPostType("q");
+        Post savedPost = postServiceImpl.createPost(post); // 이 시점에 postId 생성됨
+
+        /**
+         * Question 등록하기
+         * - postId == questionId
+         * - 등록한 Question을 Post에 넣어줍니다.
+         */
+        question.setQuestionId(savedPost.getPostId());
         String title = question.getTitle();
 //       verifyExistQuestion(title);
         question.setTitle(title);
@@ -44,7 +57,12 @@ public class QuestionService {
         user.setUserId(userId);
         question.setUser(user);
 
-        return questionRepository.save(question);
+        Question savedQuestion = questionRepository.save(question);
+
+        savedPost.setQuestion(savedQuestion);
+        postServiceImpl.createPost(savedPost);
+
+        return savedQuestion;
     }
 
     private void verifyExistQuestion(String title) {
