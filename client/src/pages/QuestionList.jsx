@@ -4,8 +4,8 @@ import Nav from '../components/Nav.jsx';
 import Footer from '../components/Footer.jsx';
 import Questions from '../components/Questions.jsx';
 import Pagination from '../components/Pagination.jsx';
-import styles from './QuestionList.module.css';
 import Button from '../components/UI/Button.jsx';
+import styles from './QuestionList.module.css';
 
 function QuestionList() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,7 +23,7 @@ function QuestionList() {
 
   return (
     <>
-      <div className={styles.container}>
+      <div id={styles.questionList}>
         <Nav />
         <div className={styles.div}>
           <div className={styles.border}>
