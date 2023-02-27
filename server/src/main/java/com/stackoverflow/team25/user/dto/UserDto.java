@@ -31,5 +31,6 @@ public class UserDto {
         private String aboutMe;
         private double acceptRate;
         private User.UserStatus userStatus;
+
     }
 }
