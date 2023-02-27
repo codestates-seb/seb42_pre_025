@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './Nav.module.css';
 import navExploreLogo from '../assets/navExplore.png';
-// import navILogo from '../assets/navCollectives.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 

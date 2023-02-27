@@ -1,4 +1,3 @@
-// import { useState } from 'react';
 import styles from './Vote.module.css';
 
 function VotesButton() {
