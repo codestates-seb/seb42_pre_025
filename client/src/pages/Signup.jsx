@@ -16,12 +16,12 @@ function Signup() {
         {/* { !isSignup && <img src = {icon} alt = 'stack overflow' className='loginogo'/>} */}
 
         <from>
-          <p>
+          <div>
             <Button
               text='Sign up with Google'
               addStyle={{
-                borderColor: 'var(--black-750:)',
-                backgroundColor: 'var(--black-750:)',
+                bdColor: 'var(--black-750:)',
+                bgColor: 'var(--black-750:)',
                 color: 'var(--powder-050:)',
 
                 textColor: 'var--white:)',
@@ -30,7 +30,7 @@ function Signup() {
                 width: '219.38px'
               }}
             />
-          </p>
+          </div>
           <Button
             text='Sign up with GiHub'
             addStyle={{
@@ -49,7 +49,7 @@ function Signup() {
             }}
           />
 
-          <p>
+          <div>
             <Button
               text='Sign up with Facebook'
               addStyle={{
@@ -63,7 +63,7 @@ function Signup() {
                 width: '219.38px'
               }}
             />
-          </p>
+          </div>
 
           {/* <button type='submit' className={styles.authBtn}>
             Sign up with GiHub
@@ -90,35 +90,42 @@ function Signup() {
               </p>
             )}
           </label>
-          {isSignup && (
-            <label htmlFor='check'>
-              <input type='checkbox' id='check' />
-              <p>
-                Opt-in to receive occasional product
-                <br /> updates, user research invitations,
-                <br /> company announcements, and digests.
-              </p>
-            </label>
-          )}
+          <div className={styles.checkBox}>
+            {isSignup && (
+              <label htmlFor='check'>
+                <div>
+                  {/* 현  div는 새로로 쌓임, 부모태그인 라벨은 클래스가 없으므로 그위에 조상태그인 클래스인 .checkBox를 css에서 label로 불러주어 디스플레이 플렉스를 써서 가로로 플어지게 된것 */}
+                  <input type='checkbox' id='check' />
+                </div>
+                <div>
+                  <p>
+                    Opt-in to receive occasional product
+                    <br /> updates, user research invitations,
+                    <br /> company announcements, and digests.
+                  </p>
+                </div>
+              </label>
+            )}
+          </div>
 
-          <div className={styles.signupbtn}> </div>
+          <div className={styles.signupbtn}>
+            <Button
+              text='signup'
+              path='/users/signup'
+              addStyle={{
+                width: '219.38px',
+                padding: '10.4px',
+                margin: '4px',
+                bgColor: 'var(--powder-100)',
+                bdColor: 'var(--powder-500)',
+                color: 'var(--powder-700)',
 
-          <Button
-            text='signup'
-            path='/users/signup'
-            addStyle={{
-              width: '219.38px',
-              padding: '10.4px',
-              margin: '4px',
-              bgColor: 'var(--powder-100)',
-              bdColor: 'var(--powder-500)',
-              color: 'var(--powder-700)',
+                textColor: 'var--white:)'
 
-              textColor: 'var--white:)'
-
-              // onClick={path ? () => goTo(path) : handleClick}
-            }}
-          />
+                // onClick={path ? () => goTo(path) : handleClick}
+              }}
+            />
+          </div>
 
           {isSignup && (
             <p>

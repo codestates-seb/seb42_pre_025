@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Button from '../components/UI/Button.jsx';
 import { Link } from 'react-router-dom';
 import styles from './Login.module.css';
-
+// import { useState } from 'react';
 // import { getData } from '../hooks/API/API.js';
 import { getFetch } from '../hooks/API/API.js';
 
@@ -10,7 +10,7 @@ import { getFetch } from '../hooks/API/API.js';
 // function Login() {
 
 function Login() {
-  const [isSignup, setIsLoggedIn] = useState(true);
+  const [isLogin, setIsLoggedIn] = useState(true);
   console.log(setIsLoggedIn);
 
   const [data, setData] = useState([]);
@@ -26,13 +26,15 @@ function Login() {
   return (
     <div className={styles.loginAuth}>
       <div className={styles.loginContainer}>
-        <Link to='/' className={styles.logo}>
-          <img
-            src='https://upload.wikimedia.org/wikipedia/commons/0/02/Stack_Overflow_logo.svg'
-            alt='logo'
-            className={styles.logoImg}
-          ></img>
-        </Link>
+        <div className={styles.logotop}>
+          <Link to='/' className={styles.logo}>
+            <img
+              src='https://upload.wikimedia.org/wikipedia/commons/0/02/Stack_Overflow_logo.svg'
+              alt='logo'
+              className={styles.logoImg}
+            ></img>
+          </Link>
+        </div>
         {/* { !isSignup && <img src = {icon} alt = 'stack overflow' className='loginogo'/>} */}
 
         <div className={styles.authLogin}>
@@ -45,52 +47,54 @@ function Login() {
         ) : ()
         }
          */}
-
-        <div className={styles.signupbtn}>
-          <p>
+        <from>
+          <div className={styles.loginGoolglebtn}>
             <Button
-              text='Log in with Google'
+              text='Sign up with Google'
               addStyle={{
-                bdColor: 'var(--black-750:)',
-                bgColor: 'var(--white:)',
-                textColor: 'var(--white:)',
+                bdColor: 'var(--black-750)',
+                bgColor: 'var(--white)',
+
+                color: 'var(--black)',
                 padding: '10.4px',
-                margin: '4px 0',
+                margin: '20px 0',
                 width: '288px'
               }}
             />
-          </p>
+          </div>
 
-          <p>
+          <div className={styles.loginGiHubbtn}>
             <Button
               text='Log in with GiHub'
               addStyle={{
-                bdColor: 'var(--black-750:)',
-                bgColor: 'var(--black-750:)',
-                textColor: 'var(--black-750:)',
+                bdColor: 'var(--black)',
+                bgColor: 'var(--black)',
+                color: 'var(--white)',
                 padding: '10.4px',
                 margin: '4px 0',
                 width: '288px'
               }}
             />
-          </p>
+          </div>
 
-          <p>
+          <div className={styles.loginFacebookbtn}>
             <Button
               text='Log in with Facebook'
               addStyle={{
-                bdColor: 'var(--black:)',
-                bgColor: 'var(--black:)',
-                textColor: 'var(--white:)',
+                borderColor: 'var(--black-750)',
+                backgroundColor: 'var(--black-750)',
+                color: 'var(--white)',
                 padding: '10.4px',
-                margin: '4px 0',
+
                 width: '288px'
               }}
             />
-          </p>
+          </div>
+        </from>
 
+        <div className={styles.logintextFrom}>
           <form className={styles.loginBar}>
-            {isSignup && (
+            {isLogin && (
               <label htmlFor='email'>
                 <h4>Email</h4>
                 <input type='email' name='email' id='email' />
@@ -100,23 +104,26 @@ function Login() {
               <h4>Password</h4>
               <input type='password' name='password' id='password' />
             </label>
-          </form>
-          <div className={styles.signupbtn}> </div>
-          <Button
-            text='login up'
-            path='/users/signup'
-            addStyle={{
-              width: '288px',
-              padding: '10.4px',
-              margin: '4px',
-              bgColor: 'var(--powder-100)',
-              bdColor: 'var(--powder-500)',
-              color: 'var(--powder-700)',
+            <div className={styles.loginbtn}>
+              <Button
+                text='login'
+                path='/users/signup'
+                addStyle={{
+                  bgColor: 'var(--powder-100)',
+                  bdColor: 'var(--powder-500)',
+                  textColor: 'var(--white)'
+                }}
+              />
+            </div>
 
-              textColor: 'var(--white:)'
-            }}
-          />
-          <p>{isSignup ? 'Login' : 'isSignup'} </p>
+            {isLogin && (
+              <p>
+                Don’t have an account?
+                <br />
+                Are you an employer?
+              </p>
+            )}
+          </form>
         </div>
       </div>
     </div>
@@ -124,26 +131,3 @@ function Login() {
 }
 
 export default Login;
-
-// {/* // console.log(data);
-
-//   return (
-//     <main id={styles.main}>
-//       로그인 페이지
-//       <p>3차: 버셀 환경 3개 다 체크 production, preview, deployment</p>
-//       <p>
-//         4차: fetch api에 header Accept 설정 추가 - 결과: 헤더 설정 추가해도 syntax 에러 안사라짐
-//       </p>
-//       <p>5차: try catch에서 err 일단 지워보기</p>
-//       <p>6차: 버셀 배포 브랜치 dev에서 feat으로 변경</p>
-//       <p>
-//         7차: 버셀 환경 3개 다 체크한 것이 왜인지 풀려있고, 프로덕션만 체크 되어 있어서 다시 세 개 다
-//         체크
-//       </p>
-//       <p>8차: try catch 다시 되살림</p>
-//       <p>9차: fetch api에 header Accept 설정 삭제</p>
-//     </main>
-//   );
-// }
-
-// export default Login; */}

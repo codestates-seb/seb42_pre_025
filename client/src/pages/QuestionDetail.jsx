@@ -7,6 +7,7 @@ import Footer from '../components/Footer.jsx';
 import Button from '../components/UI/Button.jsx';
 import Vote from '../components/Vote.jsx';
 import UserLogo from '../assets/logo.png';
+import './QuestionDetail.css';
 
 function QuestionDetail() {
   const { id } = useParams();
@@ -59,7 +60,10 @@ function QuestionDetail() {
             <Vote />
             <div>
               <div>
-                <div dangerouslySetInnerHTML={{ __html: content }}></div>
+                <div
+                  dangerouslySetInnerHTML={{ __html: content }}
+                  className={styles.contentBox}
+                ></div>
                 <div className={styles.questionTag}>{tags && tags.map((tag) => tag)}</div>
                 <div className={styles.questionOption}>
                   <button>Edit</button>
