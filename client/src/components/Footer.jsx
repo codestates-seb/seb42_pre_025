@@ -22,7 +22,7 @@ function Footer() {
           PRODUCTS
           <li className={styles.secondTitle}>Teams</li>
           <li>Advertising</li>
-          <li>Collectivies</li>
+          <li>Collectives</li>
           <li>Talent</li>
         </ol>
       </div>
@@ -59,7 +59,7 @@ function Footer() {
           <li className={styles.snsMargin}>Facebook</li>
           <li className={styles.snsMargin}>Twitter</li>
           <li className={styles.snsMargin}>Linkedin</li>
-          <li className={styles.snsMargin}>Instargram</li>
+          <li className={styles.snsMargin}>Instagram</li>
         </ul>
         <div className={styles.sixthDetail}>
           Site design / logo © 2023 Stack Exchange Inc; user contributions licensed under CC BY-SA.
