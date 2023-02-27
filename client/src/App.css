@@ -100,6 +100,8 @@
   --bronze-lighter: hsl(28, 40%, 92%);
   --bronze-darker: hsl(28, 31%, 52%);
 
+  --highlight-bg: hsl(0, 0%, 96.5%);
+
   /* --bc-lightest: var(--black-025);
     --bc-lighter: var(--black-050);
     --bc-light: var(--black-075);

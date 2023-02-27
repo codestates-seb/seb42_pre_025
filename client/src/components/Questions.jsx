@@ -22,9 +22,7 @@ function Questions({ question }) {
                 {title}
               </Link>
             </div>
-            <div className={styles.contentBody}>
-              {text.length > 235 ? `${text.slice(0, 235)}...` : text}
-            </div>
+            <div className={styles.contentBody}>{text}</div>
             <div className={styles.contentTagAndUser}>
               <div className={styles.contentTagBox}>
                 <div>
