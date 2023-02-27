@@ -12,3 +12,7 @@
 
 .signupContent {
 }
+
+.checkBox label {
+  display: flex;
+}
