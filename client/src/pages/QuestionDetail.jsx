@@ -58,22 +58,24 @@ function QuestionDetail() {
           </ol>
           <div className={styles.questionBody}>
             <Vote />
-            <div>
-              <div>
-                <div
-                  dangerouslySetInnerHTML={{ __html: content }}
-                  className={styles.contentBox}
-                ></div>
-                <div className={styles.questionTag}>{tags && tags.map((tag) => tag)}</div>
-                <div className={styles.questionOption}>
-                  <button>Edit</button>
-                  <button onClick={handleDelete}>Delete</button>
-                  <div className={styles.user}>
-                    <div className={styles.userImg}>
-                      <img className={styles.img} src={UserLogo} alt='navILogo' />
-                    </div>
-                    <div className={styles.userName}>{userName}</div>
+            <div className={styles.box}>
+              <div
+                dangerouslySetInnerHTML={{ __html: content }}
+                className={styles.contentBox}
+              ></div>
+              <div className={styles.questionTag}>{tags && tags.map((tag) => tag)}</div>
+              <div className={styles.questionOption}>
+                <div>
+                  <button className={styles.buttonStyle}>Edit</button>
+                  <button className={styles.buttonStyle} onClick={handleDelete}>
+                    Delete
+                  </button>
+                </div>
+                <div className={styles.user}>
+                  <div className={styles.userImg}>
+                    <img className={styles.img} src={UserLogo} alt='navILogo' />
                   </div>
+                  <div className={styles.userName}>{userName}</div>
                 </div>
               </div>
             </div>

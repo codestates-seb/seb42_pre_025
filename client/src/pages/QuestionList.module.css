@@ -1,7 +1,7 @@
 #questionList {
   max-width: 1264px;
   display: flex;
-  margin-left: 13vw;
+  margin: 0 auto;
 }
 
 .div {
