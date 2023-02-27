@@ -9,6 +9,10 @@ import com.stackoverflow.team25.question.dto.QuestionDto;
 import com.stackoverflow.team25.question.entity.Question;
 import com.stackoverflow.team25.question.mapper.QuestionMapper;
 import com.stackoverflow.team25.question.service.QuestionService;
+import com.stackoverflow.team25.tag.dto.TagDto;
+import com.stackoverflow.team25.tag.entity.Tag;
+import com.stackoverflow.team25.tag.mapper.TagMapper;
+import com.stackoverflow.team25.tag.repository.TagRepository;
 import com.stackoverflow.team25.user.dto.UserDto;
 import com.stackoverflow.team25.user.entity.User;
 import com.stackoverflow.team25.user.mapper.UserMapper;
@@ -29,7 +33,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/questions")
@@ -42,11 +49,12 @@ public class QuestionController {
     private final AnswerService answerService;
     private final AnswerMapper answerMapper;
     private final UserMapper userMapper;
-    private final UserService userService;
-
+    private final TagRepository tagRepository;
     @PostMapping
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.QuestionPostDto questionPostDto) {
-        Question question = questionService.createQuestion(mapper.questionPostDtoToQuestion(questionPostDto),questionPostDto.getUserId());
+        Question question = questionService.createQuestion(mapper.questionPostDtoToQuestion(questionPostDto),
+                                                   questionPostDto.getUserId(),questionPostDto.getTagNames());
+
         URI location = UriCreator.createUri(QUESTION_DEFAULT_URL, question.getQuestionId());
 
         return ResponseEntity.created(location).build();
@@ -58,18 +66,17 @@ public class QuestionController {
         questionPatchDto.setQuestionId(questionId);
         Question question = questionService.updateQuestion(mapper.questionPatchDtoToQuestion(questionPatchDto));
         QuestionDto.QuestionResponseDto response = mapper.questionToQuestionResponseDto(question);
-        User user = question.getUser();
-        response.setUserDto(userMapper.userToResponse(user));
+        response.setUserDto(userMapper.userToResponse(question.getUser()));
 
-        return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
+       return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }
     @GetMapping("/{question-id}")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public ResponseEntity getQuestion(@PathVariable("question-id") long questionId) {
         Question question = questionService.findQuestion(questionId);
         QuestionDto.QuestionResponseDto response = mapper.questionToQuestionResponseDto(question);
-        User user = question.getUser();
-        response.setUserDto(userMapper.userToResponse(user));
+        response.setUserDto(userMapper.userToResponse(question.getUser()));
+        response.setTagNames(question.getTags().stream().map(Tag::getName).collect(Collectors.toList()));
 
         return new ResponseEntity<>(new SingleResponseDto<>(response),HttpStatus.OK);
     }
@@ -81,9 +88,13 @@ public class QuestionController {
         List<QuestionDto.QuestionResponseDto> responses = mapper.questionsToQuestionResponseDtos(questions);
         for (QuestionDto.QuestionResponseDto response : responses) {
             Question question = questionService.findQuestion(response.getQuestionId());
-            User user = question.getUser();
-            response.setUserDto(userMapper.userToResponse(user));
+            response.setUserDto(userMapper.userToResponse(question.getUser()));
         }
+        for (QuestionDto.QuestionResponseDto response : responses) {
+            Question question = questionService.findQuestion(response.getQuestionId());
+            response.setTagNames(question.getTags().stream().map(Tag::getName).collect(Collectors.toList()));
+        }
+
 
         return new ResponseEntity<>(new MultiResponseDto<>(responses,pageQuestions),HttpStatus.OK);
     }
