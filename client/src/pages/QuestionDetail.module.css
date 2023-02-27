@@ -107,9 +107,20 @@
   line-height: 1.5;
 }
 .contentBox p,
-.contentBox pre {
+.contentBox ul,
+.contentBox ol,
+.contentBox pre,
+.contentBox blockquote {
   margin-bottom: 8px;
 }
+.contentBox pre {
+  overflow: auto;
+}
+.contentBox blockquote {
+  padding-left: 4px;
+  border-left: 4px solid var(--black-200);
+}
+
 .contentBox ol {
   margin-left: 28px;
   list-style-type: decimal;
