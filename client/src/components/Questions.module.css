@@ -41,6 +41,10 @@
   color: var(--blue-600);
 }
 
+.contentHead:hover {
+  color: var(--blue-500);
+}
+
 .contentBody {
   font-size: 13px;
   height: 34px;
