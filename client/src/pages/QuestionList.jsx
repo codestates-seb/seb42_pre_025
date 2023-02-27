@@ -16,9 +16,10 @@ function QuestionList() {
 
   useEffect(() => {
     getFetch(QUESTION_LIST_GET_URL, setQuestions, setPageInfo, 'pageInfo');
-  }, []);
+  }, [currentPage]);
 
   const { totalElements } = pageInfo;
+  console.log(currentPage);
 
   return (
     <>
