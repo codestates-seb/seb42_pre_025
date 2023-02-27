@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postFetch } from '../hooks/API/API';
+import { postFetch } from '../../hooks/API/API';
 import styles from './Signup.module.css';
 // import icon from ''
 import AboutSignup from './AboutSignup.jsx';
-import Button from '../components/UI/Button.jsx';
+import Button from '../../components/UI/Button.jsx';
 // import { getData } from '../hooks/API/API';
 
 function Signup() {
@@ -38,6 +38,12 @@ function Signup() {
     }
   };
 
+  // * oauth - google
+  const handleRequestSignupGoogle = () => {
+    console.log('구글 회원가입 요청');
+    return window.location.assign('https://dev.qushe8r.shop/oauth2/authorization/google');
+  };
+
   return (
     <section className={styles.signupContainer}>
       <AboutSignup />
@@ -57,6 +63,7 @@ function Signup() {
                 margin: '2px 0',
                 width: '219.38px'
               }}
+              handleClick={handleRequestSignupGoogle}
             />
           </div>
           <Button
