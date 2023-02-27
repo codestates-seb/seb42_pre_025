@@ -1,14 +1,15 @@
 package com.stackoverflow.team25.question.service;
 
-import com.stackoverflow.team25.post.entity.Post;
-import com.stackoverflow.team25.post.service.PostServiceImpl;
 import com.stackoverflow.team25.question.entity.Question;
 import com.stackoverflow.team25.question.repository.QuestionRepository;
 import com.stackoverflow.team25.exception.BusinessLogicException;
 import com.stackoverflow.team25.exception.ExceptionCode;
 
-import com.stackoverflow.team25.user.entity.User;
-import lombok.RequiredArgsConstructor;
+
+import com.stackoverflow.team25.tag.entity.Tag;
+import com.stackoverflow.team25.tag.repository.TagRepository;
+import com.stackoverflow.team25.tag.service.TagService;
+import com.stackoverflow.team25.user.repository.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,47 +19,45 @@ import java.util.List;
 import java.util.Optional;
 
 
+
+
+
 @Service
-@RequiredArgsConstructor
+
 public class QuestionService {
     private final QuestionRepository questionRepository;
-    private final PostServiceImpl postServiceImpl;
+    private final UserRepository userRepository;
+    private final TagRepository tagRepository;
+    private final TagService tagService;
 
-    public Question createQuestion(Question question, Long userId) {
-        /**
-         * Post 등록하기
-         */
-        // Todo: Post에 QuestionID , AnswerId 넣기
-            // (1) 여기서 처리하기
-            // (2) 커스텀 save 를 만들어 insert문 만들어주기
-        Post post = new Post();
-        post.setPostType("q");
-        Post savedPost = postServiceImpl.createPost(post); // 이 시점에 postId 생성됨
 
-        /**
-         * Question 등록하기
-         * - postId == questionId
-         * - 등록한 Question을 Post에 넣어줍니다.
-         */
-        question.setQuestionId(savedPost.getPostId());
+    public QuestionService(QuestionRepository questionRepository, UserRepository userRepository, TagRepository tagRepository, TagService tagService)  {
+        this.questionRepository = questionRepository;
+        this.userRepository = userRepository;
+        this.tagRepository = tagRepository;
+        this.tagService = tagService;
+    }
+
+    public Question createQuestion(Question question, Long userId, List<String> tagNames) {
         String title = question.getTitle();
 //       verifyExistQuestion(title);
         question.setTitle(title);
         question.setAnswerCount(0);
-        List<String> tags = question.getTags();
-        question.setTags(tags);
+        question.setUser(userRepository.findById(userId).orElseThrow(() ->
+                        new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND)));
+        if (tagNames != null && !tagNames.isEmpty()) {
+            verifyExistTag(tagNames);
+            List<Tag> tags = tagRepository.findAllByNameIn(tagNames);
+            question.setTags(tags);
+        }
+        return questionRepository.save(question);
+    }
 
-
-        User user = new User();
-        user.setUserId(userId);
-        question.setUser(user);
-
-        Question savedQuestion = questionRepository.save(question);
-
-        savedPost.setQuestion(savedQuestion);
-        postServiceImpl.createPost(savedPost);
-
-        return savedQuestion;
+    private void verifyExistTag(List<String> tagNames) {
+        for (String tagName : tagNames) {
+            Optional<Tag> tag = tagRepository.findByName(tagName);
+            if(!tag.isPresent()) tagService.createTag(tagName);
+        }
     }
 
     private void verifyExistQuestion(String title) {
@@ -99,11 +98,10 @@ public class QuestionService {
                 .ifPresent(verifiedQuestion::setContent);
         Optional.ofNullable(question.getAnswerCount())
                 .ifPresent(verifiedQuestion::setAnswerCount);
-        Optional.ofNullable(question.getTags())
-                .ifPresent(verifiedQuestion::setTags);
 
         return questionRepository.save(findQuestion);
     }
+
     private Question verifyQuestionById(Long questionId) {
         return questionRepository.findById(questionId)
                 .orElseThrow(() -> {

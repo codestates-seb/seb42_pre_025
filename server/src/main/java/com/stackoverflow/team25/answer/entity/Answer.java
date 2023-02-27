@@ -1,7 +1,6 @@
 package com.stackoverflow.team25.answer.entity;
 
 import com.stackoverflow.team25.audit.Auditable;
-import com.stackoverflow.team25.post.entity.Post;
 import com.stackoverflow.team25.question.entity.Question;
 import com.stackoverflow.team25.user.entity.User;
 import lombok.Getter;
@@ -16,7 +15,7 @@ import javax.persistence.*;
 @Getter
 public class Answer extends Auditable {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -29,8 +28,6 @@ public class Answer extends Auditable {
     @Lob // Large Object
     @Column(nullable = false)
     private String content;
-    @OneToOne(mappedBy = "answer", cascade = CascadeType.REMOVE)
-    private Post post_a;
 
     // 편의 메서드를 setter로 이름 지을시 Mapstruct에서 문제 발생!!
     public void addQuestion(Question question){
