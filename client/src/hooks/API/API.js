@@ -40,15 +40,16 @@ const postFetch = async (url, newData) => {
   }
 };
 
-const deleteFetch = async (url, id) => {
+const deleteFetch = async (url) => {
   try {
-    const res = await fetch(`${url}/${id}`, {
+    const res = await fetch(url, {
       method: 'DELETE',
       mode: 'cors'
     });
     // ! 새로고침 여부 확인
-    window.location.reload();
-    return await res.json();
+    // window.location.reload();
+    // return await res.json();
+    return res;
   } catch (err) {
     console.log(err);
   }
