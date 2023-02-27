@@ -1,0 +1,7 @@
+/* 본문 content의 code block 스타일링 */
+.ql-syntax {
+  padding: 12px;
+  background-color: var(--highlight-bg);
+  color: var(--black-750);
+  font-family: monospace;
+}

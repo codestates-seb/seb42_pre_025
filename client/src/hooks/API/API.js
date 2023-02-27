@@ -1,22 +1,21 @@
-const getData = async (url, setState) => {
+const getFetch = async (url, setState1, setState2, key) => {
   try {
     const res = await fetch(url, {
       method: 'GET',
-      mode: 'cors',
-      headers: {
-        Accept: 'application/json'
-      }
+      mode: 'cors'
+      //   headers: {
+      //     Accept: 'application/json'
+      //   }
     });
     const data = await res.json();
-    console.log(typeof data);
-    console.log(data);
-    setState(data.data);
+    setState1(data.data);
+    setState2 && setState2(data[key]);
   } catch (error) {
     console.error(error);
   }
 };
 
-const postData = async (url, newData) => {
+const postFetch = async (url, newData) => {
   // ! 빈 문자열 들어올 때 처리해줘야 함
   // if (userNameValue === '' || emailValue === '') return;
 
@@ -29,24 +28,31 @@ const postData = async (url, newData) => {
       },
       body: JSON.stringify(newData)
     });
-    return await res.json();
+
+    if (res.ok) {
+      return res;
+    }
+    // return await res.json();
+    // console.log(...res.headers);
+    // return res.headers.get('Location');
   } catch (err) {
     console.log(err);
   }
 };
 
-const deleteData = async (url, id) => {
+const deleteFetch = async (url) => {
   try {
-    const res = await fetch(`${url}/${id}`, {
+    const res = await fetch(url, {
       method: 'DELETE',
       mode: 'cors'
     });
     // ! 새로고침 여부 확인
-    window.location.reload();
-    return await res.json();
+    // window.location.reload();
+    // return await res.json();
+    return res;
   } catch (err) {
     console.log(err);
   }
 };
 
-export { getData, postData, deleteData };
+export { getFetch, postFetch, deleteFetch };

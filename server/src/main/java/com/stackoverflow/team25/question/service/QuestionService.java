@@ -15,6 +15,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -45,6 +49,9 @@ public class QuestionService {
 //       verifyExistQuestion(title);
         question.setTitle(title);
         question.setAnswerCount(0);
+        List<String> tags = question.getTags();
+        question.setTags(tags);
+
 
         User user = new User();
         user.setUserId(userId);
@@ -96,6 +103,9 @@ public class QuestionService {
                 .ifPresent(verifiedQuestion::setContent);
         Optional.ofNullable(question.getAnswerCount())
                 .ifPresent(verifiedQuestion::setAnswerCount);
+        Optional.ofNullable(question.getTags())
+                .ifPresent(verifiedQuestion::setTags);
+
         return questionRepository.save(findQuestion);
     }
     private Question verifyQuestionById(Long questionId) {

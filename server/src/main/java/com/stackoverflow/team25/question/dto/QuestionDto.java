@@ -8,25 +8,32 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.ElementCollection;
 import java.util.List;
 
 public class QuestionDto {
 
         @Getter
+        @Builder
         public static class QuestionPostDto {
             private Long questionId;
             private String title;
             private String content;
             private Long userId;
+            @ElementCollection
+            private List<String> tags;
         }
 
         @Getter
         @Setter
+        @Builder
         public static class QuestionPatchDto {
             private Long questionId;
             private String title;
             private String content;
             private UserDto.Response userDto;
+            @ElementCollection
+            private List<String> tags;
         }
 
         @Getter
@@ -39,6 +46,8 @@ public class QuestionDto {
             private String content;
             private List<AnswerDto.Response> answers;
             private UserDto.Response userDto;
+            @ElementCollection
+            private List<String> tags;
 
         }
 }

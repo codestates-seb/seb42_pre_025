@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './Nav.module.css';
 import navExploreLogo from '../assets/navExplore.png';
 // import navILogo from '../assets/navCollectives.png';
@@ -13,7 +14,11 @@ function Nav() {
           <li className={styles.li1}>PUBLIC</li>
           <li>
             <ol>
-              <li className={styles.li2}>Questions</li>
+              <li>
+                <Link to={'/questions'} className={styles.li2}>
+                  Questions
+                </Link>
+              </li>
               <li className={styles.li2}>Tags</li>
               <li className={styles.li2}>Users</li>
               <li className={styles.li2}>Companies</li>
@@ -23,7 +28,6 @@ function Nav() {
               </li>
               <li className={styles.li3}>
                 <img className={styles.img} src={navExploreLogo} alt='navExploreLogo' />
-                {/* <div className={styles.explore}>Explore Collectives</div> */}
                 Explore Collectives
               </li>
             </ol>

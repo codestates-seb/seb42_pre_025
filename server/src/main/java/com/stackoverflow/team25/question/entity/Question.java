@@ -30,9 +30,11 @@ public class Question extends Auditable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-    // PERSIST가 동작안함..
     @OneToOne(mappedBy = "question", fetch = FetchType.LAZY)
     private Post post_q;
+    @ElementCollection
+    private List<String> tags;
+
 
     public void addAnswer(Answer answer){
         answers.add(answer);

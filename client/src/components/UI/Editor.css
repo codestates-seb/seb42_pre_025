@@ -1,0 +1,14 @@
+.quill {
+  margin-top: 4px;
+}
+.ql-container {
+  min-height: 200px;
+}
+
+/* css reset 때문에 html 태그 효과 적용되지 않는 부분 되돌리기 */
+p strong {
+  font-weight: 600;
+}
+p em {
+  font-style: italic;
+}
