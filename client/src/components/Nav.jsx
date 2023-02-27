@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './Nav.module.css';
 import navExploreLogo from '../assets/navExplore.png';
-// import navILogo from '../assets/navCollectives.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,8 +13,8 @@ function Nav() {
           <li className={styles.li1}>PUBLIC</li>
           <li>
             <ol>
-              <li>
-                <Link to={'/questions'} className={styles.li2}>
+              <li className={styles.questionsBox}>
+                <Link to={'/questions'} className={styles.questions}>
                   Questions
                 </Link>
               </li>

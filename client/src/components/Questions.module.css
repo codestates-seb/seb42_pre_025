@@ -4,7 +4,7 @@
 
 .question {
   padding: 16px;
-  height: 120px;
+  min-height: 120px;
   border-top: 1px solid var(--black-100);
 }
 
@@ -26,6 +26,11 @@
   font-size: 13px;
 }
 
+.contentBox {
+  max-width: 925px;
+  width: 100%;
+}
+
 .contentHeadBox {
   padding-right: 24px;
   margin-bottom: 5px;
@@ -34,6 +39,10 @@
 
 .contentHead {
   color: var(--blue-600);
+}
+
+.contentHead:hover {
+  color: var(--blue-500);
 }
 
 .contentBody {
@@ -50,7 +59,7 @@
   -webkit-box-orient: vertical;
 }
 
-.contentTagUser {
+.contentTagAndUser {
   height: 38px;
   display: flex;
   justify-content: space-between;

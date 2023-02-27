@@ -1,13 +1,13 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getFetch, deleteFetch } from '../hooks/API/API';
-import styles from './QuestionDetail.module.css';
 import Nav from '../components/Nav.jsx';
 import Footer from '../components/Footer.jsx';
 import Button from '../components/UI/Button.jsx';
 import Vote from '../components/Vote.jsx';
-import UserLogo from '../assets/logo.png';
+import styles from './QuestionDetail.module.css';
 import './QuestionDetail.css';
+import UserLogo from '../assets/logo.png';
 
 function QuestionDetail() {
   const { id } = useParams();
@@ -58,22 +58,24 @@ function QuestionDetail() {
           </ol>
           <div className={styles.questionBody}>
             <Vote />
-            <div>
-              <div>
-                <div
-                  dangerouslySetInnerHTML={{ __html: content }}
-                  className={styles.contentBox}
-                ></div>
-                <div className={styles.questionTag}>{tags && tags.map((tag) => tag)}</div>
-                <div className={styles.questionOption}>
-                  <button>Edit</button>
-                  <button onClick={handleDelete}>Delete</button>
-                  <div className={styles.user}>
-                    <div className={styles.userImg}>
-                      <img className={styles.img} src={UserLogo} alt='navILogo' />
-                    </div>
-                    <div className={styles.userName}>{userName}</div>
+            <div className={styles.box}>
+              <div
+                dangerouslySetInnerHTML={{ __html: content }}
+                className={styles.contentBox}
+              ></div>
+              <div className={styles.questionTag}>{tags && tags.map((tag) => tag)}</div>
+              <div className={styles.questionOption}>
+                <div>
+                  <button className={styles.buttonStyle}>Edit</button>
+                  <button className={styles.buttonStyle} onClick={handleDelete}>
+                    Delete
+                  </button>
+                </div>
+                <div className={styles.user}>
+                  <div className={styles.userImg}>
+                    <img className={styles.img} src={UserLogo} alt='navILogo' />
                   </div>
+                  <div className={styles.userName}>{userName}</div>
                 </div>
               </div>
             </div>

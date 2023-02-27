@@ -14,6 +14,7 @@
   height: 12px;
   width: 12px;
   padding: 10px;
+  /* margin-top: 5px; */
 }
 
 .ol {
@@ -23,11 +24,16 @@
 .li1 {
   display: flex;
   justify-content: space-between;
-  font-size: 13px;
-  padding-top: 8px;
+  font-size: 12px;
+  padding-top: 10px;
   padding-left: 8px;
   height: 26px;
   text-align: start;
+  color: var(--black-600);
+}
+
+.li1:hover {
+  color: var(--black-800);
 }
 
 .li2 {
@@ -36,6 +42,11 @@
   padding-left: 28px;
   height: 34px;
   text-align: start;
+  color: var(--black-600);
+}
+
+.li2:hover {
+  color: var(--black-800);
 }
 
 .li3 {
@@ -44,12 +55,24 @@
   padding-left: 8px;
   height: 34px;
   text-align: start;
+  color: var(--black-600);
+}
+.questionsBox {
+  font-size: 15px;
+  line-height: 28px;
+  padding: 5px 0px 0px 27px;
+  height: 34px;
+  text-align: start;
+}
+.questions {
+  color: var(--black-600);
 }
 
 .collectives {
   padding-top: 10px;
+  color: var(--black-600);
 }
 
-.explore {
-  padding: 3px;
+.collectives:hover {
+  color: var(--black-800);
 }
