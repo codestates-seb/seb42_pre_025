@@ -16,7 +16,7 @@ function Questions({ question }) {
             <div className={styles.voteAnswer}>0 votes</div>
             <div className={styles.voteAnswer}>{answerCount} answers</div>
           </div>
-          <div>
+          <div className={styles.contentBox}>
             <div className={styles.contentHeadBox}>
               <Link to={`/questions/${questionId}`} className={styles.contentHead}>
                 {title}
