@@ -14,8 +14,8 @@ function Nav() {
           <li className={styles.li1}>PUBLIC</li>
           <li>
             <ol>
-              <li>
-                <Link to={'/questions'} className={styles.li2}>
+              <li className={styles.questionsBox}>
+                <Link to={'/questions'} className={styles.questions}>
                   Questions
                 </Link>
               </li>
