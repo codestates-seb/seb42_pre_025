@@ -8,7 +8,11 @@ import com.stackoverflow.team25.exception.BusinessLogicException;
 import com.stackoverflow.team25.exception.ExceptionCode;
 
 
+import com.stackoverflow.team25.tag.entity.Tag;
+import com.stackoverflow.team25.tag.repository.TagRepository;
+import com.stackoverflow.team25.tag.service.TagService;
 import com.stackoverflow.team25.user.entity.User;
+import com.stackoverflow.team25.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,8 +31,14 @@ import java.util.Optional;
 public class QuestionService {
     private final QuestionRepository questionRepository;
     private final PostServiceImpl postServiceImpl;
+    private final UserRepository userRepository;
+    private final TagRepository tagRepository;
+    private final TagService tagService;
 
-    public Question createQuestion(Question question, Long userId) {
+
+
+
+    public Question createQuestion(Question question, Long userId,List<String> tagNames) {
         /**
          * Post 등록하기
          */
@@ -49,14 +59,13 @@ public class QuestionService {
 //       verifyExistQuestion(title);
         question.setTitle(title);
         question.setAnswerCount(0);
-        List<String> tags = question.getTags();
-        question.setTags(tags);
-
-
-        User user = new User();
-        user.setUserId(userId);
-        question.setUser(user);
-
+        question.setUser(userRepository.findById(userId).orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND)));
+        if (tagNames != null && !tagNames.isEmpty()) {
+            verifyExistTag(tagNames);
+            List<Tag> tags = tagRepository.findAllByNameIn(tagNames);
+            question.setTags(tags);
+        }
         Question savedQuestion = questionRepository.save(question);
 
         savedPost.setQuestion(savedQuestion);
@@ -64,7 +73,12 @@ public class QuestionService {
 
         return savedQuestion;
     }
-
+    private void verifyExistTag(List<String> tagNames) {
+        for (String tagName : tagNames) {
+            Optional<Tag> tag = tagRepository.findByName(tagName);
+            if(!tag.isPresent()) tagService.createTag(tagName);
+        }
+    }
     private void verifyExistQuestion(String title) {
         Optional<Question> question = questionRepository.findByTitle(title);
         if(question.isPresent())
