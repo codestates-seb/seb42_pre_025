@@ -71,7 +71,12 @@
   font-size: 12px;
 }
 
+.snsFirst {
+  padding: 4px 0px;
+}
+
 .snsMargin {
+  padding: 4px 0px;
   margin-left: 15px;
 }
 
@@ -85,9 +90,6 @@
 
 .secondTitle {
   margin-top: 12px;
-}
-
-ol > li {
   height: 25px;
   line-height: 25px;
   font-weight: 300;
@@ -95,8 +97,12 @@ ol > li {
   color: var(--black-400);
 }
 
-ul > li {
-  padding: 4px 0px;
+.third {
+  height: 25px;
+  line-height: 25px;
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--black-400);
 }
 
 .api {
