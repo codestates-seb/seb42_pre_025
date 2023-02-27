@@ -30,10 +30,13 @@ public class postController {
     public ResponseEntity getPosts(Pageable pageable){
         Page<Post> posts = postService.findPosts(pageable);
         List<Post> content = posts.getContent();
-
+        // TOdo: POst Response 만들어주기
         return new ResponseEntity<>(content, HttpStatus.OK);
     }
 
+    /**
+     * Comment를 등록하는 메서드
+     */
     @PostMapping("/posts/{post-id}/comments/add")
     public ResponseEntity postComment(@PathVariable("post-id") Long postId,
                                       @RequestBody CommentDto.POST commentDto){
@@ -41,15 +44,18 @@ public class postController {
         Comment comment = commentMapper.postDtoToComment(commentDto);
         Comment findComment = commentService.createComment(comment);
 
-//        UriCreator.createUri(POST_DEFAULT_URL +"/" + postId + "/addComment", findComment.get)
         URI location = UriCreator.createCommentUri(POST_DEFAULT_URL, findComment.getPost().getPostId());
         return ResponseEntity.created(location).build();
     }
 
-//    //Todo: PostId를 통해 댓글을 조회해오는 메서드
-//    @GetMapping("/posts/{post-id}/comments")
-//    public ResponseEntity getComments(@PathVariable("post-id") Long postId){
-//        List<Comment> commentsByPost = commentService.findCommentsByPost(postId);
-//        return
-//    }
+    /**
+     * Post를 통해 Comment들을 조회해오는 메서드
+     */
+    @GetMapping("/posts/{post-id}/comments")
+    public ResponseEntity getComments(@PathVariable("post-id") Long postId){
+        List<Comment> commentsByPost = commentService.findCommentsByPost(postId);
+        List<CommentDto.Response> responses = commentMapper.commentsToResponseDtos(commentsByPost);
+
+        return new ResponseEntity(responses, HttpStatus.OK);
+    }
 }

@@ -28,9 +28,18 @@ public class QuestionService {
         /**
          * Post 등록하기
          */
+        // Todo: Post에 QuestionID , AnswerId 넣기
+            // (1) 여기서 처리하기
+            // (2) 커스텀 save 를 만들어 insert문 만들어주기
         Post post = new Post();
         post.setPostType("q");
-        Post savedPost = postServiceImpl.createPost(post);
+        Post savedPost = postServiceImpl.createPost(post); // 이 시점에 postId 생성됨
+        Post renewed = postServiceImpl.findPost(savedPost.getPostId());
+
+//        Question fkQuestion = new Question();
+//        fkQuestion.setQuestionId(savedPost.getPostId());
+//        renewed.setQuestion(fkQuestion);
+//        postServiceImpl.createPost(renewed);
 
         /**
          * Question 등록하기
@@ -45,7 +54,7 @@ public class QuestionService {
         User user = new User();
         user.setUserId(userId);
         question.setUser(user);
-
+        
         return questionRepository.save(question);
     }
 

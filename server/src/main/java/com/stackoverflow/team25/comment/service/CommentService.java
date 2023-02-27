@@ -45,7 +45,6 @@ public class CommentService {
     }
 
     public List<Comment> findCommentsByPost(Long postId) {
-        //todo : 커스텀 해야함
         List<Comment> findComments = commentRepository.findAllByPostId(postId);
         return findComments;
     }
