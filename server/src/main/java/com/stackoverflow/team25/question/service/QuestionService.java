@@ -6,59 +6,45 @@ import com.stackoverflow.team25.exception.BusinessLogicException;
 import com.stackoverflow.team25.exception.ExceptionCode;
 
 
-import com.stackoverflow.team25.tag.entity.Tag;
-import com.stackoverflow.team25.tag.repository.TagRepository;
-import com.stackoverflow.team25.tag.service.TagService;
-import com.stackoverflow.team25.user.repository.UserRepository;
+import com.stackoverflow.team25.user.entity.User;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
-
 
 
 @Service
 
 public class QuestionService {
     private final QuestionRepository questionRepository;
-    private final UserRepository userRepository;
-    private final TagRepository tagRepository;
-    private final TagService tagService;
 
 
-    public QuestionService(QuestionRepository questionRepository, UserRepository userRepository, TagRepository tagRepository, TagService tagService)  {
+    public QuestionService(QuestionRepository questionRepository)  {
         this.questionRepository = questionRepository;
-        this.userRepository = userRepository;
-        this.tagRepository = tagRepository;
-        this.tagService = tagService;
     }
 
-    public Question createQuestion(Question question, Long userId, List<String> tagNames) {
+    public Question createQuestion(Question question, Long userId) {
         String title = question.getTitle();
 //       verifyExistQuestion(title);
         question.setTitle(title);
         question.setAnswerCount(0);
-        question.setUser(userRepository.findById(userId).orElseThrow(() ->
-                        new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND)));
-        if (tagNames != null && !tagNames.isEmpty()) {
-            verifyExistTag(tagNames);
-            List<Tag> tags = tagRepository.findAllByNameIn(tagNames);
-            question.setTags(tags);
-        }
-        return questionRepository.save(question);
-    }
+        List<String> tags = question.getTags();
+        question.setTags(tags);
 
-    private void verifyExistTag(List<String> tagNames) {
-        for (String tagName : tagNames) {
-            Optional<Tag> tag = tagRepository.findByName(tagName);
-            if(!tag.isPresent()) tagService.createTag(tagName);
-        }
+
+        User user = new User();
+        user.setUserId(userId);
+        question.setUser(user);
+
+        return questionRepository.save(question);
     }
 
     private void verifyExistQuestion(String title) {
@@ -99,10 +85,11 @@ public class QuestionService {
                 .ifPresent(verifiedQuestion::setContent);
         Optional.ofNullable(question.getAnswerCount())
                 .ifPresent(verifiedQuestion::setAnswerCount);
+        Optional.ofNullable(question.getTags())
+                .ifPresent(verifiedQuestion::setTags);
 
         return questionRepository.save(findQuestion);
     }
-
     private Question verifyQuestionById(Long questionId) {
         return questionRepository.findById(questionId)
                 .orElseThrow(() -> {
