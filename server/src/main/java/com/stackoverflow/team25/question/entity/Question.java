@@ -24,6 +24,7 @@ public class Question extends Auditable {
     private Integer answerCount;
     @Column(nullable = false)
     private String title;
+    @Lob
     @Column(nullable = false)
     private String content;
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -31,7 +32,7 @@ public class Question extends Auditable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-    @OneToOne(mappedBy = "question", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "question", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Post post_q;
     @ManyToMany
     @JoinTable(name = "Question_Tag")
