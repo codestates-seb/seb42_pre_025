@@ -6,7 +6,6 @@ import Footer from '../components/Footer.jsx';
 import Button from '../components/UI/Button.jsx';
 import Vote from '../components/Vote.jsx';
 import styles from './QuestionDetail.module.css';
-import './QuestionDetail.css';
 import UserLogo from '../assets/logo.png';
 
 function QuestionDetail() {
