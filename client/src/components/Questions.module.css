@@ -4,7 +4,7 @@
 
 .question {
   padding: 16px;
-  height: 120px;
+  min-height: 120px;
   border-top: 1px solid var(--black-100);
 }
 
@@ -42,7 +42,7 @@
   margin-bottom: 8px;
 }
 
-.contentTagUser {
+.contentTagAndUser {
   height: 38px;
   display: flex;
   justify-content: space-between;
