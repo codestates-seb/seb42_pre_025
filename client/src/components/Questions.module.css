@@ -26,6 +26,11 @@
   font-size: 13px;
 }
 
+.contentBox {
+  max-width: 925px;
+  width: 100%;
+}
+
 .contentHeadBox {
   padding-right: 24px;
   margin-bottom: 5px;
