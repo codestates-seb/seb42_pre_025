@@ -33,6 +33,8 @@ public class QuestionDto {
         @Getter
         @Setter
         @Builder
+        @NoArgsConstructor
+        @AllArgsConstructor
         public static class QuestionPatchDto {
             private Long questionId;
             private String title;

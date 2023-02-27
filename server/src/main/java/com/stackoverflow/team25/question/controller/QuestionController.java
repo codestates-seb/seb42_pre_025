@@ -67,6 +67,7 @@ public class QuestionController {
         Question question = questionService.updateQuestion(mapper.questionPatchDtoToQuestion(questionPatchDto));
         QuestionDto.QuestionResponseDto response = mapper.questionToQuestionResponseDto(question);
         response.setUserDto(userMapper.userToResponse(question.getUser()));
+        response.setTagNames(question.getTags().stream().map(Tag::getName).collect(Collectors.toList()));
 
        return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }
