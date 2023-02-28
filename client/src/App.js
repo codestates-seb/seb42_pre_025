@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import QuestionList from './pages/QuestionList.jsx';
 import CreateQuestion from './pages/CreateQuestion.jsx';
@@ -12,7 +12,25 @@ import './App.css';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  console.log(setIsLoggedIn);
+  const [tokens, setTokens] = useState({
+    accessToken: '',
+    refreshToken: ''
+  });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const accessToken = url.searchParams.get('access_token');
+    const refreshToken = url.searchParams.get('refresh_token');
+
+    if (accessToken && refreshToken) {
+      setTokens({ accessToken, refreshToken });
+      setIsLoggedIn(true);
+      navigate('/');
+    }
+  }, [isLoggedIn]);
+  console.log(tokens);
+  console.log('로그인 여부', isLoggedIn);
 
   return (
     <>
