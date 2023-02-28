@@ -85,6 +85,7 @@ public class QuestionController {
         QuestionDto.QuestionResponseDto response = mapper.questionToQuestionResponseDto(question);
         response.setUserDto(userMapper.userToResponse(question.getUser()));
         response.setTagNames(question.getTags().stream().map(Tag::getName).collect(Collectors.toList()));
+
         return new ResponseEntity<>(new SingleResponseDto<>(response),HttpStatus.OK);
     }
 
@@ -93,10 +94,12 @@ public class QuestionController {
         Page<Question> pageQuestions = questionService.findQuestions(pageable);
         List<Question> questions = pageQuestions.getContent();
         List<QuestionDto.QuestionResponseDto> responses = mapper.questionsToQuestionResponseDtos(questions);
+
         for (QuestionDto.QuestionResponseDto response : responses) {
             Question question = questionService.findQuestion(response.getQuestionId());
             response.setUserDto(userMapper.userToResponse(question.getUser()));
         }
+
         for (QuestionDto.QuestionResponseDto response : responses) {
             Question question = questionService.findQuestion(response.getQuestionId());
             response.setTagNames(question.getTags().stream().map(Tag::getName).collect(Collectors.toList()));
