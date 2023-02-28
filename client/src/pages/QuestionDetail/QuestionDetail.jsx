@@ -7,6 +7,7 @@ import Footer from '../../components/Footer.jsx';
 import Button from '../../components/UI/Button.jsx';
 import Vote from './Vote.jsx';
 import Editor from '../../components/UI/Editor.jsx';
+import AnswerList from './AnswerList.jsx';
 import styles from './QuestionDetail.module.css';
 import UserLogo from '../../assets/logo.png';
 
@@ -14,40 +15,53 @@ function QuestionDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [question, setQuestion] = useState({});
-  // const [answers, setAnswers] = useState([]);
+  const [answers, setAnswers] = useState([]);
   const [answerContent, setAnswerContent] = useState('');
-  console.log(answerContent);
 
   // * question GET 요청 로직
   const QUESTION_DETAIL_URL = `${process.env.REACT_APP_URL}/questions/${id}`;
   useEffect(() => {
     getFetch(QUESTION_DETAIL_URL, setQuestion);
   }, []);
+  // console.log(QUESTION_DETAIL_URL);
 
-  // * answerCount 는 답변 컴포넌트 붙인 다음에 question에서 변수로 빼오기
-  const { questionId, title, content, tags, userDto, answerCount } = question;
-  console.log(answerCount);
-  // ? userDto에서 구조분해할당으로 변수 꺼내오는 법 있을지?
-  const userId = userDto && userDto.userId;
-  const userName = userDto && userDto.displayName;
+  // TODO: 서버 answerCount 변수 조정 기다리기 (answerCounter or answers 둘 중 하나 쓰면 됨)
+  const { title, content, tags, owner, answers: answerArr } = question;
+  console.log(question);
+  // console.log(answers);
+  const answerArrLen = answerArr && answerArr.length;
 
-  // ! 작성자에게만 edit, delete 버튼이 뜨도록 해야함
-  const handleDelete = async () => {
+  // TODO: owner 에서 구조분해할당으로 변수 꺼내오는 법 있을지?
+  const userId = owner && owner.userId;
+  const userName = owner && owner.displayName;
+
+  // TODO: 작성자에게만 edit, delete 버튼이 뜨도록 해야함
+  const handleDelete = async (url) => {
     const result = confirm('Delete this post?');
 
     if (result === true) {
-      const res = await deleteFetch(QUESTION_DETAIL_URL);
+      const res = await deleteFetch(url);
       // 상태 코드 204
       if (res.ok) {
-        navigate('/questions');
+        // 질문 삭제 요청의 경우 리다이렉션
+        if (url.includes('questions')) {
+          navigate('/questions');
+        } else {
+          // 답변 삭제 요청의 경우 리다이렉션
+          // ! 새로고침하면 상태 유지 안될 텐데 괜찮은 것인지 (안괜찮을거 같음)
+          // ! answer post도 리다이렉션 마찬가지 문제
+          window.location.reload();
+          // ? question/:id 페이지가 없나? -> 있음
+          // Questions.jsx 파일에서 <Link to={`/questions/${questionId}`} >는 이동되는데,
+          // ? navigate()는 왜 이동이 안되지?
+          // navigate(`questions/${id}`);
+        }
       }
     }
   };
 
   // * answer POST 요청 로직
-  const ANSWER_POST_URL = `${process.env.REACT_APP_URL}/questions/${questionId}/add`;
-  // console.log(ANSWER_POST_URL);
-
+  const ANSWER_POST_URL = `${process.env.REACT_APP_URL}/questions/${id}/add`;
   const onSubmit = async (e) => {
     e.preventDefault();
     // ! input 값에 빈 문자열 들어올 때 사용자에게 알림 처리해줘야 함
@@ -57,17 +71,20 @@ function QuestionDetail() {
       userId,
       content: answerContent
     };
-    // console.log(newData);
 
     const res = await postFetch(ANSWER_POST_URL, newData);
-    console.log(res);
     if (res) {
-      navigate(`/questions/${questionId}`);
+      setAnswerContent('');
+      window.location.reload();
+      // navigate(`/questions/${questionId}`);
     }
   };
 
   // * answer GET 요청 로직
-  // const ANSWER_GET_URL = `${process.env.REACT_APP_URL}/questions/${questionId}/add`;
+  const ANSWER_GET_URL = `${process.env.REACT_APP_URL}/questions/${id}/answers`;
+  useEffect(() => {
+    getFetch(ANSWER_GET_URL, setAnswers);
+  }, []);
 
   return (
     <>
@@ -106,7 +123,10 @@ function QuestionDetail() {
               <div className={styles.questionOption}>
                 <div>
                   <button className={styles.buttonStyle}>Edit</button>
-                  <button className={styles.buttonStyle} onClick={handleDelete}>
+                  <button
+                    className={styles.buttonStyle}
+                    onClick={() => handleDelete(QUESTION_DETAIL_URL)}
+                  >
                     Delete
                   </button>
                 </div>
@@ -119,15 +139,29 @@ function QuestionDetail() {
               </div>
             </div>
           </div>
-          {answerCount === 0 ? (
-            <form onSubmit={onSubmit} className={styles.answerWrapper}>
-              <h2 className={styles.answerHeader}>Your Answer</h2>
-              <Editor content={answerContent} setInputs={setAnswerContent} />
-              <div className={styles.submitBtn}>
-                <Button text='Post your question' />
-              </div>
-            </form>
-          ) : null}
+          {/* {answerCount > 0 && (
+            <div className={styles.answerBoxWrapper}>
+              <h2 className={styles.answerCount}>
+                {answerCount === 1 ? '1 Answer' : `${answerCount} Answers`}
+              </h2>
+              <AnswerList answers={answers} handleDelete={handleDelete} />
+            </div>
+          )} */}
+          {answerArrLen > 0 && (
+            <div className={styles.answerBoxWrapper}>
+              <h2 className={styles.answerCount}>
+                {answerArrLen === 1 ? '1 Answer' : `${answerArrLen} Answers`}
+              </h2>
+              <AnswerList answers={answers} handleDelete={handleDelete} />
+            </div>
+          )}
+          <form onSubmit={onSubmit} className={styles.answerPostWrapper}>
+            <h2 className={styles.answerHeader}>Your Answer</h2>
+            <Editor content={answerContent} setInputs={setAnswerContent} />
+            <div className={styles.submitBtn}>
+              <Button text='Post your question' />
+            </div>
+          </form>
         </main>
       </div>
       <Footer />
