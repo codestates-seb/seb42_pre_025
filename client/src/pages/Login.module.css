@@ -51,20 +51,21 @@
   margin-bottom: 12px;
 }
 
-.loginGoolglebtn Button {
+/* .loginGoolglebtn Button {
   background-color: white;
-}
+} */
+
 .loginGiHubbtn {
   margin-bottom: 12px;
 }
 
-.loginGiHubbtn Button {
+/* .loginGiHubbtn Button {
   background-color: darkblue;
-}
-
-/* .loginFacebookbtn {
-  margin-bottom: 12px;
 } */
+
+.loginFacebookbtn {
+  margin-bottom: 12px;
+}
 
 /* .loginFacebookbtn Button {
   background-color: black;
@@ -80,4 +81,8 @@
 .loginbtn {
   width: 100%;
   color: white;
+}
+
+.under {
+  padding-top: 20px;
 }
