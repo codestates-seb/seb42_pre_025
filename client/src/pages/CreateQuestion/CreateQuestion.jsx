@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postFetch } from '../../hooks/API.js';
 import Editor from '../../components/UI/Editor.jsx';
+import InputBox from './InputBox.jsx';
 import Button from '../../components/UI/Button.jsx';
 import Footer from '../../components/Footer.jsx';
 import styles from './CreateQuestion.module.css';
@@ -82,25 +83,18 @@ function CreateQuestion() {
                   </ul>
                 </div>
               </div>
-              <div className={`${styles.titleBox} ${styles.boxBorder}`}>
-                <label htmlFor='title' className={styles.labelTitle}>
-                  Title
-                </label>
-                <label htmlFor='title' className={styles.description}>
-                  Be specific and imagine you’re asking a question to another person.
-                </label>
-                <input
-                  className={styles.input}
-                  value={title}
-                  onChange={onChange}
-                  id='title'
-                  name='title'
-                  type='text'
-                  maxLength='300'
-                  placeholder='e.g. Is there an R function for finding the index of an element in a vector?'
-                ></input>
-              </div>
-              <div className={`${styles.bodyBox} ${styles.boxBorder}`}>
+              <InputBox
+                label='Title'
+                desc='Be specific and imagine you’re asking a question to another person.'
+                value={title}
+                onChange={onChange}
+                htmlFor='title'
+                inputId='title'
+                inputName='title'
+                placeholder='e.g. Is there an R function for finding the index of an element in a vector?'
+                maxLength='300'
+              />
+              <div className={styles.boxBorder}>
                 <label htmlFor='body' className={styles.labelTitle}>
                   What are the details of your problem?
                 </label>
@@ -110,24 +104,16 @@ function CreateQuestion() {
                 </label>
                 <Editor content={content} inputs={inputs} setInputs={setInputs} />
               </div>
-              <div className={`${styles.tagsBox} ${styles.boxBorder}`}>
-                <label htmlFor='tags' className={styles.labelTitle}>
-                  Tags
-                </label>
-                <label htmlFor='tags' className={styles.description}>
-                  Be specific and imagine you’re asking a question to another person.
-                </label>
-                <input
-                  className={styles.input}
-                  value={tags}
-                  onChange={onChange}
-                  id='tags'
-                  name='tags'
-                  type='text'
-                  maxLength='300'
-                  placeholder='e.g. (json, node.js, python)'
-                ></input>
-              </div>
+              <InputBox
+                label='Tags'
+                desc='Be specific and imagine you’re asking a question to another person.'
+                value={tags}
+                onChange={onChange}
+                htmlFor='tags'
+                inputId='tags'
+                inputName='tags'
+                placeholder='e.g. (json, node.js, python)'
+              />
               <div className={styles.formSubmit}>
                 <Button text='Post your question' />
               </div>
