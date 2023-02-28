@@ -42,8 +42,8 @@ public class UserController {
                 .build();
     }
 
-    @PatchMapping("/{user-id}")
-    public ResponseEntity updateUser(@PathVariable("user-id") @Positive long userId,
+    @PatchMapping("/{userId}")
+    public ResponseEntity updateUser(@PathVariable @Positive long userId,
                                      @Valid @RequestBody UserDto.Patch patchDto) {
         patchDto.setUserId(userId);
         User user = userService.updateUser(mapper.userPatchToUser(patchDto));
@@ -52,8 +52,8 @@ public class UserController {
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }
 
-    @GetMapping("/{user-id}")
-    public ResponseEntity getUser(@PathVariable("user-id") @Positive long userId) {
+    @GetMapping("/{userId}")
+    public ResponseEntity getUser(@PathVariable @Positive long userId) {
         User user = userService.getUser(userId);
         UserDto.Response response = mapper.userToResponse(user);
 
@@ -69,8 +69,8 @@ public class UserController {
         return new ResponseEntity(new MultiResponseDto<>(responses, pageUser), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{user-id}")
-    public ResponseEntity deleteUser(@PathVariable("user-id") @Positive Long userId) {
+    @DeleteMapping("/{userId}")
+    public ResponseEntity deleteUser(@PathVariable @Positive Long userId) {
         userService.deleteUser(userId);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);

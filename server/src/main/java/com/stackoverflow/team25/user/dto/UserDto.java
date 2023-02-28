@@ -1,9 +1,7 @@
 package com.stackoverflow.team25.user.dto;
 
 import com.stackoverflow.team25.user.entity.User;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 public class UserDto {
     @Getter
@@ -24,6 +22,8 @@ public class UserDto {
     @Getter
     @Setter
     @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class Response {
         private Long userId;
         private String email;
