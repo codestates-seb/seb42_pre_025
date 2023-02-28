@@ -36,6 +36,7 @@ public class AnswerController {
 
     @GetMapping("/{answer-id}")
     public ResponseEntity getAnswer(@PathVariable("answer-id") long answerId){
+        //TODO: 지워진 질문은 검색이 불가.
         Answer findAnswer = answerService.findAnswer(answerId);
         AnswerDto.Response response = answerMapper.answerToAnswerResponseDto(findAnswer);
 
@@ -44,6 +45,7 @@ public class AnswerController {
 
     @GetMapping
     public ResponseEntity getAnswers(Pageable pageable){
+        //TODO: 지워진 질문은 검색이 불가.
         Page<Answer> pageAnswers = answerService.findAnswers(pageable);
         List<Answer> answers = pageAnswers.getContent();
         List<AnswerDto.Response> response = answerMapper.answersToAnswerResponseDtos(answers);

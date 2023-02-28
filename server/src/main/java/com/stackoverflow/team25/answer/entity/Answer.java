@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Getter
 public class Answer extends Auditable {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -29,8 +29,8 @@ public class Answer extends Auditable {
     @Lob // Large Object
     @Column(nullable = false)
     private String content;
-    @OneToOne(mappedBy = "answer", cascade = CascadeType.REMOVE)
-    private Post post_a;
+    @Enumerated(EnumType.STRING)
+    private AnswerType answerType = AnswerType.ACTIVATE;
 
     // 편의 메서드를 setter로 이름 지을시 Mapstruct에서 문제 발생!!
     public void addQuestion(Question question){
@@ -45,5 +45,9 @@ public class Answer extends Auditable {
         if(!this.owner.getAnswers().contains(this)){
             this.owner.addAnswer(this);
         }
+    }
+
+    public enum AnswerType {
+        ACTIVATE, DELETE
     }
 }

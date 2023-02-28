@@ -30,6 +30,7 @@ public class UriCreator {
                 .path("/")
                 .queryParams(queryParams)
                 .build()
+                .toUri();
     }
 
     public static URI createCommentUri(String defaultUrl, long resourceId){

@@ -5,13 +5,13 @@ spring:
 spring:
   profiles: postgres
   datasource:
-    url: jdbc:postgresql://${AWS_DATABASE_URL}:5432/${AWS_DATABASE_NAME}
+    url: jdbc:postgresql://${LOCAL_DATABASE_URL}:5432/${LOCAL_DATABASE_NAME}
     password: ${POSTGRESQL_PASSWORD}
     username: ${POSTGRESQL_USERNAME}
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         highlight_sql: true

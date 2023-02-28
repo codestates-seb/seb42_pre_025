@@ -20,25 +20,15 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class AnswerServiceImpl implements AnswerService{
+public class AnswerServiceImpl implements AnswerService {
     private final AnswerRepository answerRepository;
     private final QuestionService questionService;
-    private final UserService userService;
-    private final PostServiceImpl postServiceImpl;
-    public Answer createAnswer(Answer answer){
-        /**
-         * Post 등록하기
-         * - postId == answerId
-         */
-        Post post = new Post();
-        post.setPostType("a");
-        Post savedPost = postServiceImpl.createPost(post);
 
+    public Answer createAnswer(Answer answer) {
         /**
          * 1. PostId 를 AnswerId로 저장
          * 2. Score와 isAccepted 필드에 Null이 아닌 초기값을 저장하도록 설정
          */
-        answer.setAnswerId(savedPost.getPostId());
         answer.setScore(0L);
         answer.setIsAccepted(false);
         /**
@@ -46,19 +36,17 @@ public class AnswerServiceImpl implements AnswerService{
          * 2. Answer를 추가할수록, Question의 answerCount가 증가함.
          */
         Question forPatchingQuestion = questionService.findVerifiedQuestion(answer.getQuestion().getQuestionId());
-        forPatchingQuestion.setAnswerCount(forPatchingQuestion.getAnswerCount()+1);
+        forPatchingQuestion.setAnswerCount(forPatchingQuestion.getAnswerCount() + 1);
         questionService.updateQuestion(forPatchingQuestion);
         /**
          * DB에 저장한 Answer를 Post에 넣어줍니다.
          */
         Answer savedAnswer = answerRepository.save(answer);
-        savedPost.setAnswer(savedAnswer);
-        postServiceImpl.createPost(savedPost);
 
         return savedAnswer;
     }
 
-    public Answer updateAnswer(Answer answer){
+    public Answer updateAnswer(Answer answer) {
         Answer findAnswer = findVerifiedAnswer(answer.getAnswerId());
         /**
          * 수정에 용이하도록 Answer Entity의 필드들은 null이 들어갈 수 있는 객체들로 구성하였다.
@@ -66,22 +54,22 @@ public class AnswerServiceImpl implements AnswerService{
          *      2. null 이 아닌 값이 들어오면, 수정 된다.
          */
         Optional.ofNullable(answer.getScore())
-                .ifPresent(score -> findAnswer.setScore(score));
+                .ifPresent(findAnswer::setScore);
         Optional.ofNullable(answer.getIsAccepted())
-                .ifPresent(isAccepted -> findAnswer.setIsAccepted(isAccepted));
+                .ifPresent(findAnswer::setIsAccepted);
         Optional.ofNullable(answer.getContent())
-                .ifPresent(content -> findAnswer.setContent(content));
+                .ifPresent(findAnswer::setContent);
         Optional.ofNullable(answer.getModifiedAt())
-                .ifPresent(modifiedAt -> findAnswer.setModifiedAt(modifiedAt));
+                .ifPresent(findAnswer::setModifiedAt);
 
         return answerRepository.save(findAnswer);
     }
 
-    public Answer findAnswer(long answerId){
+    public Answer findAnswer(long answerId) {
         return findVerifiedAnswer(answerId);
     }
 
-    public Page<Answer> findAnswers(Pageable pageable){
+    public Page<Answer> findAnswers(Pageable pageable) {
         PageRequest of = PageRequest.of(pageable.getPageNumber() - 1,
                 pageable.getPageSize(),
                 pageable.getSort());
@@ -89,21 +77,25 @@ public class AnswerServiceImpl implements AnswerService{
         return answerRepository.findAll(of);
     }
 
-    public void removeAnswer(long answerId){
+    public void removeAnswer(long answerId) {
         Answer findAnswer = findVerifiedAnswer(answerId);
         /**
          * Answer 삭제시, Question의 AnswerCount 개수를 한개 줄인다.
          */
-        Question forPatchingQuestion = questionService.findVerifiedQuestion(findAnswer.getQuestion().getQuestionId());
-        forPatchingQuestion.setAnswerCount(forPatchingQuestion.getAnswerCount()-1);
-        questionService.updateQuestion(forPatchingQuestion);
-        answerRepository.delete(findAnswer);
+        Long questionId = findAnswer.getQuestion().getQuestionId();
+        Question verifiedQuestion = questionService.findVerifiedQuestion(questionId);
+        verifiedQuestion.setAnswerCount(verifiedQuestion.getAnswerCount() - 1);
 
+        findAnswer.setAnswerType(Answer.AnswerType.DELETE);
+        questionService.saveQuestion(verifiedQuestion);
+        answerRepository.save(findAnswer);
     }
 
-    public Answer findVerifiedAnswer(long answerId){
+    public Answer findVerifiedAnswer(long answerId) {
         Optional<Answer> optionalAnswer = answerRepository.findById(answerId);
-        Answer answer = optionalAnswer.orElseThrow(() -> {throw new RuntimeException("Answer가 DB에 없다.");});
+        Answer answer = optionalAnswer.orElseThrow(() -> {
+            throw new RuntimeException("Answer가 DB에 없다.");
+        });
 
         return answer;
     }

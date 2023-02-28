@@ -12,7 +12,7 @@ public class QuestionDto {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class QuestionPostDto {
+    public static class Post {
         private Long questionId;
         private String title;
         private String content;
@@ -26,11 +26,11 @@ public class QuestionDto {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class QuestionPatchDto {
+    public static class Patch {
         private Long questionId;
         private String title;
         private String content;
-        private UserDto.Response userDto;
+        private Long userId;
         private List<String> tagNames;
     }
 
@@ -39,7 +39,7 @@ public class QuestionDto {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class QuestionResponseDto {
+    public static class Response {
         private Long questionId;
         private Integer answerCount;
         private String title;

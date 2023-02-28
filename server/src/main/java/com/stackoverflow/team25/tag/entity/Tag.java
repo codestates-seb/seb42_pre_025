@@ -17,9 +17,11 @@ public class Tag extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tagId;
-
     private String name;
-    @ManyToMany(mappedBy="tags")
-    private List<Question> questions = new ArrayList<>();
+    @OneToMany(mappedBy="tag")
+    private List<QuestionTag> questionTags = new ArrayList<>();
 
+    public Tag(String name) {
+        this.name = name;
+    }
 }
