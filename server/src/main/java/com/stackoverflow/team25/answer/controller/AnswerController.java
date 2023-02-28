@@ -7,13 +7,15 @@ import com.stackoverflow.team25.answer.service.AnswerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Positive;
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/api/answers")
@@ -23,40 +25,41 @@ public class AnswerController {
     private final AnswerService answerService;
     private final AnswerMapper answerMapper;
 
-    @PatchMapping("/{answer-id}")
-    public ResponseEntity patchAnswer(@PathVariable("answer-id") long answerId,
-                                      @RequestBody AnswerDto.Patch patchDto){
+    @PatchMapping("/{answerId}")
+    public ResponseEntity patchAnswer(@PathVariable long answerId,
+                                      @RequestBody AnswerDto.Patch patchDto) {
         patchDto.setAnswerId(answerId);
-        Answer answer = answerMapper.answerPatchDtoToAnswer(patchDto);
-        Answer updatedAnswer = answerService.updateAnswer(answer);
+        Answer updatedAnswer = answerService.updateAnswer(answerMapper.answerPatchDtoToAnswer(patchDto));
         AnswerDto.Response response = answerMapper.answerToAnswerResponseDto(updatedAnswer);
 
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(response, OK);
     }
 
-    @GetMapping("/{answer-id}")
-    public ResponseEntity getAnswer(@PathVariable("answer-id") long answerId){
+    @GetMapping("/{answerId}")
+    public ResponseEntity getAnswer(@PathVariable long answerId) {
         //TODO: 지워진 질문은 검색이 불가.
         Answer findAnswer = answerService.findAnswer(answerId);
         AnswerDto.Response response = answerMapper.answerToAnswerResponseDto(findAnswer);
 
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(response, OK);
     }
 
     @GetMapping
-    public ResponseEntity getAnswers(Pageable pageable){
+    public ResponseEntity getAnswers(Pageable pageable) {
         //TODO: 지워진 질문은 검색이 불가.
         Page<Answer> pageAnswers = answerService.findAnswers(pageable);
         List<Answer> answers = pageAnswers.getContent();
         List<AnswerDto.Response> response = answerMapper.answersToAnswerResponseDtos(answers);
 
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(response, OK);
     }
 
-    @DeleteMapping("/{answer-id}")
-    public ResponseEntity deleteAnswer(@PathVariable("answer-id") @Positive Long answerId){
+    @DeleteMapping("/{answerId}")
+    public ResponseEntity deleteAnswer(@PathVariable @Positive Long answerId) {
+
+        //TODO::접속된 user랑 글 작성자가 같은지 확인
         answerService.removeAnswer(answerId);
 
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity(NO_CONTENT);
     }
 }

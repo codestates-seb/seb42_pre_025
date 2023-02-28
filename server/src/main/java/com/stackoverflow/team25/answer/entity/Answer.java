@@ -1,7 +1,6 @@
 package com.stackoverflow.team25.answer.entity;
 
 import com.stackoverflow.team25.audit.Auditable;
-import com.stackoverflow.team25.post.entity.Post;
 import com.stackoverflow.team25.question.entity.Question;
 import com.stackoverflow.team25.user.entity.User;
 import lombok.Getter;
@@ -29,6 +28,7 @@ public class Answer extends Auditable {
     @Lob // Large Object
     @Column(nullable = false)
     private String content;
+    @Default
     @Enumerated(EnumType.STRING)
     private AnswerType answerType = AnswerType.ACTIVATE;
 
