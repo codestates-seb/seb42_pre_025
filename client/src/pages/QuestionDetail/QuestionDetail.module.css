@@ -144,7 +144,10 @@
 }
 
 /* answer box 스타일링 */
-.answerWrapper {
+.answerBoxWrapper {
+}
+
+.answerPostWrapper {
   /* background-color: greenyellow; */
 }
 .answerHeader {
@@ -152,4 +155,14 @@
 }
 .submitBtn {
   margin-top: 16px;
+}
+
+.answerBody {
+  margin-bottom: 16px;
+  display: flex;
+  border-bottom: 1px solid var(--black-100);
+}
+
+.answerCount {
+  margin: 12px 0 16px 0;
 }
