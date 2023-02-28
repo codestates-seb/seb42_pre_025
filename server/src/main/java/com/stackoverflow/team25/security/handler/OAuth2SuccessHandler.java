@@ -56,8 +56,6 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         log.info("RefreshToken: {}", refreshToken);
         log.info("refresh: {}", refresh);
 
-
-
         String uri = createURI(bearerToken, refreshToken).toString();
         getRedirectStrategy().sendRedirect(request, response, uri);
     }

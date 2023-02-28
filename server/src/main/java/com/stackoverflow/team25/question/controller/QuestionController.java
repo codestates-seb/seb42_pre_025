@@ -5,22 +5,19 @@ import com.stackoverflow.team25.answer.dto.AnswerDto;
 import com.stackoverflow.team25.answer.entity.Answer;
 import com.stackoverflow.team25.answer.mapper.AnswerMapper;
 import com.stackoverflow.team25.answer.service.AnswerService;
+import com.stackoverflow.team25.dto.MultiResponseDto;
+import com.stackoverflow.team25.dto.SingleResponseDto;
 import com.stackoverflow.team25.question.dto.QuestionDto;
 import com.stackoverflow.team25.question.entity.Question;
 import com.stackoverflow.team25.question.mapper.QuestionMapper;
 import com.stackoverflow.team25.question.service.QuestionService;
 import com.stackoverflow.team25.tag.entity.Tag;
 import com.stackoverflow.team25.tag.repository.TagRepository;
-import com.stackoverflow.team25.user.dto.UserDto;
-import com.stackoverflow.team25.user.entity.User;
 import com.stackoverflow.team25.user.mapper.UserMapper;
 import com.stackoverflow.team25.user.service.UserService;
 import com.stackoverflow.team25.utils.UriCreator;
-import com.stackoverflow.team25.dto.MultiResponseDto;
-import com.stackoverflow.team25.dto.SingleResponseDto;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -38,8 +35,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/questions")
 @Validated
 @RequiredArgsConstructor
+@Slf4j
 public class QuestionController {
-    private final static String QUESTION_DEFAULT_URL = "/questions";
+    private final static String QUESTION_DEFAULT_URL = "/api/questions";
     private final QuestionService questionService;
     private final QuestionMapper mapper;
     private final AnswerService answerService;
@@ -81,18 +79,22 @@ public class QuestionController {
 
     @GetMapping
     public ResponseEntity getQuestions(Pageable pageable) {
+        log.info("get questions");
         Page<Question> pageQuestions = questionService.findQuestions(pageable);
         List<Question> questions = pageQuestions.getContent();
+        log.info("getContent");
         List<QuestionDto.QuestionResponseDto> responses = mapper.questionsToQuestionResponseDtos(questions);
+        log.info("mapper questionsToQuestionResponseDtos");
         for (QuestionDto.QuestionResponseDto response : responses) {
             Question question = questionService.findQuestion(response.getQuestionId());
             response.setUserDto(userMapper.userToResponse(question.getUser()));
         }
+        log.info("for (QuestionDto.QuestionResponseDto response : responses)");
         for (QuestionDto.QuestionResponseDto response : responses) {
             Question question = questionService.findQuestion(response.getQuestionId());
             response.setTagNames(question.getTags().stream().map(Tag::getName).collect(Collectors.toList()));
         }
-
+        log.info("for (QuestionDto.QuestionResponseDto response : responses)");
         return new ResponseEntity<>(new MultiResponseDto<>(responses,pageQuestions),HttpStatus.OK);
     }
 
@@ -111,5 +113,13 @@ public class QuestionController {
 
         URI location = UriCreator.createUri(QUESTION_DEFAULT_URL + "/" + questionId + "/add", findAnswer.getAnswerId());
         return ResponseEntity.created(location).build();
+    }
+
+    @GetMapping("/{question-id}/answers")
+    public ResponseEntity getAnswersByQuestionId(@PathVariable("question-id") Long questionId) {
+        List<Answer> answerByQuestion = answerService.findAnswersByQuestion(questionId);
+        List<AnswerDto.Response> responses = answerMapper. answersToAnswerResponseDtos(answerByQuestion);
+        log.info("######" + responses.toString() + "#######");
+        return new ResponseEntity(new SingleResponseDto<>(responses), HttpStatus.OK);
     }
 }

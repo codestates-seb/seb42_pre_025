@@ -1,33 +1,31 @@
 package com.stackoverflow.team25.question.service;
 
+import com.stackoverflow.team25.exception.BusinessLogicException;
+import com.stackoverflow.team25.exception.ExceptionCode;
 import com.stackoverflow.team25.post.entity.Post;
 import com.stackoverflow.team25.post.service.PostServiceImpl;
 import com.stackoverflow.team25.question.entity.Question;
 import com.stackoverflow.team25.question.repository.QuestionRepository;
-import com.stackoverflow.team25.exception.BusinessLogicException;
-import com.stackoverflow.team25.exception.ExceptionCode;
-
-
 import com.stackoverflow.team25.tag.entity.Tag;
 import com.stackoverflow.team25.tag.repository.TagRepository;
 import com.stackoverflow.team25.tag.service.TagService;
-import com.stackoverflow.team25.user.entity.User;
 import com.stackoverflow.team25.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
 @Service
 @RequiredArgsConstructor
+@Transactional
+@Slf4j
 public class QuestionService {
     private final QuestionRepository questionRepository;
     private final PostServiceImpl postServiceImpl;
@@ -98,11 +96,12 @@ public class QuestionService {
         return findVerifiedQuestion(questionId);
     }
 
+    @Transactional(readOnly = true)
     public Page<Question> findQuestions(Pageable pageable) {
         PageRequest of = PageRequest.of(pageable.getPageNumber() - 1,
                 pageable.getPageSize(),
                 pageable.getSort());
-
+        log.info("find questions");
         return questionRepository.findAll(of);
     }
 
