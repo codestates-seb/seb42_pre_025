@@ -39,22 +39,13 @@ function QuestionDetail() {
   const handleDelete = async (url) => {
     const result = confirm('Delete this post?');
 
-    if (result === true) {
+    if (result) {
       const res = await deleteFetch(url);
-      // 상태 코드 204
       if (res.ok) {
-        // 질문 삭제 요청의 경우 리다이렉션
         if (url.includes('questions')) {
           navigate('/questions');
         } else {
-          // 답변 삭제 요청의 경우 리다이렉션
-          // ! 새로고침하면 상태 유지 안될 텐데 괜찮은 것인지 (안괜찮을거 같음)
-          // ! answer post도 리다이렉션 마찬가지 문제
-          window.location.reload();
-          // ? question/:id 페이지가 없나? -> 있음
-          // Questions.jsx 파일에서 <Link to={`/questions/${questionId}`} >는 이동되는데,
-          // ? navigate()는 왜 이동이 안되지?
-          // navigate(`questions/${id}`);
+          navigate(`/questions/${id}`);
         }
       }
     }
