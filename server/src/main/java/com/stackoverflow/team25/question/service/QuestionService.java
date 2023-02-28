@@ -24,6 +24,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -117,8 +118,31 @@ public class QuestionService {
                 .ifPresent(verifiedQuestion::setContent);
         Optional.ofNullable(question.getAnswerCount())
                 .ifPresent(verifiedQuestion::setAnswerCount);
-        Optional.ofNullable(question.getTags())
-                .ifPresent(verifiedQuestion::setTags);
+        Optional<List<Tag>>patchTags = Optional.ofNullable(question.getTags());
+        patchTags.ifPresent
+        (tags -> {
+            List<Tag> originalTags = findQuestion.getTags();
+
+            List<Tag> newTags = patchTags.get().stream()
+                    .filter(tag -> !originalTags.contains(tag))
+                    .collect(Collectors.toList());
+            List<Tag> removedTags = originalTags.stream()
+                    .filter(tag -> !patchTags.get().contains(tag))
+                    .collect(Collectors.toList());
+
+            newTags.stream().forEach(tag -> {
+                tag.getQuestions().add(findQuestion);
+            });
+
+            removedTags.stream().forEach(tag -> {
+                tag.getQuestions().remove(findQuestion);
+            });
+
+            originalTags.removeAll(removedTags);
+            originalTags.addAll(newTags);
+
+            findQuestion.setTags(patchTags.get());
+        });
 
         return questionRepository.save(findQuestion);
     }

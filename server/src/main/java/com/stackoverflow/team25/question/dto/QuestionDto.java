@@ -3,6 +3,7 @@ package com.stackoverflow.team25.question.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.stackoverflow.team25.answer.dto.AnswerDto;
 import com.stackoverflow.team25.question.entity.Question;
+import com.stackoverflow.team25.tag.entity.Tag;
 import com.stackoverflow.team25.user.dto.UserDto;
 import com.stackoverflow.team25.user.entity.User;
 import lombok.*;
@@ -52,5 +53,16 @@ public class QuestionDto {
         private UserDto.Response userDto;
         private List<String> tagNames;
 
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ResponseForTag {
+        private Long questionId;
+        private String title;
+        private String content;
     }
 }

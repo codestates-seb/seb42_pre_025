@@ -10,7 +10,9 @@ import com.stackoverflow.team25.question.entity.Question;
 import com.stackoverflow.team25.question.mapper.QuestionMapper;
 import com.stackoverflow.team25.question.service.QuestionService;
 import com.stackoverflow.team25.tag.entity.Tag;
+import com.stackoverflow.team25.tag.mapper.TagMapper;
 import com.stackoverflow.team25.tag.repository.TagRepository;
+import com.stackoverflow.team25.tag.service.TagService;
 import com.stackoverflow.team25.user.dto.UserDto;
 import com.stackoverflow.team25.user.entity.User;
 import com.stackoverflow.team25.user.mapper.UserMapper;
@@ -25,6 +27,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +35,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -47,6 +51,8 @@ public class QuestionController {
     private final UserMapper userMapper;
     private final UserService userService;
     private final TagRepository tagRepository;
+    private final TagMapper tagMapper;
+    private final TagService tagService;
 
     @PostMapping
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.QuestionPostDto questionPostDto) {
@@ -61,11 +67,14 @@ public class QuestionController {
     public ResponseEntity patchQuestion(@PathVariable("question-id") @Positive long questionId,
                                         @Valid @RequestBody QuestionDto.QuestionPatchDto questionPatchDto) {
         questionPatchDto.setQuestionId(questionId);
+        Optional<List<Tag>> patchTags = Optional.ofNullable(mapper.questionPatchDtoToQuestion(questionPatchDto).getTags());
+        if(patchTags!=null&&!patchTags.isEmpty())tagService.patchTag(patchTags.get(),mapper.questionPatchDtoToQuestion(questionPatchDto));
         Question question = questionService.updateQuestion(mapper.questionPatchDtoToQuestion(questionPatchDto));
+        question.setTags(tagMapper.stringListToTagList(questionPatchDto.getTagNames()));
+
         QuestionDto.QuestionResponseDto response = mapper.questionToQuestionResponseDto(question);
         response.setUserDto(userMapper.userToResponse(question.getUser()));
         response.setTagNames(question.getTags().stream().map(Tag::getName).collect(Collectors.toList()));
-
 
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }

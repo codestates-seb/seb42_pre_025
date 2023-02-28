@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface TagRepository extends JpaRepository <Tag, Long>{
     Optional<Tag> findByName(String Name);
     List<Tag> findAllByNameIn(List<String> Names);
+    boolean existsByName(String name);
 }
