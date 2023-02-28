@@ -1,13 +1,13 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import DOMPurify from 'dompurify';
-import { getFetch, deleteFetch } from '../hooks/API/API';
-import Nav from '../components/Nav.jsx';
-import Footer from '../components/Footer.jsx';
-import Button from '../components/UI/Button.jsx';
-import Vote from '../components/Vote.jsx';
+import { getFetch, deleteFetch } from '../../hooks/API';
+import Nav from '../../components/Nav.jsx';
+import Footer from '../../components/Footer.jsx';
+import Button from '../../components/UI/Button.jsx';
+import Vote from './Vote.jsx';
 import styles from './QuestionDetail.module.css';
-import UserLogo from '../assets/logo.png';
+import UserLogo from '../../assets/logo.png';
 
 function QuestionDetail() {
   const { id } = useParams();

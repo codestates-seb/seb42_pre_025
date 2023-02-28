@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './components/Header.jsx';
-import QuestionList from './pages/QuestionList.jsx';
-import CreateQuestion from './pages/CreateQuestion.jsx';
-import Home from './pages/Home.jsx';
-import Login from './pages/Login.jsx';
+import QuestionList from './pages/QuestionList/QuestionList.jsx';
+import CreateQuestion from './pages/CreateQuestion/CreateQuestion.jsx';
+import Home from './pages/Home/Home.jsx';
+import Login from './pages/Login/Login.jsx';
 import Signup from './pages/Signup/Signup.jsx';
-import QuestionDetail from './pages/QuestionDetail.jsx';
+import QuestionDetail from './pages/QuestionDetail/QuestionDetail.jsx';
 import GlobalStyles from './GlobalStyles';
 import './App.css';
 

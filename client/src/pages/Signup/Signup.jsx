@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postFetch } from '../../hooks/API/API';
+import { postFetch } from '../../hooks/API';
 import Button from '../../components/UI/Button.jsx';
 import AboutSignup from './AboutSignup.jsx';
 import styles from './Signup.module.css';

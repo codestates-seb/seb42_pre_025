@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { postFetch } from '../hooks/API/API.js';
+import { postFetch } from '../hooks/API.js';
 import Button from './UI/Button.jsx';
 import styles from './Header.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
