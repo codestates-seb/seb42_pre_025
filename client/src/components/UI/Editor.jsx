@@ -48,7 +48,11 @@ function Editor({ content, inputs, setInputs }) {
   ];
 
   const handleText = (content) => {
-    setInputs({ ...inputs, content });
+    if (inputs) {
+      setInputs({ ...inputs, content });
+    } else {
+      setInputs(content);
+    }
   };
 
   return <ReactQuill formats={formats} modules={modules} value={content} onChange={handleText} />;
