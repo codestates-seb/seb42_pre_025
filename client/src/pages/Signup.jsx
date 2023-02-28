@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postFetch } from '../hooks/API/API';
+import Button from '../components/UI/Button.jsx';
+import AboutSignup from './AboutSignup.jsx';
 import styles from './Signup.module.css';
 // import icon from ''
-import AboutSignup from './AboutSignup.jsx';
-import Button from '../components/UI/Button.jsx';
-// import { getData } from '../hooks/API/API';
 
 function Signup() {
   // const [isSignup] = useState(true);
@@ -51,7 +50,6 @@ function Signup() {
                 bdColor: 'var(--black-750:)',
                 bgColor: 'var(--black-750:)',
                 color: 'var(--powder-050:)',
-
                 textColor: 'var--white:)',
                 padding: '10.4px',
                 margin: '2px 0',
@@ -65,11 +63,6 @@ function Signup() {
               borderColor: 'var(--powder-500)',
               backgroundColor: 'var(--powder-100)',
               color: 'var(--powder-700)',
-
-              // borderColor: 'var(--black-750:)',
-              // backgroundColor: 'var(--black-750)',
-              // color: 'var(--powder-050:)',
-
               textColor: 'var--white:)',
               padding: '10.4px',
               margin: '4px',
@@ -93,10 +86,6 @@ function Signup() {
             />
           </div>
         </div>
-
-        {/* <button type='submit' className={styles.authBtn}>
-            Sign up with GiHub
-          </button> */}
 
         <form onSubmit={onSubmit}>
           <label htmlFor='name' className={styles.label}>
@@ -154,8 +143,6 @@ function Signup() {
                 color: 'var(--powder-700)',
 
                 textColor: 'var--white:)'
-
-                // onClick={path ? () => goTo(path) : handleClick}
               }}
             />
           </div>
