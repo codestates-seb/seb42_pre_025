@@ -1,21 +1,19 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postFetch } from '../../hooks/API/API';
+import { postFetch } from '../../hooks/API';
+import Button from '../../components/UI/Button.jsx';
+import AboutSignup from './AboutSignup.jsx';
 import styles from './Signup.module.css';
 // import icon from ''
-import AboutSignup from './AboutSignup.jsx';
-import Button from '../../components/UI/Button.jsx';
-// import { getData } from '../hooks/API/API';
 
 function Signup() {
-  // const [isSignup] = useState(true);
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
-    displayName: '',
     email: '',
-    password: ''
+    password: '',
+    displayName: ''
   });
-  const { displayName, email, password } = inputs;
+  const { email, password, displayName } = inputs;
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -29,7 +27,7 @@ function Signup() {
   const onSubmit = async (e) => {
     e.preventDefault();
     // ! input 값에 빈 문자열 들어올 때 사용자에게 알림 처리해줘야 함
-    if (displayName === '' || email === '' || password === '') return;
+    if (email === '' || password === '' || displayName === '') return;
 
     const res = await postFetch(SIGNUP_POST_URL, inputs);
 
@@ -115,6 +113,7 @@ function Signup() {
             Email
           </label>
           <input type='email' name='email' id='email' value={email} onChange={onChange} />
+
           <label htmlFor='password' className={styles.label}>
             Password
           </label>

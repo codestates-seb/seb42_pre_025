@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { postFetch } from '../hooks/API/API.js';
+import { postFetch } from '../hooks/API.js';
 import Button from './UI/Button.jsx';
 import styles from './Header.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,7 +10,7 @@ function Header() {
 
   const handleLogout = async () => {
     console.log('로그아웃 클릭');
-    const LOGOUT_POST_URL = `${process.env.REACT_APP_URL}/users`;
+    const LOGOUT_POST_URL = `${process.env.REACT_APP_URL}/logout`;
     const res = await postFetch(LOGOUT_POST_URL);
     if (res.ok) {
       navigate('/');

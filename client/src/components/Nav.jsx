@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from './Nav.module.css';
 import navExploreLogo from '../assets/navExplore.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
-
+import { faInfoCircle, faEarthAmerica } from '@fortawesome/free-solid-svg-icons';
 function Nav() {
   return (
     <nav id={styles.nav}>
@@ -14,6 +13,7 @@ function Nav() {
           <li>
             <ol>
               <li className={styles.questionsBox}>
+                <FontAwesomeIcon icon={faEarthAmerica} />
                 <Link to={'/questions'} className={styles.questions}>
                   Questions
                 </Link>
