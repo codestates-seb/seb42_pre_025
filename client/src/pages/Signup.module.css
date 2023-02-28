@@ -21,3 +21,19 @@
   display: block;
   font-weight: 600;
 }
+
+/* .signupContainer {
+  min-height: 100vh;
+
+  background-color: #f1f2f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+  margin: 4px, 16px;
+}
+
+.checkBox label {
+  display: flex;
+} */
