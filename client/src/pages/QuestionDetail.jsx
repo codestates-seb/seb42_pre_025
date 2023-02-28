@@ -46,7 +46,7 @@ function QuestionDetail() {
             <li>
               <div className={styles.questionTitle}>{title}</div>
             </li>
-            <li>
+            <li className={styles.askButton}>
               <Button
                 text='Ask Question'
                 path='/questions/ask'
@@ -63,7 +63,14 @@ function QuestionDetail() {
                 dangerouslySetInnerHTML={{ __html: content }}
                 className={styles.contentBox}
               ></div>
-              <div className={styles.questionTag}>{tags && tags.map((tag) => tag)}</div>
+              <div className={styles.questionTag}>
+                {tags &&
+                  tags.map((tag) => (
+                    <button className={styles.contentTag} key={tag}>
+                      {tag}
+                    </button>
+                  ))}
+              </div>
               <div className={styles.questionOption}>
                 <div>
                   <button className={styles.buttonStyle}>Edit</button>
