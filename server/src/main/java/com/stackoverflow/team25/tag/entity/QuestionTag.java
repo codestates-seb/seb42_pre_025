@@ -6,12 +6,14 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.*;
+
 @Entity
 @Getter
 @Setter
 public class QuestionTag {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long questionTagId;
     @ManyToOne
     @JoinColumn(name = "question_id")

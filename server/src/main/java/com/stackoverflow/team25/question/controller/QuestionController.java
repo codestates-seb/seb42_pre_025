@@ -36,7 +36,6 @@ public class QuestionController {
     private final AnswerService answerService;
     private final QuestionMapper questionMapper;
     private final AnswerMapper answerMapper;
-    private final UserMapper userMapper;
 
     @PostMapping
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.Post post) {
