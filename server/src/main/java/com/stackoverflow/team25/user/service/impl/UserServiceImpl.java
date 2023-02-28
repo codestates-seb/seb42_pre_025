@@ -114,4 +114,9 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("삭제된 회원입니다.");
         }
     }
+
+    @Override
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("유저가 없음"));
+    }
 }

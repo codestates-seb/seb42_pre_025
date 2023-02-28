@@ -26,6 +26,9 @@
   margin-bottom: 4px;
   color: var(--black-700);
 }
+.askButton {
+  min-width: 100px;
+}
 
 .questionBody {
   display: flex;
@@ -35,25 +38,34 @@
 
 .box {
   min-width: 94.7%;
-  min-height: 350px;
+  /* min-height: 350px; */
 }
 
 .questionTag {
   display: flex;
-  height: 45px;
-  margin: 30px 0px 10px 0px;
+  margin: 30px 0px 50px 0px;
+}
+
+.contentTag {
+  padding: 4.8px 6px;
+  margin: 2px 6px 2px 0px;
+  width: inherit;
+  border-radius: 4px;
+  background-color: var(--powder-100);
+  color: var(--powder-700);
 }
 
 .questionOption {
   display: flex;
   justify-content: space-between;
-  height: 17px;
+  /* height: 17px; */
   margin: 16px 0px;
 }
 
 .buttonStyle {
   background-color: var(--white);
-  margin-left: 6px;
+  margin-right: 10px;
+  padding: 0px;
   color: var(--black-500);
 }
 
@@ -97,11 +109,6 @@
   color: var(--blue-500);
 }
 
-.questionAnswer {
-  width: 100%;
-  background-color: greenyellow;
-}
-
 /* 본문 content 스타일링 되살리기 */
 .contentBox {
   line-height: 1.5;
@@ -119,10 +126,11 @@
   background-color: var(--highlight-bg);
   color: var(--black-750);
   font-family: monospace;
-  overflow: auto;
+  overflow-x: scroll;
 }
 .contentBox blockquote {
-  padding-left: 4px;
+  margin-left: 28px;
+  padding-left: 8px;
   border-left: 4px solid var(--black-200);
 }
 
@@ -133,4 +141,15 @@
 .contentBox ul {
   margin-left: 28px;
   list-style-type: disc;
+}
+
+/* answer box 스타일링 */
+.answerWrapper {
+  /* background-color: greenyellow; */
+}
+.answerHeader {
+  padding: 20px 0 16px 0;
+}
+.submitBtn {
+  margin-top: 16px;
 }
