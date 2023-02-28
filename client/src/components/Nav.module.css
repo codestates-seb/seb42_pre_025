@@ -60,11 +60,13 @@
 .questionsBox {
   font-size: 15px;
   line-height: 28px;
-  padding: 5px 0px 0px 27px;
+  padding: 0px 0px 0px 8px;
   height: 34px;
   text-align: start;
 }
 .questions {
+  margin-left: 4px;
+  font-weight: 700;
   color: var(--black-600);
 }
 
