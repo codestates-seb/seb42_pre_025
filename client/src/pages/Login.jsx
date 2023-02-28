@@ -1,27 +1,37 @@
-import { useState, useEffect } from 'react';
-import Button from '../components/UI/Button.jsx';
-import { Link } from 'react-router-dom';
-import styles from './Login.module.css';
-// import { useState } from 'react';
-// import { getData } from '../hooks/API/API.js';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { getFetch } from '../hooks/API/API.js';
-
-// import { useEffect, useState } from 'react';
-// function Login() {
+import Button from '../components/UI/Button.jsx';
+import styles from './Login.module.css';
 
 function Login() {
-  const [isLogin, setIsLoggedIn] = useState(true);
-  console.log(setIsLoggedIn);
+  const navigate = useNavigate();
+  const [inputs, setInputs] = useState({
+    email: '',
+    password: ''
+  });
+  const { email, password } = inputs;
 
-  const [data, setData] = useState([]);
-  const { REACT_APP_URL: BASE_URL } = process.env;
-  const LOGIN_GET_URL = `${BASE_URL}/users?page=1&size=5&sort=userId,desc`;
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setInputs({ ...inputs, [name]: value });
+  };
+  // console.log(inputs);
 
-  useEffect(() => {
-    getFetch(LOGIN_GET_URL, setData);
-  }, []);
+  const LOGIN_GET_URL = `${process.env.REACT_APP_URL}/users`;
 
-  console.log(data);
+  // ! 유효성 검사 추가
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    // ! input 값에 빈 문자열 들어올 때 사용자에게 알림 처리해줘야 함
+    if (email === '' || password === '') return;
+
+    const res = await getFetch(LOGIN_GET_URL, inputs);
+
+    if (res.ok) {
+      navigate('/questions');
+    }
+  };
 
   return (
     <div className={styles.loginAuth}>
@@ -40,24 +50,15 @@ function Login() {
         <div className={styles.authLogin}>
           <div className={styles.authLoginContainer}> </div>
         </div>
-        {/* {isSignup ? (
-          <>
-          <div className={styles.authLogin}></div>
-          </>
-        ) : ()
-        }
-         */}
         <from>
           <div className={styles.loginGoolglebtn}>
             <Button
               text='Sign up with Google'
               addStyle={{
-                bdColor: 'var(--black-750)',
-                bgColor: 'var(--white)',
-
+                borderColor: 'var(--black-750)',
+                backgroundColor: 'var(--white)',
                 color: 'var(--black)',
                 padding: '10.4px',
-                margin: '20px 0',
                 width: '288px'
               }}
             />
@@ -67,11 +68,10 @@ function Login() {
             <Button
               text='Log in with GiHub'
               addStyle={{
-                bdColor: 'var(--black)',
-                bgColor: 'var(--black)',
+                borderColor: 'var(--black)',
+                backgroundColor: 'var(--black)',
                 color: 'var(--white)',
                 padding: '10.4px',
-                margin: '4px 0',
                 width: '288px'
               }}
             />
@@ -82,7 +82,7 @@ function Login() {
               text='Log in with Facebook'
               addStyle={{
                 borderColor: 'var(--black-750)',
-                backgroundColor: 'var(--black-750)',
+                backgroundColor: 'var(--blue-900)',
                 color: 'var(--white)',
                 padding: '10.4px',
 
@@ -93,37 +93,47 @@ function Login() {
         </from>
 
         <div className={styles.logintextFrom}>
-          <form className={styles.loginBar}>
-            {isLogin && (
-              <label htmlFor='email'>
-                <h4>Email</h4>
-                <input type='email' name='email' id='email' />
+          <div className={styles.loginBar}>
+            <form onSubmit={onSubmit}>
+              <label htmlFor='email' className={styles.label}>
+                Email
               </label>
-            )}
-            <label htmlFor='password'>
-              <h4>Password</h4>
-              <input type='password' name='password' id='password' />
-            </label>
-            <div className={styles.loginbtn}>
-              <Button
-                text='login'
-                path='/users/signup'
-                addStyle={{
-                  bgColor: 'var(--powder-100)',
-                  bdColor: 'var(--powder-500)',
-                  textColor: 'var(--white)'
-                }}
+              <input type='email' name='email' id='email' value={email} onChange={onChange} />
+              <label htmlFor='password' className={styles.label}>
+                Password
+              </label>
+              <input
+                type='password'
+                name='password'
+                id='password'
+                value={password}
+                onChange={onChange}
               />
-            </div>
+              {/* ////////// */}
 
-            {isLogin && (
-              <p>
-                Don’t have an account?
-                <br />
-                Are you an employer?
-              </p>
-            )}
-          </form>
+              {/* <a className={flex--item}
+            href="/users/account-recovery">Forgot password?</a> */}
+
+              <div className={styles.loginbtn}>
+                <Button
+                  text='login'
+                  path='/users/login'
+                  addStyle={{
+                    width: '248px',
+                    textColor: 'var(--white)'
+                  }}
+                />
+              </div>
+
+              <div className={styles.under}>
+                <p>
+                  Don’t have an account?
+                  <br />
+                  Are you an employer?
+                </p>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
