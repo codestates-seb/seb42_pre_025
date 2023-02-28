@@ -21,7 +21,7 @@ import static lombok.Builder.Default;
 @Builder
 public class Tag extends Auditable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long tagId;
     private String name;
     @OneToMany(mappedBy="tag")
