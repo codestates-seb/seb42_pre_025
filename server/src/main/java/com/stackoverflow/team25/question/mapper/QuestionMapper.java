@@ -1,26 +1,29 @@
 package com.stackoverflow.team25.question.mapper;
 
+import com.stackoverflow.team25.answer.dto.AnswerDto;
 import com.stackoverflow.team25.answer.mapper.AnswerMapper;
-import com.stackoverflow.team25.question.dto.QuestionDto;
 import com.stackoverflow.team25.question.entity.Question;
-import com.stackoverflow.team25.tag.dto.TagDto;
 import com.stackoverflow.team25.tag.entity.QuestionTag;
 import com.stackoverflow.team25.tag.entity.Tag;
-import com.stackoverflow.team25.tag.mapper.TagMapper;
+import com.stackoverflow.team25.user.dto.UserDto;
 import com.stackoverflow.team25.user.entity.User;
 import com.stackoverflow.team25.user.mapper.UserMapper;
-import org.mapstruct.Mapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring", uses = {AnswerMapper.class, TagMapper.class, UserMapper.class})
-public interface QuestionMapper {
-    QuestionDto.Response questionToQuestionResponseDto(Question question);
+import static com.stackoverflow.team25.question.dto.QuestionDto.*;
 
-    List<QuestionDto.Response> questionsToQuestionResponseDtos(List<Question> questions);
+//@Mapper(componentModel = "spring", uses = {AnswerMapper.class, TagMapper.class, UserMapper.class})
+@Component
+@RequiredArgsConstructor
+public class QuestionMapper {
+    private final UserMapper userMapper;
+    private final AnswerMapper answerMapper;
 
-    default Question questionPostDtoToQuestion(QuestionDto.Post post) {
+    public Question questionPostDtoToQuestion(Post post) {
         User user = new User();
         user.setUserId(post.getUserId());
         Question question = new Question();
@@ -40,7 +43,7 @@ public interface QuestionMapper {
         return question;
     }
 
-    default Question questionPatchDtoToQuestion(QuestionDto.Patch patch) {
+    public Question questionPatchDtoToQuestion(Patch patch) {
         User user = new User();
         user.setUserId(patch.getUserId());
         Question question = new Question();
@@ -61,20 +64,27 @@ public interface QuestionMapper {
         return question;
     }
 
-    default List<QuestionTag> stringListToTagList(List<String> tagNames) {
-        return tagNames.stream()
-                .map(Tag::new)
-                .map(tag -> {
-                    QuestionTag questionTag = new QuestionTag();
-                    questionTag.setTag(tag);
-                    return questionTag;
-                }).collect(Collectors.toList());
-    }
-    default TagDto.Response tagToResponseDtoWithTagIdAndName(Tag tag) {
-        return TagDto.Response.builder()
-                .tagId(tag.getTagId())
-                .name(tag.getName())
+    public Response questionToQuestionResponseDto(Question question) {
+        List<String> tagNames = question.getQuestionTags().stream()
+                .map(questionTag -> questionTag.getTag().getName())
+                .collect(Collectors.toList());
+        List<AnswerDto.Response> answerResponses = answerMapper.answersToAnswerResponseDtos(question.getAnswers());
+        UserDto.Response userresponse = userMapper.userToUserResponseDto(question.getUser());
+
+        return Response.builder()
+                .questionId(question.getQuestionId())
+                .answerCount(question.getAnswerCount())
+                .title(question.getTitle())
+                .content(question.getContent())
+                .answers(answerResponses)
+                .owner(userresponse)
+                .tagNames(tagNames)
+                .questionType(question.getQuestionType())
                 .build();
     }
-    List<Tag> responseDtoToTag (List < TagDto.Response > responses);
+
+    public List<Response> questionsToQuestionResponseDtos(List<Question> questions) {
+        return questions.stream().map(Response::new).collect(Collectors.toList());
+    }
+
 }
