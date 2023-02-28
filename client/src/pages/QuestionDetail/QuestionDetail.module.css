@@ -131,7 +131,7 @@
   background-color: var(--highlight-bg);
   color: var(--black-750);
   font-family: monospace;
-  overflow: auto;
+  overflow-x: scroll;
 }
 .contentBox blockquote {
   margin-left: 28px;
