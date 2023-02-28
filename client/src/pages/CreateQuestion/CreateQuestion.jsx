@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postFetch } from '../hooks/API/API.js';
-import Editor from '../components/UI/Editor.jsx';
-import Button from '../components/UI/Button.jsx';
-import Footer from '../components/Footer.jsx';
+import { postFetch } from '../../hooks/API.js';
+import Editor from '../../components/UI/Editor.jsx';
+import Button from '../../components/UI/Button.jsx';
+import Footer from '../../components/Footer.jsx';
 import styles from './CreateQuestion.module.css';
 
 function CreateQuestion() {

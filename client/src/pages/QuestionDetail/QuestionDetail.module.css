@@ -135,7 +135,7 @@
 }
 .contentBox blockquote {
   margin-left: 28px;
-  padding-left: 4px;
+  padding-left: 8px;
   border-left: 4px solid var(--black-200);
 }
 

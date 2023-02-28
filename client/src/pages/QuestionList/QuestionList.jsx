@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { getFetch } from '../hooks/API/API.js';
-import Nav from '../components/Nav.jsx';
-import Footer from '../components/Footer.jsx';
-import Questions from '../components/Questions.jsx';
-import Pagination from '../components/Pagination.jsx';
-import Button from '../components/UI/Button.jsx';
+import { getFetch } from '../../hooks/API.js';
+import Nav from '../../components/Nav.jsx';
+import Footer from '../../components/Footer.jsx';
+import Questions from './Questions.jsx';
+import Pagination from './Pagination.jsx';
+import Button from '../../components/UI/Button.jsx';
 import styles from './QuestionList.module.css';
 
 function QuestionList() {

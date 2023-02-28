@@ -1,4 +1,4 @@
-import Footer from '../components/Footer.jsx';
+import Footer from '../../components/Footer.jsx';
 import styles from './Home.module.css';
 
 function Home() {
