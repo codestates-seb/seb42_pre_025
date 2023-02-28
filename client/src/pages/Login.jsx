@@ -1,32 +1,34 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getFetch } from '../hooks/API/API.js';
+import { postFetch } from '../hooks/API/API.js';
 import Button from '../components/UI/Button.jsx';
 import styles from './Login.module.css';
+// import icon from ''
 
 function Login() {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
-    email: '',
+    username: '',
     password: ''
   });
-  const { email, password } = inputs;
+  const { username, password } = inputs;
 
   const onChange = (e) => {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
   };
-  // console.log(inputs);
+  console.log(inputs);
 
-  const LOGIN_GET_URL = `${process.env.REACT_APP_URL}/users`;
+  const LOGIN_POST_URL = `${process.env.REACT_APP_URL}/login`;
+  console.log(LOGIN_POST_URL);
 
   // ! 유효성 검사 추가
   const onSubmit = async (e) => {
     e.preventDefault();
     // ! input 값에 빈 문자열 들어올 때 사용자에게 알림 처리해줘야 함
-    if (email === '' || password === '') return;
+    if (username === '' || password === '') return;
 
-    const res = await getFetch(LOGIN_GET_URL, inputs);
+    const res = await postFetch(LOGIN_POST_URL, inputs);
 
     if (res.ok) {
       navigate('/questions');
@@ -96,9 +98,10 @@ function Login() {
           <div className={styles.loginBar}>
             <form onSubmit={onSubmit}>
               <label htmlFor='email' className={styles.label}>
-                Email
+                Username
               </label>
-              <input type='email' name='email' id='email' value={email} onChange={onChange} />
+              <input type='email' name='username' id='email' value={username} onChange={onChange} />
+
               <label htmlFor='password' className={styles.label}>
                 Password
               </label>
