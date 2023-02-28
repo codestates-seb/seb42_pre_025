@@ -1,0 +1,35 @@
+#questionList {
+  max-width: 1264px;
+  display: flex;
+  margin: 0 auto;
+}
+
+.div {
+  max-width: 1100px;
+  border-left: 1px solid var(--black-100);
+  width: 87%;
+}
+
+.border {
+  padding: 25px 25px 0px 25px;
+}
+
+.allQuestionsBox {
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  font-size: 27px;
+  padding-top: 10px;
+  font-weight: 450;
+}
+
+.allQuestions {
+  width: 160px;
+}
+
+.questionNumber {
+  height: 50px;
+  font-size: 17px;
+  font-weight: 520;
+  line-height: 50px;
+}

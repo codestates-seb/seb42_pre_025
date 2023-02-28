@@ -31,17 +31,5 @@ public class UserDto {
         private String aboutMe;
         private double acceptRate;
         private User.UserStatus userStatus;
-
-        public static class ResponseBuilder {
-            public ResponseBuilder user(User user) {
-                this.userId = user.getUserId();
-                this.email = user.getEmail();
-                this.displayName = user.getDisplayName();
-                this.aboutMe = user.getAboutMe();
-                this.acceptRate = user.getAcceptRate();
-                this.userStatus = user.getUserStatus();
-                return this;
-            }
-        }
     }
 }

@@ -1,0 +1,23 @@
+.signupContainer {
+  min-height: 100vh;
+
+  background-color: #f1f2f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+  margin: 4px, 16px;
+}
+
+.signupContent {
+}
+
+.checkBox label {
+  display: flex;
+}
+
+.label {
+  display: block;
+  font-weight: 600;
+}

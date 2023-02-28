@@ -1,0 +1,155 @@
+.container {
+  display: flex;
+  max-width: 1264px;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.detailBox {
+  width: 84%;
+  padding: 24px;
+  border-left: 1px solid var(--black-100);
+}
+
+.questionHead {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 77px;
+  border-bottom: 1px solid var(--black-100);
+}
+
+.questionTitle {
+  font-size: 27px;
+  min-height: 36px;
+  margin-top: 9px;
+  margin-bottom: 4px;
+  color: var(--black-700);
+}
+.askButton {
+  min-width: 100px;
+}
+
+.questionBody {
+  display: flex;
+  margin-top: 16px;
+  /* height: 70vh; */
+}
+
+.box {
+  min-width: 94.7%;
+  /* min-height: 350px; */
+}
+
+.questionTag {
+  display: flex;
+  margin: 30px 0px 50px 0px;
+}
+
+.contentTag {
+  padding: 4.8px 6px;
+  margin: 2px 6px 2px 0px;
+  width: inherit;
+  border-radius: 4px;
+  background-color: var(--powder-100);
+  color: var(--powder-700);
+}
+
+.questionOption {
+  display: flex;
+  justify-content: space-between;
+  /* height: 17px; */
+  margin: 16px 0px;
+}
+
+.buttonStyle {
+  background-color: var(--white);
+  margin-right: 10px;
+  padding: 0px;
+  color: var(--black-500);
+}
+
+.buttonStyle:hover {
+  color: var(--black-400);
+}
+
+.user {
+  display: flex;
+  justify-content: space-between;
+  height: 54px;
+  width: 180px;
+  padding: 5px 6px 7px 7px;
+  background-color: var(--powder-200);
+  border-radius: 3px;
+}
+
+.userImg {
+  display: flex;
+  align-items: center;
+  width: 45px;
+  height: 54px;
+  line-height: 45px;
+}
+
+.img {
+  width: 45px;
+  height: 45px;
+}
+
+.userName {
+  height: 54px;
+  width: 145px;
+  line-height: 55px;
+  font-size: 13px;
+  padding-left: 10px;
+  color: var(--blue-600);
+}
+
+.userName:hover {
+  color: var(--blue-500);
+}
+
+/* 본문 content 스타일링 되살리기 */
+.contentBox {
+  line-height: 1.5;
+}
+.contentBox p,
+.contentBox ul,
+.contentBox ol,
+.contentBox pre,
+.contentBox blockquote {
+  margin-bottom: 8px;
+}
+
+.contentBox pre {
+  padding: 12px;
+  background-color: var(--highlight-bg);
+  color: var(--black-750);
+  font-family: monospace;
+  overflow-x: scroll;
+}
+.contentBox blockquote {
+  margin-left: 28px;
+  padding-left: 8px;
+  border-left: 4px solid var(--black-200);
+}
+
+.contentBox ol {
+  margin-left: 28px;
+  list-style-type: decimal;
+}
+.contentBox ul {
+  margin-left: 28px;
+  list-style-type: disc;
+}
+
+/* answer box 스타일링 */
+.answerWrapper {
+  /* background-color: greenyellow; */
+}
+.answerHeader {
+  padding: 20px 0 16px 0;
+}
+.submitBtn {
+  margin-top: 16px;
+}

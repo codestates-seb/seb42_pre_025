@@ -1,0 +1,83 @@
+.loginAuth {
+  min-height: 100vh;
+  margin: 0% auto;
+  background-color: #f1f2f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginContainer {
+}
+
+.logotop {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.logo {
+  width: 150px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.logoImg {
+  transform: scale(0.9);
+}
+
+.loginBar {
+  padding: 0;
+  width: 240px;
+  margin: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  justify-content: center;
+}
+
+.loginBar input {
+  width: 100%;
+  height: 25px;
+  margin-bottom: 15px;
+}
+
+.loginBar h4 {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.loginGoolglebtn {
+  margin-bottom: 12px;
+}
+
+.loginGoolglebtn Button {
+  background-color: white;
+}
+.loginGiHubbtn {
+  margin-bottom: 12px;
+}
+
+.loginGiHubbtn Button {
+  background-color: darkblue;
+}
+
+/* .loginFacebookbtn {
+  margin-bottom: 12px;
+} */
+
+/* .loginFacebookbtn Button {
+  background-color: black;
+} */
+
+.logintextFrom {
+  width: 100%;
+  height: auto;
+  margin: 50 0px;
+  background-color: white;
+}
+
+.loginbtn {
+  width: 100%;
+  color: white;
+}

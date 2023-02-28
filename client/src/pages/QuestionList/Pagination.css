@@ -1,0 +1,44 @@
+.pagination {
+  display: flex;
+  height: 94px;
+  padding-left: 20px;
+  border-top: 1px solid var(--black-100);
+  margin-right: 20px;
+  padding-top: 20px;
+}
+
+.pagination li {
+  text-align: center;
+  height: 27px;
+  width: 26px;
+  line-height: 29px;
+  margin-top: 20px;
+  margin-left: 4px;
+  border: 1px solid var(--black-100);
+  border-radius: 3px;
+  font-size: 13px;
+}
+
+.pagination .active {
+  background-color: var(--orange-400);
+}
+.active a {
+  color: var(--white);
+}
+
+/* .pagedot {
+  margin-top: 30px;
+  margin-left: 10px;
+}
+
+.pageNext {
+  text-align: center;
+  height: 27px;
+  width: 46px;
+  line-height: 29px;
+  margin-top: 20px;
+  margin-left: 10px;
+  border: 1px solid var(--black-100);
+  border-radius: 3px;
+  font-size: 13px;
+} */
