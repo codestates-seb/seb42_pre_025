@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/questions")
+@RequestMapping("/api/questions")
 @Validated
 @RequiredArgsConstructor
 public class QuestionController {

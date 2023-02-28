@@ -16,7 +16,7 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
-@RequestMapping("/answers")
+@RequestMapping("/api/answers")
 @RequiredArgsConstructor
 @Validated
 public class AnswerController {
