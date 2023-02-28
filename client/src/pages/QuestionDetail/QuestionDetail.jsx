@@ -25,9 +25,11 @@ function QuestionDetail() {
   }, []);
   // console.log(QUESTION_DETAIL_URL);
 
-  const { title, content, tags, owner, answerCount } = question;
-  // console.log(question);
+  // TODO: 서버 answerCount 변수 조정 기다리기 (answerCounter or answers 둘 중 하나 쓰면 됨)
+  const { title, content, tags, owner, answers: answerArr } = question;
+  console.log(question);
   // console.log(answers);
+  const answerArrLen = answerArr && answerArr.length;
 
   // TODO: owner 에서 구조분해할당으로 변수 꺼내오는 법 있을지?
   const userId = owner && owner.userId;
@@ -137,10 +139,18 @@ function QuestionDetail() {
               </div>
             </div>
           </div>
-          {answerCount > 0 && (
+          {/* {answerCount > 0 && (
             <div className={styles.answerBoxWrapper}>
               <h2 className={styles.answerCount}>
                 {answerCount === 1 ? '1 Answer' : `${answerCount} Answers`}
+              </h2>
+              <AnswerList answers={answers} handleDelete={handleDelete} />
+            </div>
+          )} */}
+          {answerArrLen > 0 && (
+            <div className={styles.answerBoxWrapper}>
+              <h2 className={styles.answerCount}>
+                {answerArrLen === 1 ? '1 Answer' : `${answerArrLen} Answers`}
               </h2>
               <AnswerList answers={answers} handleDelete={handleDelete} />
             </div>
