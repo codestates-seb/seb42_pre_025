@@ -1,17 +1,17 @@
 spring:
   profiles:
-    active: h2
+    active: postgres
 ---
 spring:
   profiles: postgres
   datasource:
-    url: jdbc:postgresql://localhost:5432/springboot
+    url: jdbc:postgresql://${AWS_DATABASE_URL}:5432/${AWS_DATABASE_NAME}
     password: ${POSTGRESQL_PASSWORD}
     username: ${POSTGRESQL_USERNAME}
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     properties:
       hibernate:
         highlight_sql: true
@@ -31,11 +31,12 @@ spring:
             client-id: ${GITHUB_CLIENT_ID}
             client-secret: ${GITHUB_CLIENT_SECRET}
             scope:
-              - email
-              - profile
+              - user:email
+              - user:profile
           google:
             client-id: ${GOOGLE_CLIENT_ID}
             client-secret: ${GOOGLE_CLIENT_SECRET}
+            redirect-uri: https://dev.qushe8r.shop/login/oauth2/code/google
             scope:
               - email
               - profile
@@ -71,6 +72,10 @@ mail:
     name:
       user:
         join: email-registration-member
+jwt:
+  key: ${JWT_SECRET_KEY}
+  access-token-expiration-minutes: 40
+  refresh-token-expiration-minutes: 420
 ---
 spring:
   profiles: h2

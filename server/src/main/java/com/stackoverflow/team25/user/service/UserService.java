@@ -15,4 +15,6 @@ public interface UserService {
     Page<User> getUsers(Pageable pageable);
 
     void deleteUser(long userId);
+
+    User findUserByEmail(String email);
 }
