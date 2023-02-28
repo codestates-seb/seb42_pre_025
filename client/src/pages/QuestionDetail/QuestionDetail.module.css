@@ -38,7 +38,7 @@
 
 .box {
   min-width: 94.7%;
-  min-height: 350px;
+  /* min-height: 350px; */
 }
 
 .questionTag {
@@ -58,7 +58,7 @@
 .questionOption {
   display: flex;
   justify-content: space-between;
-  height: 17px;
+  /* height: 17px; */
   margin: 16px 0px;
 }
 
@@ -109,7 +109,7 @@
   color: var(--blue-500);
 }
 
-.questionAnswer {
+.answerWrapper {
   width: 100%;
   background-color: greenyellow;
 }

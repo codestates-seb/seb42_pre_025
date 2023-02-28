@@ -87,7 +87,7 @@ function QuestionDetail() {
               </div>
             </div>
           </div>
-          <ol className={styles.questionAnswer}>
+          <ol className={styles.answerWrapper}>
             <li>답변</li>
           </ol>
         </main>

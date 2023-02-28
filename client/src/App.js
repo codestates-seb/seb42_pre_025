@@ -11,7 +11,7 @@ import GlobalStyles from './GlobalStyles';
 import './App.css';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [tokens, setTokens] = useState({
     accessToken: '',
     refreshToken: ''
