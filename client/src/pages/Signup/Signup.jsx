@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { userContext } from '../../App';
 import { postFetch } from '../../hooks/API';
 import Button from '../../components/UI/Button.jsx';
 import AboutSignup from './AboutSignup.jsx';
@@ -14,6 +15,19 @@ function Signup() {
     displayName: ''
   });
   const { email, password, displayName } = inputs;
+
+  // useContext 테스트 코드: 시작
+  const { setIsLoggedIn, isLoggedIn, setTokens, tokens } = useContext(userContext);
+  console.log('로그인 여부: ', isLoggedIn);
+  console.log(setIsLoggedIn);
+  console.log(setTokens);
+  console.log(tokens);
+
+  // setTokens({
+  //   accessToken: 'xasdf',
+  //   refreshToken: 'test'
+  // });
+  // console.log(tokens);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -30,8 +44,12 @@ function Signup() {
     if (email === '' || password === '' || displayName === '') return;
 
     const res = await postFetch(SIGNUP_POST_URL, inputs);
+    // const ACCESS_TOKEN = res.headers.get('Authorization');
+    // const REFRESH_TOKEN = res.headers.get('Refresh');
 
     if (res.ok) {
+      console.log('서버 응답 ok');
+
       navigate('/questions');
     }
   };
