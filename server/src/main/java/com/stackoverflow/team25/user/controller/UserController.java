@@ -32,9 +32,14 @@ public class UserController {
     @PostMapping
     public ResponseEntity createUser(@Valid @RequestBody UserDto.Post postDto) {
         User user = userService.createUser(mapper.userPostToUser(postDto));
+        String accessToken = userService.delegateAccessToken(user);
+        String refreshToken = userService.delegateRefreshToken(user);
         URI location = UriCreator.createUri(USERS_DEFAULT_URL, user.getUserId());
 
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.created(location)
+                .header("Authorization", "Bearer " + accessToken)
+                .header("Refresh", refreshToken)
+                .build();
     }
 
     @PatchMapping("/{user-id}")
