@@ -3,19 +3,23 @@ package com.stackoverflow.team25.answer.entity;
 import com.stackoverflow.team25.audit.Auditable;
 import com.stackoverflow.team25.question.entity.Question;
 import com.stackoverflow.team25.user.entity.User;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.Builder.Default;
 
 import javax.persistence.*;
+
+import static com.stackoverflow.team25.answer.entity.Answer.AnswerType.ACTIVATE;
+import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @NoArgsConstructor
 @Setter
 @Getter
+@AllArgsConstructor
+@Builder
 public class Answer extends Auditable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long answerId;
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -30,7 +34,7 @@ public class Answer extends Auditable {
     private String content;
     @Default
     @Enumerated(EnumType.STRING)
-    private AnswerType answerType = AnswerType.ACTIVATE;
+    private AnswerType answerType = ACTIVATE;
 
     // 편의 메서드를 setter로 이름 지을시 Mapstruct에서 문제 발생!!
     public void addQuestion(Question question){
