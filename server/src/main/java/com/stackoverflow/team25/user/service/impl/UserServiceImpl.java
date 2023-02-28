@@ -3,6 +3,7 @@ package com.stackoverflow.team25.user.service.impl;
 import com.stackoverflow.team25.mail.event.UserRegistrationApplicationEvnet;
 import com.stackoverflow.team25.security.entity.Role;
 import com.stackoverflow.team25.security.entity.UserRole;
+import com.stackoverflow.team25.security.jwt.JwtTokenizer;
 import com.stackoverflow.team25.security.repository.RoleRepository;
 import com.stackoverflow.team25.user.entity.User;
 import com.stackoverflow.team25.user.repository.UserRepository;
@@ -12,11 +13,14 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +30,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
     private final ApplicationEventPublisher publisher;
+    private final JwtTokenizer jwtTokenizer;
 
     @Override
     public User createUser(User user) {
@@ -118,5 +123,47 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("유저가 없음"));
+    }
+
+    @Override
+    public User getUser(Authentication authentication) {
+        OAuth2User principal = (OAuth2User) authentication.getPrincipal();
+        String email = (String) principal.getAttributes().get("email");
+        String name = (String) principal.getAttributes().get("name");
+
+        User user = User.builder()
+                .email(email)
+                .displayName(name)
+                .password(UUID.randomUUID().toString())
+                .build();
+        return user;
+    }
+
+    @Override
+    public String delegateAccessToken(User user) {
+        Map<String, Object> claims = new HashMap<>();
+        List<String> roles = user.getUserRoles().stream()
+                .map(UserRole::getRole)
+                .map(Role::getRoleName)
+                .collect(Collectors.toList());
+
+        claims.put("username", user.getEmail());
+        claims.put("roles", roles);
+
+        String subject = user.getEmail();
+        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes());
+        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+        String accessToken = jwtTokenizer.generateAccessToken(claims, subject, expiration, base64EncodedSecretKey);
+
+        return accessToken;
+    }
+
+    public String delegateRefreshToken(User user) {
+        String subject = user.getEmail();
+        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMinutes());
+        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+        String refreshToken = jwtTokenizer.generateRefreshToken(subject, expiration, base64EncodedSecretKey);
+
+        return refreshToken;
     }
 }

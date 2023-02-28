@@ -3,6 +3,7 @@ package com.stackoverflow.team25.user.service;
 import com.stackoverflow.team25.user.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 
 public interface UserService {
 
@@ -17,4 +18,10 @@ public interface UserService {
     void deleteUser(long userId);
 
     User findUserByEmail(String email);
+
+    User getUser(Authentication authentication);
+
+    String delegateAccessToken(User user);
+
+    String delegateRefreshToken(User user);
 }
