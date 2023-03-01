@@ -20,7 +20,7 @@ function Header({ setIsLoggedIn, setTokens }) {
     console.log('로그아웃 클릭');
     const LOGOUT_POST_URL = `${process.env.REACT_APP_URL}/logout`;
     const res = await postFetch(LOGOUT_POST_URL);
-    console.log(res.status);
+    console.log('status code: ', res.status);
     // console.log(typeof res.status);
 
     if (res) {
