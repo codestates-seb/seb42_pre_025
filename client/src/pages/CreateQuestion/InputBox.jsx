@@ -12,7 +12,7 @@ function InputBox({
   maxLength
 }) {
   return (
-    <div className={styles.boxBorder}>
+    <div className={styles.container}>
       <label htmlFor={htmlFor} className={styles.labelTitle}>
         {label}
       </label>
