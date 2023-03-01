@@ -10,12 +10,6 @@ const getFetch = async (url) => {
     });
 
     return await res.json();
-    // const data = await res.json();
-    // setState1(data.data);
-    // setState2 && setState2(data[key]);
-    // key2 && setState2(data[key][key2]);
-    // console.log(data[key]);
-    // return data;
   } catch (error) {
     console.error(error);
   }
@@ -28,7 +22,7 @@ const postFetch = async (url, newData) => {
   try {
     const res = await fetch(url, {
       method: 'POST',
-      mode: 'cors',
+      // mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -49,8 +43,8 @@ const postFetch = async (url, newData) => {
 const deleteFetch = async (url) => {
   try {
     const res = await fetch(url, {
-      method: 'DELETE',
-      mode: 'cors'
+      method: 'DELETE'
+      // mode: 'cors'
     });
     // ! 새로고침 여부 확인
     // window.location.reload();
