@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext, useMemo } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import QuestionList from './pages/QuestionList/QuestionList.jsx';
@@ -10,13 +10,30 @@ import QuestionDetail from './pages/QuestionDetail/QuestionDetail.jsx';
 import GlobalStyles from './GlobalStyles';
 import './App.css';
 
+export const userContext = createContext({
+  setIsLoggedIn: () => {},
+  isLoggedIn: false,
+  setTokens: () => {},
+  tokens: {
+    accessToken: '',
+    refreshToken: ''
+  }
+});
+// console.log(userContext);
+
 function App() {
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [tokens, setTokens] = useState({
     accessToken: '',
     refreshToken: ''
   });
-  const navigate = useNavigate();
+
+  const value = useMemo(
+    () => ({ isLoggedIn, setIsLoggedIn, tokens, setTokens }),
+    [isLoggedIn, setIsLoggedIn, tokens, setTokens]
+  );
+  // console.log(value);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -35,15 +52,17 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      <Header />
-      <Routes>
-        <Route path='/' element={isLoggedIn ? <QuestionList /> : <Home />} />
-        <Route path='/questions' element={<QuestionList />} />
-        <Route path='/questions/ask' element={<CreateQuestion />} />
-        <Route path='/users/login' element={<Login />} />
-        <Route path='/users/signup' element={<Signup setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path='/questions/:id' element={<QuestionDetail />} />
-      </Routes>
+      <userContext.Provider value={value}>
+        <Header />
+        <Routes>
+          <Route path='/' element={isLoggedIn ? <QuestionList /> : <Home />} />
+          <Route path='/questions' element={<QuestionList />} />
+          <Route path='/questions/ask' element={<CreateQuestion />} />
+          <Route path='/users/login' element={<Login />} />
+          <Route path='/users/signup' element={<Signup setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path='/questions/:id' element={<QuestionDetail />} />
+        </Routes>
+      </userContext.Provider>
     </>
   );
 }

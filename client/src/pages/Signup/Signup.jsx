@@ -1,6 +1,9 @@
 import { useState } from 'react';
+// useContext import 해야함
 import { useNavigate } from 'react-router-dom';
-import { postFetch } from '../../hooks/API';
+// import { userContext } from '../../App';
+import { postFetch } from '../../util/API';
+import { checkPassword } from '../../util/checkPassword';
 import Button from '../../components/UI/Button.jsx';
 import AboutSignup from './AboutSignup.jsx';
 import styles from './Signup.module.css';
@@ -15,6 +18,19 @@ function Signup() {
   });
   const { email, password, displayName } = inputs;
 
+  // * useContext 관련 코드
+  // const { setIsLoggedIn, isLoggedIn, setTokens, tokens } = useContext(userContext);
+  // console.log('로그인 여부: ', isLoggedIn);
+  // console.log(setIsLoggedIn);
+  // console.log(setTokens);
+  // console.log(tokens);
+
+  // setTokens({
+  //   accessToken: 'xasdf',
+  //   refreshToken: 'test'
+  // });
+  // console.log(tokens);
+
   const onChange = (e) => {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
@@ -23,13 +39,19 @@ function Signup() {
 
   const SIGNUP_POST_URL = `${process.env.REACT_APP_URL}/users`;
 
-  // ! 유효성 검사 추가
   const onSubmit = async (e) => {
     e.preventDefault();
-    // ! input 값에 빈 문자열 들어올 때 사용자에게 알림 처리해줘야 함
-    if (email === '' || password === '' || displayName === '') return;
+    if (email === '' || password === '' || displayName === '') {
+      alert('Email, password and user name cannot be empty.');
+      return;
+    }
+
+    const result = checkPassword(inputs.password);
+    if (!result) return;
 
     const res = await postFetch(SIGNUP_POST_URL, inputs);
+    // const accessToken = res.headers.get('Authorization');
+    // const refreshToken = res.headers.get('Refresh');
 
     if (res.ok) {
       navigate('/questions');
@@ -107,7 +129,14 @@ function Signup() {
           <label htmlFor='name' className={styles.label}>
             Display Name
           </label>
-          <input type='text' id='name' name='displayName' value={displayName} onChange={onChange} />
+          <input
+            type='text'
+            id='name'
+            name='displayName'
+            maxLength={16}
+            value={displayName}
+            onChange={onChange}
+          />
 
           <label htmlFor='email' className={styles.label}>
             Email
@@ -149,17 +178,17 @@ function Signup() {
 
           <div className={styles.signupbtn}>
             <Button
-              text='signup'
-              path='/users/signup'
+              text='Sign up'
+              // path='/users/signup'
               addStyle={{
                 width: '219.38px',
                 padding: '10.4px',
-                margin: '4px',
-                bgColor: 'var(--powder-100)',
-                bdColor: 'var(--powder-500)',
-                color: 'var(--powder-700)',
+                margin: '4px'
+                // bgColor: 'var(--powder-100)',
+                // bdColor: 'var(--powder-500)',
+                // color: 'var(--powder-700)',
 
-                textColor: 'var--white:)'
+                // textColor: 'var--white:)'
 
                 // onClick={path ? () => goTo(path) : handleClick}
               }}

@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import DOMPurify from 'dompurify';
-import { getFetch, postFetch, deleteFetch } from '../../hooks/API';
+import { getFetch, postFetch, deleteFetch } from '../../util/API';
 import Nav from '../../components/Nav.jsx';
 import Footer from '../../components/Footer.jsx';
 import Button from '../../components/UI/Button.jsx';
@@ -21,17 +21,25 @@ function QuestionDetail() {
   // * question GET 요청 로직
   const QUESTION_DETAIL_URL = `${process.env.REACT_APP_URL}/questions/${id}`;
   useEffect(() => {
-    getFetch(QUESTION_DETAIL_URL, setQuestion);
+    async function getData() {
+      const res = await getFetch(QUESTION_DETAIL_URL);
+      setQuestion(res.data);
+      // setAnswers(res.data.answers);
+    }
+    getData();
   }, []);
+  // }, [question, answers]);
+
   // console.log(QUESTION_DETAIL_URL);
 
   // TODO: 서버 answerCount 변수 조정 기다리기 (answerCounter or answers 둘 중 하나 쓰면 됨)
   const { title, content, tags, owner, answers: answerArr } = question;
   console.log(question);
-  // console.log(answers);
+  console.log(answers);
   const answerArrLen = answerArr && answerArr.length;
 
   // TODO: owner 에서 구조분해할당으로 변수 꺼내오는 법 있을지?
+  // const { userId, displayName: userName } = owner;
   const userId = owner && owner.userId;
   const userName = owner && owner.displayName;
 
@@ -39,22 +47,13 @@ function QuestionDetail() {
   const handleDelete = async (url) => {
     const result = confirm('Delete this post?');
 
-    if (result === true) {
+    if (result) {
       const res = await deleteFetch(url);
-      // 상태 코드 204
       if (res.ok) {
-        // 질문 삭제 요청의 경우 리다이렉션
         if (url.includes('questions')) {
           navigate('/questions');
         } else {
-          // 답변 삭제 요청의 경우 리다이렉션
-          // ! 새로고침하면 상태 유지 안될 텐데 괜찮은 것인지 (안괜찮을거 같음)
-          // ! answer post도 리다이렉션 마찬가지 문제
-          window.location.reload();
-          // ? question/:id 페이지가 없나? -> 있음
-          // Questions.jsx 파일에서 <Link to={`/questions/${questionId}`} >는 이동되는데,
-          // ? navigate()는 왜 이동이 안되지?
-          // navigate(`questions/${id}`);
+          navigate(`/questions/${id}`);
         }
       }
     }
@@ -73,17 +72,27 @@ function QuestionDetail() {
     };
 
     const res = await postFetch(ANSWER_POST_URL, newData);
+    const headerLocation = res.headers.get('Location').slice(4); // '/questions/49/add/37'
+    const location = headerLocation.slice(0, headerLocation.indexOf('/add')); // '/questions/49'
+
     if (res) {
       setAnswerContent('');
-      window.location.reload();
-      // navigate(`/questions/${questionId}`);
+      navigate(location);
     }
   };
 
   // * answer GET 요청 로직
   const ANSWER_GET_URL = `${process.env.REACT_APP_URL}/questions/${id}/answers`;
   useEffect(() => {
-    getFetch(ANSWER_GET_URL, setAnswers);
+    async function getData() {
+      const res = await getFetch(ANSWER_GET_URL);
+      setAnswers(res.data);
+
+      if (res) {
+        navigate(`/questions/${id}`);
+      }
+    }
+    getData();
   }, []);
 
   return (

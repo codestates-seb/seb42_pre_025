@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { postFetch } from '../../hooks/API.js';
+import { postFetch } from '../../util/API.js';
+import { checkPassword } from '../../util/checkPassword.js';
 import Button from '../../components/UI/Button.jsx';
 import styles from './Login.module.css';
 // import icon from ''
@@ -22,11 +23,16 @@ function Login() {
   const LOGIN_POST_URL = `${process.env.REACT_APP_URL}/login`;
   console.log(LOGIN_POST_URL);
 
-  // ! 유효성 검사 추가
   const onSubmit = async (e) => {
     e.preventDefault();
-    // ! input 값에 빈 문자열 들어올 때 사용자에게 알림 처리해줘야 함
-    if (username === '' || password === '') return;
+    if (username === '' || password === '') {
+      alert('User name and password cannot be empty.');
+      return;
+    }
+
+    const result = checkPassword(inputs.password);
+    console.log(result);
+    if (!result) return;
 
     const res = await postFetch(LOGIN_POST_URL, inputs);
 
