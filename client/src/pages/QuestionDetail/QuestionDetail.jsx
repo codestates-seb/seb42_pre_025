@@ -1,7 +1,8 @@
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import DOMPurify from 'dompurify';
 import { getFetch, postFetch, deleteFetch } from '../../util/API';
+import { userContext } from '../../App';
 import Nav from '../../components/Nav.jsx';
 import Footer from '../../components/Footer.jsx';
 import Button from '../../components/UI/Button.jsx';
@@ -40,7 +41,7 @@ function QuestionDetail() {
 
   // TODO: owner 에서 구조분해할당으로 변수 꺼내오는 법 있을지?
   // const { userId, displayName: userName } = owner;
-  const userId = owner && owner.userId;
+  // const userId = owner && owner.userId;
   const userName = owner && owner.displayName;
 
   // TODO: 작성자에게만 edit, delete 버튼이 뜨도록 해야함
@@ -60,6 +61,9 @@ function QuestionDetail() {
   };
 
   // * answer POST 요청 로직
+  const { tokens } = useContext(userContext);
+  const accessToken = tokens && tokens.accessToken;
+
   const ANSWER_POST_URL = `${process.env.REACT_APP_URL}/questions/${id}/add`;
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -67,11 +71,11 @@ function QuestionDetail() {
     if (answerContent === '') return;
 
     const newData = {
-      userId,
+      // userId,
       content: answerContent
     };
 
-    const res = await postFetch(ANSWER_POST_URL, newData);
+    const res = await postFetch(ANSWER_POST_URL, newData, accessToken);
     const headerLocation = res.headers.get('Location').slice(4); // '/questions/49/add/37'
     const location = headerLocation.slice(0, headerLocation.indexOf('/add')); // '/questions/49'
 
