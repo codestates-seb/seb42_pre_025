@@ -2,11 +2,12 @@ import { useState, useEffect, createContext, useMemo } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import QuestionList from './pages/QuestionList/QuestionList.jsx';
+import QuestionDetail from './pages/QuestionDetail/QuestionDetail.jsx';
 import CreateQuestion from './pages/CreateQuestion/CreateQuestion.jsx';
+import EditQuestion from './pages/EditQuestion/EditQuestion.jsx';
 import Home from './pages/Home/Home.jsx';
 import Login from './pages/Login/Login.jsx';
 import Signup from './pages/Signup/Signup.jsx';
-import QuestionDetail from './pages/QuestionDetail/QuestionDetail.jsx';
 import GlobalStyles from './GlobalStyles';
 import './App.css';
 
@@ -58,6 +59,7 @@ function App() {
           <Route path='/' element={isLoggedIn ? <QuestionList /> : <Home />} />
           <Route path='/questions' element={<QuestionList />} />
           <Route path='/questions/ask' element={<CreateQuestion />} />
+          <Route path='/questions/edit' element={<EditQuestion />} />
           <Route path='/users/login' element={<Login />} />
           <Route path='/users/signup' element={<Signup setIsLoggedIn={setIsLoggedIn} />} />
           <Route path='/questions/:id' element={<QuestionDetail />} />

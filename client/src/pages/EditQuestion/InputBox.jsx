@@ -1,13 +1,10 @@
 import styles from './InputBox.module.css';
 
-function InputBox({ label, desc, value, onChange, inputId, inputName, placeholder, maxLength }) {
+function InputBox({ label, value, onChange, inputId, inputName }) {
   return (
     <div className={styles.container}>
-      <label htmlFor={inputId} className={styles.labelTitle}>
+      <label className={styles.labelTitle} htmlFor={inputId}>
         {label}
-      </label>
-      <label htmlFor={inputId} className={styles.description}>
-        {desc}
       </label>
       <input
         className={styles.input}
@@ -16,8 +13,6 @@ function InputBox({ label, desc, value, onChange, inputId, inputName, placeholde
         id={inputId}
         name={inputName}
         type='text'
-        maxLength={maxLength}
-        placeholder={placeholder}
       ></input>
     </div>
   );

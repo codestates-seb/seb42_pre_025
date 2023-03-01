@@ -1,0 +1,33 @@
+.container {
+  max-width: 1264px;
+  display: flex;
+  margin: 0 auto;
+}
+
+.main {
+  max-width: 1100px;
+  width: 87%;
+  padding: 32px;
+  border-left: 1px solid var(--black-100);
+  /* background-color: gold; */
+}
+
+.boxBorder {
+  width: 65%;
+  margin-bottom: 16px;
+  /* padding: 24px; */
+  /* border: solid 1px;
+  border-radius: 2px;
+  border-color: var(--black-075); */
+}
+
+.labelTitle {
+  margin-bottom: 8px;
+  display: block;
+  font-weight: 600;
+  color: var(--fc-dark);
+}
+
+.btnGroup {
+  margin-top: 20px;
+}
