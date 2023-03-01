@@ -16,9 +16,6 @@ const getFetch = async (url) => {
 };
 
 const postFetch = async (url, newData, jwt) => {
-  // ! 빈 문자열 들어올 때 처리해줘야 함
-  // if (userNameValue === '' || emailValue === '') return;
-
   try {
     const res = await fetch(url, {
       method: 'POST',
