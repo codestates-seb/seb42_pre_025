@@ -1,22 +1,12 @@
 import styles from './InputBox.module.css';
 
-function InputBox({
-  label,
-  desc,
-  value,
-  onChange,
-  htmlFor,
-  inputId,
-  inputName,
-  placeholder,
-  maxLength
-}) {
+function InputBox({ label, desc, value, onChange, inputId, inputName, placeholder, maxLength }) {
   return (
     <div className={styles.container}>
-      <label htmlFor={htmlFor} className={styles.labelTitle}>
+      <label htmlFor={inputId} className={styles.labelTitle}>
         {label}
       </label>
-      <label htmlFor={htmlFor} className={styles.description}>
+      <label htmlFor={inputId} className={styles.description}>
         {desc}
       </label>
       <input
