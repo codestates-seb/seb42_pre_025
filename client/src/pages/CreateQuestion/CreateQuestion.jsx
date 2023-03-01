@@ -112,7 +112,7 @@ function CreateQuestion() {
                 inputName='tags'
                 placeholder='e.g. (json, node.js, python)'
               />
-              <div className={styles.formSubmit}>
+              <div>
                 <Button text='Post your question' />
               </div>
             </main>
