@@ -1,23 +1,68 @@
-.signupContainer {
+.signupAuth {
   min-height: 100vh;
-
-  background-color: #f1f2f3;
+  margin: 0% auto;
+  background-color: var(--black-050);
   display: flex;
   justify-content: center;
   align-items: center;
-
-  padding: 20px;
-  margin: 4px, 16px;
 }
 
 .signupContent {
 }
 
-.checkBox label {
-  display: flex;
-}
-
 .label {
   display: block;
+  margin-bottom: 5px;
   font-weight: 600;
+  font-weight: 600;
+}
+
+.signuptextFrom {
+  padding: 0;
+  width: 180px;
+
+  padding: 20px;
+
+  justify-content: center;
+
+  height: auto;
+  margin: 50 0px;
+  background-color: var(--white);
+}
+
+/* .signupBar {
+  padding: 0;
+  width: 200px;
+  font-weight: 600;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  justify-content: center;
+} */
+
+.signupBar input {
+  display: flex;
+  width: 100%;
+  height: 25px;
+  margin-bottom: 15px;
+}
+
+.signupGoolglebtn {
+  margin-bottom: 12px;
+}
+
+.signupGiHubbtn {
+  margin-bottom: 12px;
+}
+
+.signupFacebookbtn {
+  margin-bottom: 12px;
+}
+
+/* .signubtn {
+ 
+} */
+
+.under {
+  color: var(--black-700);
+  font-size: 12px;
 }
