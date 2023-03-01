@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { postFetch } from '../../util/API.js';
-import { checkPassword } from '../../util/checkPassword.js';
 import Button from '../../components/UI/Button.jsx';
 import styles from './Login.module.css';
 // import icon from ''
@@ -23,16 +22,11 @@ function Login() {
   const LOGIN_POST_URL = `${process.env.REACT_APP_URL}/login`;
   console.log(LOGIN_POST_URL);
 
+  // ! 유효성 검사 추가
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (username === '' || password === '') {
-      alert('User name and password cannot be empty.');
-      return;
-    }
-
-    const result = checkPassword(inputs.password);
-    console.log(result);
-    if (!result) return;
+    // ! input 값에 빈 문자열 들어올 때 사용자에게 알림 처리해줘야 함
+    if (username === '' || password === '') return;
 
     const res = await postFetch(LOGIN_POST_URL, inputs);
 
@@ -58,16 +52,16 @@ function Login() {
         <div className={styles.authLogin}>
           <div className={styles.authLoginContainer}> </div>
         </div>
-        <from>
+        <form>
           <div className={styles.loginGoolglebtn}>
             <Button
-              text='Sign up with Google'
+              text='Log in with Google'
               addStyle={{
                 borderColor: 'var(--black-750)',
                 backgroundColor: 'var(--white)',
                 color: 'var(--black)',
                 padding: '10.4px',
-                width: '288px'
+                width: '219px'
               }}
             />
           </div>
@@ -80,7 +74,7 @@ function Login() {
                 backgroundColor: 'var(--black)',
                 color: 'var(--white)',
                 padding: '10.4px',
-                width: '288px'
+                width: '219px'
               }}
             />
           </div>
@@ -94,17 +88,17 @@ function Login() {
                 color: 'var(--white)',
                 padding: '10.4px',
 
-                width: '288px'
+                width: '219px'
               }}
             />
           </div>
-        </from>
+        </form>
 
-        <div className={styles.logintextFrom}>
+        <div className={styles.logintextForm}>
           <div className={styles.loginBar}>
             <form onSubmit={onSubmit}>
               <label htmlFor='email' className={styles.label}>
-                Username
+                Email
               </label>
               <input type='email' name='username' id='email' value={username} onChange={onChange} />
 
@@ -118,30 +112,26 @@ function Login() {
                 value={password}
                 onChange={onChange}
               />
-              {/* ////////// */}
-
-              {/* <a className={flex--item}
-            href="/users/account-recovery">Forgot password?</a> */}
 
               <div className={styles.loginbtn}>
                 <Button
-                  text='login'
-                  path='/users/login'
+                  text='Log in'
+                  // path='/users/login'
                   addStyle={{
-                    width: '248px',
+                    width: '180px',
                     textColor: 'var(--white)'
                   }}
                 />
               </div>
-
-              <div className={styles.under}>
-                <p>
-                  Don’t have an account?
-                  <br />
-                  Are you an employer?
-                </p>
-              </div>
             </form>
+          </div>
+        </div>
+        <div className={styles.under}>
+          <div>
+            Don’t have an account?
+            <Link to={`/signup`} className={styles.contentSignup}>
+              sign up
+            </Link>
           </div>
         </div>
       </div>
