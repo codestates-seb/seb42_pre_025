@@ -88,7 +88,6 @@ function CreateQuestion() {
                 desc='Be specific and imagine you’re asking a question to another person.'
                 value={title}
                 onChange={onChange}
-                htmlFor='title'
                 inputId='title'
                 inputName='title'
                 placeholder='e.g. Is there an R function for finding the index of an element in a vector?'
@@ -109,7 +108,6 @@ function CreateQuestion() {
                 desc='Be specific and imagine you’re asking a question to another person.'
                 value={tags}
                 onChange={onChange}
-                htmlFor='tags'
                 inputId='tags'
                 inputName='tags'
                 placeholder='e.g. (json, node.js, python)'
