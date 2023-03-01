@@ -15,7 +15,7 @@ const getFetch = async (url) => {
   }
 };
 
-const postFetch = async (url, newData) => {
+const postFetch = async (url, newData, jwt) => {
   // ! 빈 문자열 들어올 때 처리해줘야 함
   // if (userNameValue === '' || emailValue === '') return;
 
@@ -24,7 +24,8 @@ const postFetch = async (url, newData) => {
       method: 'POST',
       // mode: 'cors',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: jwt
       },
       body: JSON.stringify(newData)
     });
