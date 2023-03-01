@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getFetch } from '../../hooks/API.js';
+import { getFetch } from '../../util/API.js';
 import Nav from '../../components/Nav.jsx';
 import Footer from '../../components/Footer.jsx';
 import Questions from './Questions.jsx';

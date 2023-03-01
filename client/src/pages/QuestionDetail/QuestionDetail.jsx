@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import DOMPurify from 'dompurify';
-import { getFetch, postFetch, deleteFetch } from '../../hooks/API';
+import { getFetch, postFetch, deleteFetch } from '../../util/API';
 import Nav from '../../components/Nav.jsx';
 import Footer from '../../components/Footer.jsx';
 import Button from '../../components/UI/Button.jsx';

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postFetch } from '../../hooks/API.js';
+import { postFetch } from '../../util/API.js';
 import Editor from '../../components/UI/Editor.jsx';
 import InputBox from './InputBox.jsx';
 import Button from '../../components/UI/Button.jsx';
