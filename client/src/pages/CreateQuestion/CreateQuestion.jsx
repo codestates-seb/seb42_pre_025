@@ -1,7 +1,8 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postFetch } from '../../util/API.js';
 import { userContext } from '../../App.js';
+import useCheckLogin from '../../util/useCheckLogin.js';
 import Editor from '../../components/UI/Editor.jsx';
 import InputBox from './InputBox.jsx';
 import Button from '../../components/UI/Button.jsx';
@@ -10,17 +11,6 @@ import styles from './CreateQuestion.module.css';
 
 function CreateQuestion() {
   const navigate = useNavigate();
-  const { isLoggedIn, tokens } = useContext(userContext);
-  const accessToken = tokens && tokens.accessToken;
-
-  // 로그인되어 있지 않으면 로그인 페이지로 리디렉션
-  useEffect(() => {
-    console.log('로그인 여부:', isLoggedIn);
-    if (!isLoggedIn) {
-      navigate('/users/login');
-    }
-  }, []);
-
   const [inputs, setInputs] = useState({
     title: '',
     content: '',
@@ -33,7 +23,13 @@ function CreateQuestion() {
     setInputs({ ...inputs, [name]: value });
   };
 
+  // 로그인되어 있지 않으면 로그인 페이지로 리디렉션
+  useCheckLogin();
+
+  // * question POST 요청
   const QUESTION_POST_URL = `${process.env.REACT_APP_URL}/questions`;
+  const { tokens } = useContext(userContext);
+  const accessToken = tokens && tokens.accessToken;
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -54,7 +50,6 @@ function CreateQuestion() {
     };
     // console.log(newData);
 
-    // TODO: Authorization header에 accessToken 실어보내기
     const res = await postFetch(QUESTION_POST_URL, newData, accessToken);
     const location = res.headers.get('Location').slice(4); // '/api' 삭제
 

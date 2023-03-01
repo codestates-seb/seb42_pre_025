@@ -1,14 +1,13 @@
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useEffect, useState, useContext } from 'react';
 import DOMPurify from 'dompurify';
-import { getFetch, postFetch, deleteFetch } from '../../util/API';
-import { userContext } from '../../App';
+import { getFetch, deleteFetch } from '../../util/API';
 import Nav from '../../components/Nav.jsx';
 import Footer from '../../components/Footer.jsx';
 import Button from '../../components/UI/Button.jsx';
 import Vote from './Vote.jsx';
-import Editor from '../../components/UI/Editor.jsx';
 import AnswerList from './AnswerList.jsx';
+import CreateAnswer from './CreateAnswer.jsx';
 import styles from './QuestionDetail.module.css';
 import UserLogo from '../../assets/logo.png';
 
@@ -17,7 +16,6 @@ function QuestionDetail() {
   const navigate = useNavigate();
   const [question, setQuestion] = useState({});
   const [answers, setAnswers] = useState([]);
-  const [answerContent, setAnswerContent] = useState('');
 
   // * question GET 요청 로직
   const QUESTION_DETAIL_URL = `${process.env.REACT_APP_URL}/questions/${id}`;
@@ -57,31 +55,6 @@ function QuestionDetail() {
           navigate(`/questions/${id}`);
         }
       }
-    }
-  };
-
-  // * answer POST 요청 로직
-  const { tokens } = useContext(userContext);
-  const accessToken = tokens && tokens.accessToken;
-
-  const ANSWER_POST_URL = `${process.env.REACT_APP_URL}/questions/${id}/add`;
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    // ! input 값에 빈 문자열 들어올 때 사용자에게 알림 처리해줘야 함
-    if (answerContent === '') return;
-
-    const newData = {
-      // userId,
-      content: answerContent
-    };
-
-    const res = await postFetch(ANSWER_POST_URL, newData, accessToken);
-    const headerLocation = res.headers.get('Location').slice(4); // '/questions/49/add/37'
-    const location = headerLocation.slice(0, headerLocation.indexOf('/add')); // '/questions/49'
-
-    if (res) {
-      setAnswerContent('');
-      navigate(location);
     }
   };
 
@@ -170,13 +143,14 @@ function QuestionDetail() {
               <AnswerList answers={answers} handleDelete={handleDelete} />
             </div>
           )}
-          <form onSubmit={onSubmit} className={styles.answerPostWrapper}>
+          <CreateAnswer />
+          {/* <form onSubmit={onSubmit} className={styles.answerPostWrapper}>
             <h2 className={styles.answerHeader}>Your Answer</h2>
             <Editor content={answerContent} setInputs={setAnswerContent} />
             <div className={styles.submitBtn}>
               <Button text='Post your question' />
             </div>
-          </form>
+          </form> */}
         </main>
       </div>
       <Footer />

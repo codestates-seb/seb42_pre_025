@@ -147,16 +147,6 @@
 .answerBoxWrapper {
 }
 
-.answerPostWrapper {
-  /* background-color: greenyellow; */
-}
-.answerHeader {
-  padding: 20px 0 16px 0;
-}
-.submitBtn {
-  margin-top: 16px;
-}
-
 .answerBody {
   margin-bottom: 16px;
   display: flex;
