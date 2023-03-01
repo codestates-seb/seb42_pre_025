@@ -24,7 +24,7 @@ function QuestionDetail() {
     async function getData() {
       const res = await getFetch(QUESTION_DETAIL_URL);
       setQuestion(res.data);
-      setAnswers(res.data.answers);
+      // setAnswers(res.data.answers);
     }
     getData();
   }, []);
@@ -82,14 +82,18 @@ function QuestionDetail() {
   };
 
   // * answer GET 요청 로직
-  // const ANSWER_GET_URL = `${process.env.REACT_APP_URL}/questions/${id}/answers`;
-  // useEffect(() => {
-  //   const res = getFetch(ANSWER_GET_URL, setAnswers);
+  const ANSWER_GET_URL = `${process.env.REACT_APP_URL}/questions/${id}/answers`;
+  useEffect(() => {
+    async function getData() {
+      const res = await getFetch(ANSWER_GET_URL);
+      setAnswers(res.data);
 
-  //   if (res) {
-  //     navigate(`/questions/${id}`);
-  //   }
-  // }, []);
+      if (res) {
+        navigate(`/questions/${id}`);
+      }
+    }
+    getData();
+  }, []);
 
   return (
     <>

@@ -15,7 +15,13 @@ function QuestionList() {
   const QUESTION_LIST_GET_URL = `${process.env.REACT_APP_URL}/questions?page=${currentPage}&size=10&sort=questionId,desc`;
 
   useEffect(() => {
-    getFetch(QUESTION_LIST_GET_URL, setQuestions, setPageInfo, 'pageInfo');
+    // getFetch(QUESTION_LIST_GET_URL, setQuestions, setPageInfo, 'pageInfo');
+    async function getData() {
+      const res = await getFetch(QUESTION_LIST_GET_URL);
+      setQuestions(res.data);
+      setPageInfo(res.pageInfo);
+    }
+    getData();
   }, [currentPage]);
 
   const { totalElements } = pageInfo;
