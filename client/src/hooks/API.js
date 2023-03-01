@@ -1,15 +1,21 @@
-const getFetch = async (url, setState1, setState2, key) => {
+// const getFetch = async (url, setState1, setState2, key, key2) => {
+const getFetch = async (url) => {
   try {
     const res = await fetch(url, {
-      method: 'GET',
-      mode: 'cors'
+      method: 'GET'
+      // mode: 'cors'
       //   headers: {
       //     Accept: 'application/json'
       //   }
     });
-    const data = await res.json();
-    setState1(data.data);
-    setState2 && setState2(data[key]);
+
+    return await res.json();
+    // const data = await res.json();
+    // setState1(data.data);
+    // setState2 && setState2(data[key]);
+    // key2 && setState2(data[key][key2]);
+    // console.log(data[key]);
+    // return data;
   } catch (error) {
     console.error(error);
   }

@@ -21,17 +21,25 @@ function QuestionDetail() {
   // * question GET 요청 로직
   const QUESTION_DETAIL_URL = `${process.env.REACT_APP_URL}/questions/${id}`;
   useEffect(() => {
-    getFetch(QUESTION_DETAIL_URL, setQuestion);
+    async function getData() {
+      const res = await getFetch(QUESTION_DETAIL_URL);
+      setQuestion(res.data);
+      setAnswers(res.data.answers);
+    }
+    getData();
   }, []);
+  // }, [question, answers]);
+
   // console.log(QUESTION_DETAIL_URL);
 
   // TODO: 서버 answerCount 변수 조정 기다리기 (answerCounter or answers 둘 중 하나 쓰면 됨)
   const { title, content, tags, owner, answers: answerArr } = question;
   console.log(question);
-  // console.log(answers);
+  console.log(answers);
   const answerArrLen = answerArr && answerArr.length;
 
   // TODO: owner 에서 구조분해할당으로 변수 꺼내오는 법 있을지?
+  // const { userId, displayName: userName } = owner;
   const userId = owner && owner.userId;
   const userName = owner && owner.displayName;
 
@@ -64,18 +72,24 @@ function QuestionDetail() {
     };
 
     const res = await postFetch(ANSWER_POST_URL, newData);
+    const headerLocation = res.headers.get('Location').slice(4); // '/questions/49/add/37'
+    const location = headerLocation.slice(0, headerLocation.indexOf('/add')); // '/questions/49'
+
     if (res) {
       setAnswerContent('');
-      window.location.reload();
-      // navigate(`/questions/${questionId}`);
+      navigate(location);
     }
   };
 
   // * answer GET 요청 로직
-  const ANSWER_GET_URL = `${process.env.REACT_APP_URL}/questions/${id}/answers`;
-  useEffect(() => {
-    getFetch(ANSWER_GET_URL, setAnswers);
-  }, []);
+  // const ANSWER_GET_URL = `${process.env.REACT_APP_URL}/questions/${id}/answers`;
+  // useEffect(() => {
+  //   const res = getFetch(ANSWER_GET_URL, setAnswers);
+
+  //   if (res) {
+  //     navigate(`/questions/${id}`);
+  //   }
+  // }, []);
 
   return (
     <>
