@@ -1,6 +1,4 @@
 import { Link } from 'react-router-dom';
-// import { useContext } from 'react';
-// import { userContext } from '../App';
 import { postFetch } from '../util/API.js';
 import Button from './UI/Button.jsx';
 import styles from './Header.module.css';
@@ -8,14 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 function Header({ setIsLoggedIn, setTokens }) {
-  // const navigate = useNavigate();
-
-  // const { isLoggedIn, tokens } = useContext(userContext);
-  // console.log(setIsLoggedIn);
-  // console.log(setTokens);
-  // console.log('로그인 여부: ', isLoggedIn);
-  // console.log(tokens);
-
   const handleLogout = async () => {
     console.log('로그아웃 클릭');
     const LOGOUT_POST_URL = `${process.env.REACT_APP_URL}/logout`;
