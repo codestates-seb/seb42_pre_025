@@ -29,7 +29,7 @@ function QuestionDetail() {
   }, []);
   // }, [question, answers]);
 
-  // console.log(QUESTION_DETAIL_URL);
+  console.log(question);
 
   // TODO: 서버 answerCount 변수 조정 기다리기 (answerCounter or answers 둘 중 하나 쓰면 됨)
   const { title, content, tags, owner, answers: answerArr } = question;

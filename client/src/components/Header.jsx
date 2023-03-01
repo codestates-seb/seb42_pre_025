@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { postFetch } from '../util/API.js';
 import Button from './UI/Button.jsx';
 import styles from './Header.module.css';
@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 function Header({ setIsLoggedIn, setTokens }) {
+  const navigate = useNavigate();
   const handleLogout = async () => {
     console.log('로그아웃 클릭');
     const LOGOUT_POST_URL = `${process.env.REACT_APP_URL}/logout`;
@@ -19,8 +20,8 @@ function Header({ setIsLoggedIn, setTokens }) {
         accessToken: '',
         refreshToken: ''
       });
-      console.log('/로 자동 이동');
-      // navigate('/');
+      console.log('/로 클라이언트가 이동시켜줌');
+      navigate('/');
     }
   };
 

@@ -33,8 +33,10 @@ function CreateAnswer() {
     const res = await postFetch(ANSWER_POST_URL, newData, accessToken);
     const headerLocation = res.headers.get('Location').slice(4); // '/questions/49/add/37'
     const location = headerLocation.slice(0, headerLocation.indexOf('/add')); // '/questions/49'
+    console.log(location);
 
     if (res) {
+      console.log('답변 등록 후 location 확인 필요');
       setAnswerContent('');
       navigate(location);
     }

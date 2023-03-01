@@ -29,53 +29,11 @@ function Login() {
   console.log(username);
   console.log(password);
 
-  // * 여기 아래부터 원본
-  // const navigate = useNavigate();
-  // const [inputs, setInputs] = useState({
-  //   username: '',
-  //   password: ''
-  // });
-  // // ! inputs 리턴 받아온 다음 구조분해 할당 필요
-  // const { username, password } = inputs;
-
-  // * useContext 관련 코드
-  // const { isLoggedIn, tokens } = useContext(userContext);
-  // console.log('로그인 여부: ', isLoggedIn);
-  // console.log(tokens);
-
-  // const onChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setInputs({ ...inputs, [name]: value });
-  // };
-  // console.log(inputs);
-
-  // const LOGIN_POST_URL = `${process.env.REACT_APP_URL}/login`;
-  // // console.log(LOGIN_POST_URL);
-
-  // const onSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (username === '' || password === '') {
-  //     alert('User name and password cannot be empty.');
-  //     return;
-  //   }
-
-  //   const result = checkPassword(inputs.password);
-  //   if (!result) return;
-
-  //   const res = await postFetch(LOGIN_POST_URL, inputs);
-  //   const accessToken = res.headers.get('Authorization');
-  //   const refreshToken = res.headers.get('Refresh');
-
-  //   if (res.ok) {
-  //     setTokens({
-  //       accessToken,
-  //       refreshToken
-  //     });
-  //     setIsLoggedIn(true);
-  //     navigate('/questions');
-  //   }
-  // };
-  // console.log(tokens);
+  // * oauth - google
+  const handleRequestSignupGoogle = () => {
+    console.log('구글 회원가입 요청');
+    return window.location.assign('https://dev.qushe8r.shop/oauth2/authorization/google');
+  };
 
   return (
     <div className={styles.loginAuth}>
@@ -105,6 +63,7 @@ function Login() {
                 padding: '10.4px',
                 width: '288px'
               }}
+              handleClick={handleRequestSignupGoogle}
             />
           </div>
 
