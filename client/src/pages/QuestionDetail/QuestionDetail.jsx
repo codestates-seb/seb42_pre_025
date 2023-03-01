@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import DOMPurify from 'dompurify';
 import { getFetch, postFetch, deleteFetch } from '../../util/API';
@@ -131,7 +131,9 @@ function QuestionDetail() {
               </div>
               <div className={styles.questionOption}>
                 <div>
-                  <button className={styles.buttonStyle}>Edit</button>
+                  <Link to={'/questions/edit'}>
+                    <button className={styles.buttonStyle}>Edit</button>{' '}
+                  </Link>
                   <button
                     className={styles.buttonStyle}
                     onClick={() => handleDelete(QUESTION_DETAIL_URL)}

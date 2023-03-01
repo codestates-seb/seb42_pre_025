@@ -1,0 +1,22 @@
+.container {
+  width: 65%;
+  margin-bottom: 16px;
+  /* padding: 24px; */
+}
+
+.labelTitle {
+  margin-bottom: 8px;
+  display: block;
+  font-weight: 600;
+  color: var(--fc-dark);
+}
+
+.input {
+  width: 95%;
+  margin-top: 4px;
+  padding: 8px 10px;
+  display: inline-block;
+}
+.input::placeholder {
+  color: var(--fc-light);
+}
