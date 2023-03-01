@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { userContext } from '../../App.js';
 import { postFetch } from '../../util/API.js';
 import { checkPassword } from '../../util/checkPassword.js';
 import Button from '../../components/UI/Button.jsx';
@@ -21,7 +22,7 @@ function Login() {
   console.log(inputs);
 
   const LOGIN_POST_URL = `${process.env.REACT_APP_URL}/login`;
-  console.log(LOGIN_POST_URL);
+  // console.log(LOGIN_POST_URL);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -31,7 +32,7 @@ function Login() {
     }
 
     const result = checkPassword(inputs.password);
-    console.log(result);
+    // console.log(result);
     if (!result) return;
 
     const res = await postFetch(LOGIN_POST_URL, inputs);

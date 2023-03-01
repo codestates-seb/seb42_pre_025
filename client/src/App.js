@@ -54,14 +54,17 @@ function App() {
     <>
       <GlobalStyles />
       <userContext.Provider value={value}>
-        <Header />
+        <Header setIsLoggedIn={setIsLoggedIn} setTokens={setTokens} />
         <Routes>
           <Route path='/' element={isLoggedIn ? <QuestionList /> : <Home />} />
           <Route path='/questions' element={<QuestionList />} />
           <Route path='/questions/ask' element={<CreateQuestion />} />
           <Route path='/questions/edit' element={<EditQuestion />} />
           <Route path='/users/login' element={<Login />} />
-          <Route path='/users/signup' element={<Signup setIsLoggedIn={setIsLoggedIn} />} />
+          <Route
+            path='/users/signup'
+            element={<Signup setIsLoggedIn={setIsLoggedIn} setTokens={setTokens} />}
+          />
           <Route path='/questions/:id' element={<QuestionDetail />} />
         </Routes>
       </userContext.Provider>
