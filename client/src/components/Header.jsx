@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import { useContext } from 'react';
 // import { userContext } from '../App';
 import { postFetch } from '../util/API.js';
@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 function Header({ setIsLoggedIn, setTokens }) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // const { isLoggedIn, tokens } = useContext(userContext);
   // console.log(setIsLoggedIn);
@@ -21,7 +21,7 @@ function Header({ setIsLoggedIn, setTokens }) {
     const LOGOUT_POST_URL = `${process.env.REACT_APP_URL}/logout`;
     const res = await postFetch(LOGOUT_POST_URL);
     console.log(res.status);
-    console.log(typeof res.status);
+    // console.log(typeof res.status);
 
     if (res) {
       setIsLoggedIn(false);
@@ -29,7 +29,8 @@ function Header({ setIsLoggedIn, setTokens }) {
         accessToken: '',
         refreshToken: ''
       });
-      navigate('/');
+      console.log('/로 자동 이동');
+      // navigate('/');
     }
   };
 
