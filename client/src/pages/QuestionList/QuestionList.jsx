@@ -25,7 +25,7 @@ function QuestionList() {
   }, [currentPage]);
 
   const { totalElements } = pageInfo;
-  console.log(questions);
+  // console.log(questions);
 
   return (
     <>
