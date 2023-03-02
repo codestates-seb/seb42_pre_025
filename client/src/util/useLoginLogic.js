@@ -32,7 +32,7 @@ function useLoginLogic(initialInputs, url, alertMsg, key1, key2, key3) {
     const res = await postFetch(url, inputs);
     const accessToken = res.headers.get('Authorization');
     const refreshToken = res.headers.get('Refresh');
-    console.log(url);
+    // console.log(url);
 
     if (res.ok) {
       setTokens({
