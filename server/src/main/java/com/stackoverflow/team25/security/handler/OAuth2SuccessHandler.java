@@ -12,88 +12,40 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @RequiredArgsConstructor
 public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final UserService userService;
-//    private final JwtTokenizer jwtTokenizer;
 
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        //TODO: 회원가입 시 데이터 베이스에 저장, email 보낼때 어떻게 보낼지 생각, UserService 어떻게 받을지 생각
         log.info("# Success OAuth 2.0 Login");
+        User principal = userService.getUser(authentication);
+        String email = principal.getEmail();
+        String name = principal.getDisplayName();
+        log.info("# principal: {}, {}", email, name);
 
-        User user = userService.getUser(authentication);
-//        User user = getUser(authentication);
-        log.info("# user: {}, {}", user.getEmail(), user.getDisplayName());
+        User user = User.builder()
+                .email(email)
+                .displayName(name)
+                .password(UUID.randomUUID().toString())
+                .build();
+        Optional<User> optionalUser = userService.findUserByEmail(email);
+
+        if (optionalUser.isEmpty()) {
+            user = userService.createUser(user);
+        } else {
+            user = optionalUser.get();
+        }
 
         String accessToken = userService.delegateAccessToken(user);
         String refreshToken = userService.delegateRefreshToken(user);
         String bearerToken = "Bearer " + accessToken;
 
-//        response.setHeader("Authorization", bearerToken);
-//        response.setHeader("Refresh", refreshToken);
-
         String uri = UriCreator.createURI(bearerToken, refreshToken).toString();
 
         getRedirectStrategy().sendRedirect(request, response, uri);
     }
-
-//    private User getUser(Authentication authentication) {
-//        OAuth2User principal = (OAuth2User) authentication.getPrincipal();
-//        String email = (String) principal.getAttributes().get("email");
-//        String name = (String) principal.getAttributes().get("name");
-//
-//        User user = User.builder()
-//                .email(email)
-//                .displayName(name)
-//                .password(UUID.randomUUID().toString())
-//                .build();
-//        return user;
-//    }
-//
-//    private String delegateAccessToken(User user) {
-//        Map<String, Object> claims = new HashMap<>();
-//        List<String> roles = user.getUserRoles().stream()
-//                .map(UserRole::getRole)
-//                .map(Role::getRoleName)
-//                .collect(Collectors.toList());
-//
-//        claims.put("username", user.getEmail());
-//        claims.put("roles", roles);
-//
-//        String subject = user.getEmail();
-//        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes());
-//        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
-//        String accessToken = jwtTokenizer.generateAccessToken(claims, subject, expiration, base64EncodedSecretKey);
-//
-//        return accessToken;
-//    }
-//
-//    private String delegateRefreshToken(User user) {
-//        String subject = user.getEmail();
-//        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMinutes());
-//        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
-//        String refreshToken = jwtTokenizer.generateRefreshToken(subject, expiration, base64EncodedSecretKey);
-//
-//        return refreshToken;
-//    }
-
-//    private URI createURI(String accessToken, String refreshToken) {
-//        MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
-//        queryParams.add("access_token", accessToken);
-//        queryParams.add("refresh_token", refreshToken);
-//
-//        //TODO:: 프론트 페이지로 변경
-//        return UriComponentsBuilder
-//                .newInstance()
-//                .scheme("http")
-//                .host("localhost")
-//                .port(3000)
-//                .path("/")
-//                .queryParams(queryParams)
-//                .build()
-//                .toUri();
-//    }
-
 }

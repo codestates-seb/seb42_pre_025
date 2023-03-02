@@ -13,12 +13,10 @@ import java.net.URISyntaxException;
 @RequestMapping("/")
 public class OAuthController {
 
-    // httpHeaders
     @RequestMapping("/")
     public ResponseEntity<Object> exRedirect5() throws URISyntaxException {
         URI redirectUri = new URI("http://localhost:3000");
         HttpHeaders httpHeaders = new HttpHeaders();
-        System.out.println("########### 방문자여 어서오세요 ##############");
         httpHeaders.setLocation(redirectUri);
         return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
     }
