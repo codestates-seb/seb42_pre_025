@@ -2,7 +2,7 @@
 :headphones: 네? 뉴진스의 하입보이요
 
 this repository is for pre- project for SEB-42-pre025 BE team
-br/><br/><br/>
+<br/><br/>
 ## 프로젝트 목표
 부트캠프 기간동안 학습한 지식들을 응용하여  
 컴퓨터 프로그래밍의 다양한 주제에 대한 질문과 답변의 기능 서비스를 제공하는 스택 오버플로(Stack Overflow)  
