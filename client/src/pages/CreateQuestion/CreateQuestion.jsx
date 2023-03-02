@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postFetch } from '../../util/API.js';
-// import { userContext } from '../../App.js';
 import useAccessToken from '../../util/useAccessToken.js';
 import useCheckLogin from '../../util/useCheckLogin.js';
 import Editor from '../../components/UI/Editor.jsx';
@@ -27,8 +26,6 @@ function CreateQuestion() {
   // 로그인되어 있지 않으면 로그인 페이지로 리디렉션
   useCheckLogin();
 
-  // const { tokens } = useContext(userContext);
-  // const accessToken = tokens && tokens.accessToken;
   const accessToken = useAccessToken();
 
   const onSubmit = async (e) => {
@@ -47,14 +44,10 @@ function CreateQuestion() {
       title,
       content,
       tags
-      // userId: 3,
-      // password: '1111'
     };
-    // console.log(newData);
 
     // * question POST 요청
     const QUESTION_POST_URL = `${process.env.REACT_APP_URL}/questions`;
-    // const accessToken = useAccessToken()
 
     const res = await postFetch(QUESTION_POST_URL, newData, accessToken);
     const location = res.headers.get('Location').slice(4); // 'questions/51', '/api' 삭제

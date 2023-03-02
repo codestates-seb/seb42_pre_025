@@ -9,16 +9,11 @@
   width: 87%;
   padding: 32px;
   border-left: 1px solid var(--black-100);
-  /* background-color: gold; */
 }
 
 .boxBorder {
   width: 65%;
   margin-bottom: 16px;
-  /* padding: 24px; */
-  /* border: solid 1px;
-  border-radius: 2px;
-  border-color: var(--black-075); */
 }
 
 .labelTitle {

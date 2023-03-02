@@ -1,15 +1,6 @@
 import styles from './Vote.module.css';
 
 function VotesButton() {
-  //   const [counter, setCount] = useState({});
-
-  //   const handleUpClick = () => {
-  //     setCount((cur) => cur + 1);
-  //   };
-  //   const handleDownClick = () => {
-  //     setCount((cur) => cur - 1);
-  //   };
-
   return (
     <div>
       <div className={styles.upDownCount}>
@@ -26,7 +17,3 @@ function VotesButton() {
 }
 
 export default VotesButton;
-
-// role='presentation' onClick={handleUpClick}
-// {counter}
-// role='presentation' onClick={handleDownClick}

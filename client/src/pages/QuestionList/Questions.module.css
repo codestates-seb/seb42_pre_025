@@ -38,8 +38,6 @@
 }
 
 .contentHead {
-  /* line-height: 1.5; */
-  /* vertical-align: top; */
   color: var(--blue-600);
 }
 
@@ -66,7 +64,6 @@
   display: flex;
   justify-content: space-between;
   height: 38px;
-  /* margin-bottom: 10px; */
 }
 
 .contentTagAndBox {
@@ -85,5 +82,4 @@
 .contentUser {
   height: 38px;
   line-height: 40px;
-  /* align-items: center; */
 }

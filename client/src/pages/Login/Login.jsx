@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import useLoginLogic from '../../util/useLoginLogic.js';
 import Button from '../../components/UI/Button.jsx';
 import styles from './Login.module.css';
-// import icon from ''
 
 function Login() {
   const initialInputs = {
@@ -21,13 +20,9 @@ function Login() {
   );
 
   const { username, password } = inputs;
-  console.log(inputs);
-  console.log(username);
-  console.log(password);
 
   // * oauth - google
   const handleRequestSignupGoogle = () => {
-    console.log('구글 회원가입 요청');
     return window.location.assign('https://dev.qushe8r.shop/oauth2/authorization/google');
   };
 
@@ -43,8 +38,6 @@ function Login() {
             ></img>
           </Link>
         </div>
-        {/* { !isSignup && <img src = {icon} alt = 'stack overflow' className='loginogo'/>} */}
-
         <div className={styles.authLogin}>
           <div className={styles.authLoginContainer}> </div>
         </div>
@@ -62,7 +55,6 @@ function Login() {
               }}
             />
           </div>
-
           <div className={styles.loginGiHubbtn}>
             <Button
               text='Log in with GiHub'
@@ -75,7 +67,6 @@ function Login() {
               }}
             />
           </div>
-
           <div className={styles.loginFacebookbtn}>
             <Button
               text='Log in with Facebook'
@@ -84,13 +75,11 @@ function Login() {
                 backgroundColor: 'var(--blue-900)',
                 color: 'var(--white)',
                 padding: '10.4px',
-
                 width: '219px'
               }}
             />
           </div>
         </form>
-
         <div className={styles.logintextForm}>
           <div className={styles.loginBar}>
             <form onSubmit={onSubmit}>
@@ -98,7 +87,6 @@ function Login() {
                 Email
               </label>
               <input type='email' name='username' id='email' value={username} onChange={onChange} />
-
               <label htmlFor='password' className={styles.label}>
                 Password
               </label>
@@ -109,7 +97,6 @@ function Login() {
                 value={password}
                 onChange={onChange}
               />
-
               <div className={styles.loginbtn}>
                 <Button
                   text='Log in'

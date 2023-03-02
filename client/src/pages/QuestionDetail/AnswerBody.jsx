@@ -23,9 +23,6 @@ function AnswerBody({ id, content, userName, handleDelete }) {
             </button>
           </div>
           <div className={styles.user}>
-            {/* <div className={styles.userImg}>
-              <img className={styles.img} src={UserLogo} alt='user logo' />
-            </div> */}
             <div className={styles.userName}>{userName}</div>
           </div>
         </div>

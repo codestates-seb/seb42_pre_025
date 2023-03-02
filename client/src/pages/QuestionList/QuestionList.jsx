@@ -15,7 +15,6 @@ function QuestionList() {
   const QUESTION_LIST_GET_URL = `${process.env.REACT_APP_URL}/questions?page=${currentPage}&size=10&sort=questionId,desc`;
 
   useEffect(() => {
-    // getFetch(QUESTION_LIST_GET_URL, setQuestions, setPageInfo, 'pageInfo');
     async function getData() {
       const res = await getFetch(QUESTION_LIST_GET_URL);
       setQuestions(res.data);
@@ -25,7 +24,6 @@ function QuestionList() {
   }, [currentPage]);
 
   const { totalElements } = pageInfo;
-  // console.log(questions);
 
   return (
     <>
@@ -46,7 +44,6 @@ function QuestionList() {
               </div>
             </div>
             <div className={styles.questionNumber}>
-              {/* {totalElements ? `${totalElements} questions` : '0 question'} */}
               {totalElements === 1
                 ? '1 question'
                 : totalElements >= 2
