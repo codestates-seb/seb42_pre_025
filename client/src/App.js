@@ -1,5 +1,6 @@
-import { useState, useEffect, createContext, useMemo } from 'react';
+import { useEffect, createContext, useMemo } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import useLocalStorage from './util/useLocalStorage.js';
 import Header from './components/Header.jsx';
 import QuestionList from './pages/QuestionList/QuestionList.jsx';
 import QuestionDetail from './pages/QuestionDetail/QuestionDetail.jsx';
@@ -24,8 +25,8 @@ export const userContext = createContext({
 
 function App() {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [tokens, setTokens] = useState({
+  const [isLoggedIn, setIsLoggedIn] = useLocalStorage('login', false);
+  const [tokens, setTokens] = useLocalStorage('jwt', {
     accessToken: '',
     refreshToken: ''
   });
