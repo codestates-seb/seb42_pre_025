@@ -15,6 +15,8 @@ function CreateAnswer() {
 
   // 로그인되어 있지 않으면 로그인 페이지로 리디렉션
   // useCheckLogin();
+  const { isLoggedIn } = useContext(userContext);
+  const accessToken = useAccessToken();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +31,7 @@ function CreateAnswer() {
 
     // * answer POST 요청
     const ANSWER_POST_URL = `${process.env.REACT_APP_URL}/questions/${id}/add`;
-    const accessToken = useAccessToken();
+
     const res = await postFetch(ANSWER_POST_URL, newData, accessToken);
     // const headerLocation = res.headers.get('Location').slice(4); // '/questions/49/add/37'
     // const location = headerLocation.slice(0, headerLocation.indexOf('/add')); // '/questions/49'
@@ -44,7 +46,6 @@ function CreateAnswer() {
     }
   };
 
-  const { isLoggedIn } = useContext(userContext);
   const checkLogin = () => {
     if (!isLoggedIn) {
       alert('Please log in first to post your answer.');

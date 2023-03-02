@@ -1,8 +1,8 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 import { getFetch, deleteFetch } from '../../util/API';
-import { userContext } from '../../App';
+import useAccessToken from '../../util/useAccessToken';
 import Nav from '../../components/Nav.jsx';
 import Footer from '../../components/Footer.jsx';
 import Button from '../../components/UI/Button.jsx';
@@ -28,10 +28,9 @@ function QuestionDetail() {
     }
     getData();
   }, []);
-  // }, [question, answers]);
 
   console.log(question);
-  console.log(answers);
+  // console.log(answers);
 
   // TODO: 서버 answerCount 변수 조정 기다리기 (answerCounter or answers 둘 중 하나 쓰면 됨)
   const { title, content, tags, owner, answers: answerArr } = question;
@@ -39,18 +38,20 @@ function QuestionDetail() {
   const userName = owner && owner.displayName;
 
   // TODO: 작성자에게만 edit, delete 버튼이 뜨도록 해야함
+  const accessToken = useAccessToken();
+
   const handleDelete = async (url) => {
     const result = confirm('Delete this post?');
+    console.log('삭제 요청 url: ', url);
 
     if (result) {
-      const { tokens } = useContext(userContext);
-      const accessToken = tokens && tokens.accessToken;
       const res = await deleteFetch(url, accessToken);
       if (res.ok) {
         if (url.includes('questions')) {
           navigate('/questions');
         } else {
-          navigate(`/questions/${id}`);
+          window.location.reload();
+          // navigate(`/questions/${id}`);
         }
       }
     }
