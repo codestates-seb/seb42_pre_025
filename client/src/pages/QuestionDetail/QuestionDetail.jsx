@@ -18,7 +18,7 @@ function QuestionDetail() {
   const [question, setQuestion] = useState({});
   const [answers, setAnswers] = useState([]);
 
-  // * question GET 요청 로직
+  // * question & question GET 요청
   const QUESTION_DETAIL_URL = `${process.env.REACT_APP_URL}/questions/${id}`;
   useEffect(() => {
     async function getData() {
@@ -29,20 +29,14 @@ function QuestionDetail() {
     getData();
   }, []);
 
-  console.log(question);
-  // console.log(answers);
-
-  // TODO: 서버 answerCount 변수 조정 기다리기 (answerCounter or answers 둘 중 하나 쓰면 됨)
   const { title, content, tags, owner, answers: answerArr } = question;
   const answerArrLen = answerArr && answerArr.length;
   const userName = owner && owner.displayName;
 
-  // TODO: 작성자에게만 edit, delete 버튼이 뜨도록 해야함
   const accessToken = useAccessToken();
 
   const handleDelete = async (url) => {
     const result = confirm('Delete this post?');
-    console.log('삭제 요청 url: ', url);
 
     if (result) {
       const res = await deleteFetch(url, accessToken);
@@ -51,26 +45,10 @@ function QuestionDetail() {
           navigate('/questions');
         } else {
           window.location.reload();
-          // navigate(`/questions/${id}`);
         }
       }
     }
   };
-
-  // TODO: answer GET 요청 없이도 되는지 확인 필요
-  // * answer GET 요청 로직
-  // const ANSWER_GET_URL = `${process.env.REACT_APP_URL}/questions/${id}/answers`;
-  // useEffect(() => {
-  //   async function getData() {
-  //     const res = await getFetch(ANSWER_GET_URL);
-  //     setAnswers(res.data);
-
-  //     if (res) {
-  //       navigate(`/questions/${id}`);
-  //     }
-  //   }
-  //   getData();
-  // }, []);
 
   return (
     <>
@@ -127,14 +105,6 @@ function QuestionDetail() {
               </div>
             </div>
           </div>
-          {/* {answerCount > 0 && (
-            <div className={styles.answerBoxWrapper}>
-              <h2 className={styles.answerCount}>
-                {answerCount === 1 ? '1 Answer' : `${answerCount} Answers`}
-              </h2>
-              <AnswerList answers={answers} handleDelete={handleDelete} />
-            </div>
-          )} */}
           {answerArrLen > 0 && (
             <div className={styles.answerBoxWrapper}>
               <h2 className={styles.answerCount}>
@@ -144,13 +114,6 @@ function QuestionDetail() {
             </div>
           )}
           <CreateAnswer />
-          {/* <form onSubmit={onSubmit} className={styles.answerPostWrapper}>
-            <h2 className={styles.answerHeader}>Your Answer</h2>
-            <Editor content={answerContent} setInputs={setAnswerContent} />
-            <div className={styles.submitBtn}>
-              <Button text='Post your question' />
-            </div>
-          </form> */}
         </main>
       </div>
       <Footer />

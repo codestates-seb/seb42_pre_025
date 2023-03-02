@@ -2,15 +2,6 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './Editor.css';
 
-// * 순정 editor
-// function Editor({ content, inputs, setInputs }) {
-//   const handleText = (content) => {
-//     setInputs({ ...inputs, content });
-//   };
-
-//   return <ReactQuill theme='snow' value={content} onChange={handleText} />;
-// }
-
 // * custom editor
 function Editor({ content, inputs, setInputs }) {
   const modules = {
@@ -57,5 +48,14 @@ function Editor({ content, inputs, setInputs }) {
 
   return <ReactQuill formats={formats} modules={modules} value={content} onChange={handleText} />;
 }
+
+// * 순정 editor
+// function Editor({ content, inputs, setInputs }) {
+//   const handleText = (content) => {
+//     setInputs({ ...inputs, content });
+//   };
+
+//   return <ReactQuill theme='snow' value={content} onChange={handleText} />;
+// }
 
 export default Editor;

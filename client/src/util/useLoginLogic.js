@@ -7,16 +7,12 @@ import { checkPassword } from './checkPassword';
 function useLoginLogic(initialInputs, url, alertMsg, key1, key2, key3) {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState(initialInputs);
-
-  // * useContext 관련 코드
-  const { isLoggedIn, tokens, setIsLoggedIn, setTokens } = useContext(userContext);
-  //   console.log(tokens);
+  const { setIsLoggedIn, setTokens } = useContext(userContext);
 
   const onChange = (e) => {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
   };
-  //   console.log(inputs);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +28,6 @@ function useLoginLogic(initialInputs, url, alertMsg, key1, key2, key3) {
     const res = await postFetch(url, inputs);
     const accessToken = res.headers.get('Authorization');
     const refreshToken = res.headers.get('Refresh');
-    // console.log(url);
 
     if (res.ok) {
       setTokens({
@@ -43,8 +38,6 @@ function useLoginLogic(initialInputs, url, alertMsg, key1, key2, key3) {
       navigate('/questions');
     }
   };
-  console.log('로그인 여부: ', isLoggedIn);
-  console.log(tokens);
 
   return [inputs, onChange, onSubmit];
 }

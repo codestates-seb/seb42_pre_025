@@ -11,7 +11,6 @@
   margin-bottom: 8px;
 }
 
-/* css reset 때문에 html 태그 효과 적용되지 않는 부분 되돌리기 */
 p strong {
   font-weight: 600;
 }

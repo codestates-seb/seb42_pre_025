@@ -21,7 +21,6 @@ export const userContext = createContext({
     refreshToken: ''
   }
 });
-// console.log(userContext);
 
 function App() {
   const navigate = useNavigate();
@@ -35,7 +34,6 @@ function App() {
     () => ({ isLoggedIn, setIsLoggedIn, tokens, setTokens }),
     [isLoggedIn, setIsLoggedIn, tokens, setTokens]
   );
-  // console.log(value);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -48,8 +46,6 @@ function App() {
       navigate('/');
     }
   }, [isLoggedIn]);
-  console.log(tokens);
-  console.log('로그인 여부', isLoggedIn);
 
   return (
     <>

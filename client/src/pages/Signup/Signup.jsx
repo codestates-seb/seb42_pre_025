@@ -2,8 +2,6 @@ import useLoginLogic from '../../util/useLoginLogic.js';
 import Button from '../../components/UI/Button.jsx';
 import AboutSignup from './AboutSignup.jsx';
 import styles from './Signup.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 function Signup() {
   const initialInputs = {
@@ -24,9 +22,6 @@ function Signup() {
   );
 
   const { email, password, displayName } = inputs;
-  console.log(inputs);
-  // console.log(username);
-  // console.log(password);
 
   // * oauth - google
   const handleRequestSignupGoogle = () => {
@@ -37,17 +32,8 @@ function Signup() {
   return (
     <div className={styles.signupAuth}>
       <AboutSignup />
-      {/* AboutSignup 페이지 연결 */}
-
       <div className={styles.signupContainer}>
-        <div className={styles.logotop}></div>
-
-        <div className={styles.authSignup}>
-          <div className={styles.authSignupContainer}> </div>
-        </div>
         <form>
-          <FontAwesomeIcon icon={faGoogle} className={styles.highlight} />
-
           <div className={styles.loginGoolglebtn}>
             <Button
               text='Sign up with Google'
@@ -61,7 +47,6 @@ function Signup() {
               handleClick={handleRequestSignupGoogle}
             />
           </div>
-
           <div className={styles.signupGiHubbtn}>
             <Button
               text='Sign up with GitHub'
@@ -74,7 +59,6 @@ function Signup() {
               }}
             />
           </div>
-
           <div className={styles.signupFacebookbtn}>
             <Button
               text='Sign up with Facebook'
@@ -88,7 +72,6 @@ function Signup() {
             />
           </div>
         </form>
-
         <div className={styles.signuptextFrom}>
           <div className={styles.fromContainer}>
             <div className={styles.signupBar}>
@@ -104,12 +87,10 @@ function Signup() {
                   value={displayName}
                   onChange={onChange}
                 />
-
                 <label htmlFor='email' className={styles.label}>
                   Email
                 </label>
                 <input type='email' name='email' id='email' value={email} onChange={onChange} />
-
                 <label htmlFor='password' className={styles.label}>
                   Password
                 </label>
@@ -124,7 +105,6 @@ function Signup() {
                   Passwords must contain at least eight characters, including at least 1 letter and
                   1 number.
                 </p>
-
                 <div className={styles.signupbtn}>
                   <Button
                     text='Sign up'

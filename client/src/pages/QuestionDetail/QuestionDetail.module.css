@@ -33,12 +33,10 @@
 .questionBody {
   display: flex;
   margin-top: 16px;
-  /* height: 70vh; */
 }
 
 .box {
   min-width: 94.7%;
-  /* min-height: 350px; */
 }
 
 .questionTag {
@@ -58,7 +56,6 @@
 .questionOption {
   display: flex;
   justify-content: space-between;
-  /* height: 17px; */
   margin: 16px 0px;
 }
 
@@ -144,9 +141,6 @@
 }
 
 /* answer box 스타일링 */
-.answerBoxWrapper {
-}
-
 .answerBody {
   margin-bottom: 16px;
   display: flex;

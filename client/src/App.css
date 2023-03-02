@@ -102,26 +102,6 @@
 
   --highlight-bg: hsl(0, 0%, 96.5%);
 
-  /* --bc-lightest: var(--black-025);
-    --bc-lighter: var(--black-050);
-    --bc-light: var(--black-075);
-    --bc-medium: var(--black-100);
-    --bc-dark: var(--black-150);
-    --bc-darker: var(--black-200);
-  
-    --highlight-bg: hsl(0, 0%, 96.5%);
-    --highlight-color: var(--black-750);
-    --highlight-comment: hsl(210, 8%, 43.5%);
-    --highlight-punctuation: var(--black-600);
-    --highlight-namespace: hsl(27, 99%, 36%);
-    --highlight-attribute: hsl(206, 98.5%, 29%);
-    --highlight-literal: hsl(27, 99%, 36%);
-    --highlight-symbol: hsl(306, 43%, 35%);
-    --highlight-keyword: hsl(206, 98.5%, 29%);
-    --highlight-variable: hsl(80, 80.5%, 26.5%);
-    --highlight-addition: var(--green-700);
-    --highlight-deletion: var(--red-600); */
-
   /* Font */
   --main-font: Arial, Helvetica, sans-serif;
 

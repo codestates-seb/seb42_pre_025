@@ -7,9 +7,6 @@
   align-items: center;
 }
 
-.signupContent {
-}
-
 .label {
   display: block;
   margin-bottom: 5px;
@@ -30,15 +27,6 @@
   background-color: var(--white);
 }
 
-/* .signupBar {
-  padding: 0;
-  width: 200px;
-  font-weight: 600;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  justify-content: center;
-} */
-
 .signupBar input {
   display: flex;
   width: 100%;
@@ -58,10 +46,6 @@
 .signupFacebookbtn {
   margin-bottom: 12px;
 }
-
-/* .signubtn {
- 
-} */
 
 .under {
   margin-top: 5px;

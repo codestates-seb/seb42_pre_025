@@ -17,7 +17,6 @@ function EditQuestion() {
               <label htmlFor='body' className={styles.labelTitle}>
                 Body
               </label>
-              {/* <Editor content={content} inputs={inputs} setInputs={setInputs} /> */}
               <Editor />
             </div>
             <InputBox label='Tags' inputId='tags' inputName='tags' />
