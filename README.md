@@ -1,9 +1,30 @@
-# seb42_pre_025
-:headphones: 네? 뉴진스의 하입보이요
+# :headphones: 네? 뉴진스의 하입보이요 Team 입니다.
 
-this repository is for pre- project for SEB-42-pre025 BE team
+:bulb: 서비스 소개
+-
+stackoverflow clone 사이트 입니다.
 
-=================================================================
+:paperclip: 배포 주소
+-
+
+:calendar: 프로젝트 기간
+-
+
+:file_folder: 문서함
+-
+
+:family: 팀원 소개
+-
+
+:computer: 기술 스택
+-
+
+:pencil2: 커밋 컨벤션
+-
+
+:page_with_curl: 결과 화면
+-
+
 Java Spring info
 -
 - Language : Java
