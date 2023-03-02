@@ -84,6 +84,3 @@ dependencies
 추가 dependancies
 - Gson
 - MapStruct
-
-
-
