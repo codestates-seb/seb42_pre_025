@@ -1,8 +1,3 @@
-// import { useState, useContext } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import { userContext } from '../../App.js';
-// import { postFetch } from '../../util/API';
-// import { checkPassword } from '../../util/checkPassword';
 import useLoginLogic from '../../util/useLoginLogic.js';
 import Button from '../../components/UI/Button.jsx';
 import AboutSignup from './AboutSignup.jsx';
