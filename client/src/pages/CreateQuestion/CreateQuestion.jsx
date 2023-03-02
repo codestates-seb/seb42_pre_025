@@ -1,7 +1,7 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postFetch } from '../../util/API.js';
-import { userContext } from '../../App.js';
+import useAccessToken from '../../util/useAccessToken.js';
 import useCheckLogin from '../../util/useCheckLogin.js';
 import Editor from '../../components/UI/Editor.jsx';
 import InputBox from './InputBox.jsx';
@@ -26,15 +26,12 @@ function CreateQuestion() {
   // 로그인되어 있지 않으면 로그인 페이지로 리디렉션
   useCheckLogin();
 
-  // * question POST 요청
-  const QUESTION_POST_URL = `${process.env.REACT_APP_URL}/questions`;
-  const { tokens } = useContext(userContext);
-  const accessToken = tokens && tokens.accessToken;
-
   const onSubmit = async (e) => {
     e.preventDefault();
-    // ! input 값에 빈 문자열 들어올 때 사용자에게 알림 처리해줘야 함
-    if (title === '' || content === '') return;
+    if (title === '' || content === '') {
+      alert('Title and body can cannot be empty.');
+      return;
+    }
 
     let tags;
     if (inputs.tags.split(',').length === 1 && inputs.tags.split(',')[0] === '') {
@@ -49,6 +46,10 @@ function CreateQuestion() {
       // password: '1111'
     };
     // console.log(newData);
+
+    // * question POST 요청
+    const QUESTION_POST_URL = `${process.env.REACT_APP_URL}/questions`;
+    const accessToken = useAccessToken();
 
     const res = await postFetch(QUESTION_POST_URL, newData, accessToken);
     const location = res.headers.get('Location').slice(4); // '/api' 삭제

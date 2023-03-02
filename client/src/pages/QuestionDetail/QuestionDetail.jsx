@@ -24,33 +24,27 @@ function QuestionDetail() {
     async function getData() {
       const res = await getFetch(QUESTION_DETAIL_URL);
       setQuestion(res.data);
-      // setAnswers(res.data.answers);
+      setAnswers(res.data.answers);
     }
     getData();
   }, []);
   // }, [question, answers]);
 
   console.log(question);
+  console.log(answers);
 
   // TODO: 서버 answerCount 변수 조정 기다리기 (answerCounter or answers 둘 중 하나 쓰면 됨)
   const { title, content, tags, owner, answers: answerArr } = question;
-  console.log(question);
-  console.log(answers);
   const answerArrLen = answerArr && answerArr.length;
-
-  // TODO: owner 에서 구조분해할당으로 변수 꺼내오는 법 있을지?
-  // const { userId, displayName: userName } = owner;
-  // const userId = owner && owner.userId;
   const userName = owner && owner.displayName;
 
   // TODO: 작성자에게만 edit, delete 버튼이 뜨도록 해야함
-  const { tokens } = useContext(userContext);
-  const accessToken = tokens && tokens.accessToken;
-
   const handleDelete = async (url) => {
     const result = confirm('Delete this post?');
 
     if (result) {
+      const { tokens } = useContext(userContext);
+      const accessToken = tokens && tokens.accessToken;
       const res = await deleteFetch(url, accessToken);
       if (res.ok) {
         if (url.includes('questions')) {
@@ -62,19 +56,20 @@ function QuestionDetail() {
     }
   };
 
+  // TODO: answer GET 요청 없이도 되는지 확인 필요
   // * answer GET 요청 로직
-  const ANSWER_GET_URL = `${process.env.REACT_APP_URL}/questions/${id}/answers`;
-  useEffect(() => {
-    async function getData() {
-      const res = await getFetch(ANSWER_GET_URL);
-      setAnswers(res.data);
+  // const ANSWER_GET_URL = `${process.env.REACT_APP_URL}/questions/${id}/answers`;
+  // useEffect(() => {
+  //   async function getData() {
+  //     const res = await getFetch(ANSWER_GET_URL);
+  //     setAnswers(res.data);
 
-      if (res) {
-        navigate(`/questions/${id}`);
-      }
-    }
-    getData();
-  }, []);
+  //     if (res) {
+  //       navigate(`/questions/${id}`);
+  //     }
+  //   }
+  //   getData();
+  // }, []);
 
   return (
     <>
