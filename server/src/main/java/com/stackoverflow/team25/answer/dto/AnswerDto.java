@@ -1,6 +1,7 @@
 package com.stackoverflow.team25.answer.dto;
 
 import com.stackoverflow.team25.answer.entity.Answer;
+import com.stackoverflow.team25.answer.entity.Answer.AnswerType;
 import com.stackoverflow.team25.user.dto.UserDto;
 import lombok.*;
 
@@ -42,6 +43,7 @@ public class AnswerDto {
         private String content;
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
+        private AnswerType answerType;
 
         public Response(Answer answer) {
             this.answerId = answer.getAnswerId();
@@ -52,6 +54,7 @@ public class AnswerDto {
             this.content = answer.getContent();
             this.createdAt = answer.getCreatedAt();
             this.modifiedAt = answer.getModifiedAt();
+            this.answerType = answer.getAnswerType();
         }
     }
 }
