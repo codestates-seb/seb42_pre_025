@@ -15,7 +15,6 @@ public class UriCreator {
                 .toUri();
     }
 
-
     public static URI createURI(String accessToken, String refreshToken) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.add("access_token", accessToken);
@@ -30,6 +29,7 @@ public class UriCreator {
                 .path("/")
                 .queryParams(queryParams)
                 .build()
+                .toUri();
     }
 
     public static URI createCommentUri(String defaultUrl, long resourceId){

@@ -1,13 +1,22 @@
 package com.stackoverflow.team25.user.entity;
 
 import com.stackoverflow.team25.answer.entity.Answer;
-import com.stackoverflow.team25.comment.entity.Comment;
 import com.stackoverflow.team25.security.entity.UserRole;
 import lombok.*;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.stackoverflow.team25.user.entity.User.UserStatus.USER_ACTIVATE;
+import static javax.persistence.CascadeType.PERSIST;
+import static javax.persistence.CascadeType.REMOVE;
+import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.GenerationType.IDENTITY;
+import static lombok.AccessLevel.*;
+import static lombok.Builder.Default;
 
 @Entity
 @Table(name = "users")
@@ -18,24 +27,25 @@ import java.util.List;
 @AllArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long userId;
     private String password;
+    @Column(unique = true, updatable = false)
     private String email;
     private String displayName;
-    @Builder.Default
+    @Default
     private String aboutMe = "About ME!";
     private double acceptRate;
-    @Builder.Default
-    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    @Default
+    @OneToMany(mappedBy = "user", cascade = PERSIST, fetch = EAGER)
+    @Setter(PRIVATE)
     private List<UserRole> userRoles = new ArrayList<>();
-    @Builder.Default
+    @Default
     @Enumerated(EnumType.STRING)
-    private UserStatus userStatus = UserStatus.USER_ACTIVATE;
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private UserStatus userStatus = USER_ACTIVATE;
+    @Default
+    @OneToMany(mappedBy = "owner", cascade = REMOVE, fetch = LAZY)
     private List<Answer> answers = new ArrayList<>();
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Comment> comments = new ArrayList<>();
 
     public void setUserRole(UserRole userRole) {
         this.userRoles.add(userRole);
@@ -63,5 +73,9 @@ public class User {
             this.nums = nums;
             this.desc = desc;
         }
+    }
+
+    public static Long getId() {
+        return (Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }

@@ -1,15 +1,19 @@
 package com.stackoverflow.team25.user.dto;
 
 import com.stackoverflow.team25.user.entity.User;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 public class UserDto {
     @Getter
     public static class Post {
+        @Email
         private String email;
+        @NotNull
         private String password;
+        @NotNull
         private String displayName;
     }
 
@@ -24,6 +28,8 @@ public class UserDto {
     @Getter
     @Setter
     @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class Response {
         private Long userId;
         private String email;
@@ -31,5 +37,15 @@ public class UserDto {
         private String aboutMe;
         private double acceptRate;
         private User.UserStatus userStatus;
+
+        public Response(User user) {
+            this.userId = user.getUserId();
+            this.email = user.getEmail();
+            this.displayName = user.getDisplayName();
+            this.aboutMe = user.getAboutMe();
+            this.acceptRate = user.getAcceptRate();
+            this.userStatus = user.getUserStatus();
+        }
     }
+
 }
