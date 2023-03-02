@@ -1,7 +1,7 @@
 import useLoginLogic from '../../util/useLoginLogic.js';
 import Button from '../../components/UI/Button.jsx';
-import styles from './Signup.module.css';
 import AboutSignup from './AboutSignup.jsx';
+import styles from './Signup.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
@@ -28,6 +28,12 @@ function Signup() {
   // console.log(username);
   // console.log(password);
 
+  // * oauth - google
+  const handleRequestSignupGoogle = () => {
+    console.log('구글 회원가입 요청');
+    return window.location.assign('https://dev.qushe8r.shop/oauth2/authorization/google');
+  };
+
   return (
     <div className={styles.signupAuth}>
       <AboutSignup />
@@ -39,12 +45,12 @@ function Signup() {
         <div className={styles.authSignup}>
           <div className={styles.authSignupContainer}> </div>
         </div>
-        <from>
+        <form>
           <FontAwesomeIcon icon={faGoogle} className={styles.highlight} />
 
           <div className={styles.loginGoolglebtn}>
             <Button
-              text='  Sign up with Google'
+              text='Sign up with Google'
               addStyle={{
                 borderColor: 'var(--black-750)',
                 backgroundColor: 'var(--white)',
@@ -52,12 +58,13 @@ function Signup() {
                 padding: '10.4px',
                 width: '219px'
               }}
+              handleClick={handleRequestSignupGoogle}
             />
           </div>
 
           <div className={styles.signupGiHubbtn}>
             <Button
-              text='Signup in with GitHub'
+              text='Sign up with GitHub'
               addStyle={{
                 borderColor: 'var(--black)',
                 backgroundColor: 'var(--black)',
@@ -70,7 +77,7 @@ function Signup() {
 
           <div className={styles.signupFacebookbtn}>
             <Button
-              text='Signup in with Facebook'
+              text='Sign up with Facebook'
               addStyle={{
                 borderColor: 'var(--black-750)',
                 backgroundColor: 'var(--blue-900)',
@@ -80,27 +87,28 @@ function Signup() {
               }}
             />
           </div>
-        </from>
+        </form>
 
         <div className={styles.signuptextFrom}>
           <div className={styles.fromContainer}>
             <div className={styles.signupBar}>
               <form onSubmit={onSubmit}>
-                <label htmlFor='email' className={styles.label}>
+                <label htmlFor='name' className={styles.label}>
                   Display Name
                 </label>
                 <input
-                  type='email'
-                  name='username'
-                  id='email'
-                  value={username}
+                  type='text'
+                  id='name'
+                  name='displayName'
+                  maxLength={16}
+                  value={displayName}
                   onChange={onChange}
                 />
 
                 <label htmlFor='email' className={styles.label}>
                   Email
                 </label>
-                <input type='email' name='username' id='email' value={username} />
+                <input type='email' name='email' id='email' value={email} onChange={onChange} />
 
                 <label htmlFor='password' className={styles.label}>
                   Password
@@ -112,18 +120,16 @@ function Signup() {
                   value={password}
                   onChange={onChange}
                 />
-                {/* ////////// */}
-
-                {/* <a className={flex--item}
-            href="/users/account-recovery">Forgot password?</a> */}
+                <p className={styles.desc}>
+                  Passwords must contain at least eight characters, including at least 1 letter and
+                  1 number.
+                </p>
 
                 <div className={styles.signupbtn}>
                   <Button
                     text='Sign up'
                     addStyle={{
-                      width: '190px',
-
-                      textColor: 'var(--white)'
+                      width: '190px'
                     }}
                   />
                 </div>
@@ -142,4 +148,4 @@ function Signup() {
   );
 }
 
-export default Login;
+export default Signup;

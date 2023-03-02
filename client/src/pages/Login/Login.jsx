@@ -51,6 +51,7 @@ function Login() {
         <form>
           <div className={styles.loginGoolglebtn}>
             <Button
+              handleClick={handleRequestSignupGoogle}
               text='Log in with Google'
               addStyle={{
                 borderColor: 'var(--black-750)',
@@ -59,7 +60,6 @@ function Login() {
                 padding: '10.4px',
                 width: '219px'
               }}
-              handleClick={handleRequestSignupGoogle}
             />
           </div>
 
@@ -113,7 +113,6 @@ function Login() {
               <div className={styles.loginbtn}>
                 <Button
                   text='Log in'
-                  // path='/users/login'
                   addStyle={{
                     width: '180px',
                     textColor: 'var(--white)'
@@ -126,7 +125,7 @@ function Login() {
         <div className={styles.under}>
           <div>
             Don’t have an account?
-            <Link to={`/signup`} className={styles.contentSignup}>
+            <Link to={'/users/signup'} className={styles.contentSignup}>
               sign up
             </Link>
           </div>
