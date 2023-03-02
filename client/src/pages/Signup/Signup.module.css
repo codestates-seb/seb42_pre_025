@@ -51,6 +51,7 @@
 }
 
 .signupGiHubbtn {
+  margin-top: 12px;
   margin-bottom: 12px;
 }
 
@@ -63,6 +64,7 @@
 } */
 
 .under {
+  margin-top: 5px;
   color: var(--black-700);
   font-size: 12px;
 }
