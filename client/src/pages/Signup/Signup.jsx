@@ -25,7 +25,6 @@ function Signup() {
 
   // * oauth - google
   const handleRequestSignupGoogle = () => {
-    console.log('구글 회원가입 요청');
     return window.location.assign('https://dev.qushe8r.shop/oauth2/authorization/google');
   };
 

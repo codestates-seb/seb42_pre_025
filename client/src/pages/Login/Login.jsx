@@ -20,13 +20,9 @@ function Login() {
   );
 
   const { username, password } = inputs;
-  console.log(inputs);
-  console.log(username);
-  console.log(password);
 
   // * oauth - google
   const handleRequestSignupGoogle = () => {
-    console.log('구글 회원가입 요청');
     return window.location.assign('https://dev.qushe8r.shop/oauth2/authorization/google');
   };
 
