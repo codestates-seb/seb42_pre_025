@@ -46,7 +46,12 @@ function QuestionList() {
               </div>
             </div>
             <div className={styles.questionNumber}>
-              {totalElements ? `${totalElements} questions` : '0 question'}{' '}
+              {/* {totalElements ? `${totalElements} questions` : '0 question'} */}
+              {totalElements === 1
+                ? '1 question'
+                : totalElements >= 2
+                ? `${totalElements} questions`
+                : '0 question'}
             </div>
           </div>
           {questions &&
