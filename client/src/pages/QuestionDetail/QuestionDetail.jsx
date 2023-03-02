@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 import { getFetch, deleteFetch } from '../../util/API';
+import { userContext } from '../../App';
 import Nav from '../../components/Nav.jsx';
 import Footer from '../../components/Footer.jsx';
 import Button from '../../components/UI/Button.jsx';
@@ -43,11 +44,14 @@ function QuestionDetail() {
   const userName = owner && owner.displayName;
 
   // TODO: 작성자에게만 edit, delete 버튼이 뜨도록 해야함
+  const { tokens } = useContext(userContext);
+  const accessToken = tokens && tokens.accessToken;
+
   const handleDelete = async (url) => {
     const result = confirm('Delete this post?');
 
     if (result) {
-      const res = await deleteFetch(url);
+      const res = await deleteFetch(url, accessToken);
       if (res.ok) {
         if (url.includes('questions')) {
           navigate('/questions');
