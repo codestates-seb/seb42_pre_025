@@ -2,7 +2,7 @@
 
 :bulb: 서비스 소개
 -
-stackoverflow clone 사이트 입니다.
+stackoverflow clone 사이트 입니다.  
 
 :paperclip: 배포 주소
 -
@@ -36,10 +36,35 @@ https://seb42-pre-025.vercel.app/
   
 :computer: 기술 스택
 -
+### 공통
+<img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white">
+
+### Frontend
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"> <img src="https://img.shields.io/badge/JAVASCRIPT-F7DF1E?style=for-the-badge&logo=JAVASCRIPT&logoColor=white"> <img src="https://img.shields.io/badge/REACT-008FC7?style=for-the-badge&logo=REACT&logoColor=white"> <img src="https://img.shields.io/badge/VERCEL-000000?style=for-the-badge&logo=VERCEL&logoColor=white"> 
+
+### Backend
+<img src="https://img.shields.io/badge/Java-008FC7?style=for-the-badge&logo=Java&logoColor=white"> <img src="https://img.shields.io/badge/SPRING-6DB33F?style=for-the-badge&logo=SPRING&logoColor=white"> <img src="https://img.shields.io/badge/SPRING BOOT-6DB33F?style=for-the-badge&logo=SPRING BOOT&logoColor=white"> <img src="https://img.shields.io/badge/SPRING Security-6DB33F?style=for-the-badge&logo=SPRING Security&logoColor=white"> <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JWT&logoColor=white"> <img src="https://img.shields.io/badge/AMAZON EC2-FF9900?style=for-the-badge&logo=Amazon EC2&logoColor=white"> 
 
 
-:pencil2: 커밋 컨벤션
+:pencil2: 커밋 & 코드 컨벤션
 -
+| 태그 이름 | 설명 |
+| --- | --- |
+| feat | 새로운 기능 추가 |
+| fix | 버그 수정 |
+| docs | 문서 수정 |
+| refactor | 코드 리팩토링 |
+| test | 테스트 및 테스트 리팩토링 코드 작성(프로덕션 코드 변경 X) |
+| chore | 빌드 업무 수정, 패키지 매니저 설정 및 수정(프로덕션 코드 변경 X) |
+| style | 코드 수정은 없지만, 코드 포맷 변경시 작성 |
+| design | CSS 등 사용자 UI 디자인 변경 |
+| comment | 필요한 주석 추가 및 변경 |
+| rename | 파일 및 폴더를 수정하는 작업 |
+| remove | 파일 및 폴더를 삭제하는 작업 |
+| init | 초기 환경설정 |
+| !BREAKING CHANGE | 커다란 API 변경의 경우 |
+| !HOTFIX |  급하게 치명적인 버그를 고쳐야 하는 경우 |
+
 
   <details>
 <summary>코드 컨벤션</summary>
@@ -134,39 +159,10 @@ import styles from './컴포넌트명.module.css';
 
 </div>
 </details>
+
 :page_with_curl: 결과 화면
 -
 
-Java Spring info
--
-- Language : Java
-- Spring Boot ver : 2.7.8
-- Project : Metadata
-- Group : com.stackoverflow
-- Artifact : team25
-- Name : team25
-- Description : seb42_pre_team25
-- Package name :  com.stackoverflow.team25
-
-Packaging
-.Jar
-
-Java ver.
-11
-
-dependencies
-- Lombok
-- Spring Configuration Processor
-- Spring Web
-- Spring Security
-- OAuth2 Client
-- Spring Data JPA
-- PostgreSQL Driver
-- H2 Database
-- Validation
-- Java Mail Sender
-- Spring REST Docs
-
-추가 dependancies
-- Gson
-- MapStruct
+|화면|화면|화면|
+|:---:|:---:|:---:|
+|스크린샷|스크린샷|스크린샷|
