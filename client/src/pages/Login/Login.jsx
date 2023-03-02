@@ -51,13 +51,13 @@ function Login() {
         <form>
           <div className={styles.loginGoolglebtn}>
             <Button
-              text='Sign up with Google'
+              text='Log in with Google'
               addStyle={{
                 borderColor: 'var(--black-750)',
                 backgroundColor: 'var(--white)',
                 color: 'var(--black)',
                 padding: '10.4px',
-                width: '288px'
+                width: '219px'
               }}
               handleClick={handleRequestSignupGoogle}
             />
@@ -71,7 +71,7 @@ function Login() {
                 backgroundColor: 'var(--black)',
                 color: 'var(--white)',
                 padding: '10.4px',
-                width: '288px'
+                width: '219px'
               }}
             />
           </div>
@@ -85,7 +85,7 @@ function Login() {
                 color: 'var(--white)',
                 padding: '10.4px',
 
-                width: '288px'
+                width: '219px'
               }}
             />
           </div>
@@ -95,7 +95,7 @@ function Login() {
           <div className={styles.loginBar}>
             <form onSubmit={onSubmit}>
               <label htmlFor='email' className={styles.label}>
-                Username
+                Email
               </label>
               <input type='email' name='username' id='email' value={username} onChange={onChange} />
 
@@ -109,30 +109,26 @@ function Login() {
                 value={password}
                 onChange={onChange}
               />
-              {/* ////////// */}
-
-              {/* <a className={flex--item}
-            href="/users/account-recovery">Forgot password?</a> */}
 
               <div className={styles.loginbtn}>
                 <Button
-                  text='login'
-                  path='/users/login'
+                  text='Log in'
+                  // path='/users/login'
                   addStyle={{
-                    width: '248px',
+                    width: '180px',
                     textColor: 'var(--white)'
                   }}
                 />
               </div>
-
-              <div className={styles.under}>
-                <p>
-                  Don’t have an account?
-                  <br />
-                  Are you an employer?
-                </p>
-              </div>
             </form>
+          </div>
+        </div>
+        <div className={styles.under}>
+          <div>
+            Don’t have an account?
+            <Link to={`/signup`} className={styles.contentSignup}>
+              sign up
+            </Link>
           </div>
         </div>
       </div>
