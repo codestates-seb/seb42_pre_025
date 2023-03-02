@@ -126,7 +126,7 @@ function Login() {
           <div>
             Don’t have an account?
             <Link to={'/users/signup'} className={styles.contentSignup}>
-              sign up
+              Sign up
             </Link>
           </div>
         </div>

@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom';
 import styles from './Questions.module.css';
 
 function Questions({ question }) {
-  const { questionId, title, content, tags, answerCount, userDto } = question;
-  const userName = userDto && userDto.displayName;
+  const { questionId, title, content, tags, answerCount, owner } = question;
+  const userName = owner && owner.displayName;
+  console.log(question);
 
   // html 태그 제거하고 텍스트만 추출하는 정규식
   const text = content.replace(/(<([^>]+)>)/gi, '');
