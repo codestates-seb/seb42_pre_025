@@ -1,38 +1,34 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { postFetch } from '../../util/API.js';
+import { Link } from 'react-router-dom';
+import useLoginLogic from '../../util/useLoginLogic.js';
 import Button from '../../components/UI/Button.jsx';
 import styles from './Login.module.css';
 // import icon from ''
 
 function Login() {
-  const navigate = useNavigate();
-  const [inputs, setInputs] = useState({
+  const initialInputs = {
     username: '',
     password: ''
-  });
-  const { username, password } = inputs;
-
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setInputs({ ...inputs, [name]: value });
   };
-  console.log(inputs);
-
   const LOGIN_POST_URL = `${process.env.REACT_APP_URL}/login`;
-  console.log(LOGIN_POST_URL);
+  const msg = 'User name and password cannot be empty.';
 
-  // ! 유효성 검사 추가
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    // ! input 값에 빈 문자열 들어올 때 사용자에게 알림 처리해줘야 함
-    if (username === '' || password === '') return;
+  const [inputs, onChange, onSubmit] = useLoginLogic(
+    initialInputs,
+    LOGIN_POST_URL,
+    msg,
+    'username',
+    'password'
+  );
 
-    const res = await postFetch(LOGIN_POST_URL, inputs);
+  const { username, password } = inputs;
+  console.log(inputs);
+  console.log(username);
+  console.log(password);
 
-    if (res.ok) {
-      navigate('/questions');
-    }
+  // * oauth - google
+  const handleRequestSignupGoogle = () => {
+    console.log('구글 회원가입 요청');
+    return window.location.assign('https://dev.qushe8r.shop/oauth2/authorization/google');
   };
 
   return (
@@ -55,6 +51,7 @@ function Login() {
         <form>
           <div className={styles.loginGoolglebtn}>
             <Button
+              handleClick={handleRequestSignupGoogle}
               text='Log in with Google'
               addStyle={{
                 borderColor: 'var(--black-750)',
@@ -116,7 +113,6 @@ function Login() {
               <div className={styles.loginbtn}>
                 <Button
                   text='Log in'
-                  // path='/users/login'
                   addStyle={{
                     width: '180px',
                     textColor: 'var(--white)'
@@ -129,7 +125,7 @@ function Login() {
         <div className={styles.under}>
           <div>
             Don’t have an account?
-            <Link to={`/signup`} className={styles.contentSignup}>
+            <Link to={'/users/signup'} className={styles.contentSignup}>
               sign up
             </Link>
           </div>

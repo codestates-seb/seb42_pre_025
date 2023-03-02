@@ -25,7 +25,7 @@ function QuestionList() {
   }, [currentPage]);
 
   const { totalElements } = pageInfo;
-  // console.log(currentPage);
+  // console.log(questions);
 
   return (
     <>
@@ -45,7 +45,14 @@ function QuestionList() {
                 />
               </div>
             </div>
-            <div className={styles.questionNumber}>{totalElements} questions</div>
+            <div className={styles.questionNumber}>
+              {/* {totalElements ? `${totalElements} questions` : '0 question'} */}
+              {totalElements === 1
+                ? '1 question'
+                : totalElements >= 2
+                ? `${totalElements} questions`
+                : '0 question'}
+            </div>
           </div>
           {questions &&
             questions.map((question) => (

@@ -15,16 +15,15 @@ const getFetch = async (url) => {
   }
 };
 
-const postFetch = async (url, newData) => {
-  // ! 빈 문자열 들어올 때 처리해줘야 함
-  // if (userNameValue === '' || emailValue === '') return;
-
+const postFetch = async (url, newData, jwt) => {
   try {
     const res = await fetch(url, {
       method: 'POST',
       // mode: 'cors',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: jwt,
+        withCredentials: true
       },
       body: JSON.stringify(newData)
     });
@@ -40,11 +39,15 @@ const postFetch = async (url, newData) => {
   }
 };
 
-const deleteFetch = async (url) => {
+const deleteFetch = async (url, jwt) => {
   try {
     const res = await fetch(url, {
-      method: 'DELETE'
+      method: 'DELETE',
       // mode: 'cors'
+      headers: {
+        Authorization: jwt,
+        withCredentials: true
+      }
     });
     // ! 새로고침 여부 확인
     // window.location.reload();

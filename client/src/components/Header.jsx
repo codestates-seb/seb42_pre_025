@@ -5,14 +5,22 @@ import styles from './Header.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
-function Header() {
+function Header({ setIsLoggedIn, setTokens }) {
   const navigate = useNavigate();
-
   const handleLogout = async () => {
     console.log('로그아웃 클릭');
     const LOGOUT_POST_URL = `${process.env.REACT_APP_URL}/logout`;
     const res = await postFetch(LOGOUT_POST_URL);
-    if (res.ok) {
+    console.log('status code: ', res.status);
+    // console.log(typeof res.status);
+
+    if (res) {
+      setIsLoggedIn(false);
+      setTokens({
+        accessToken: '',
+        refreshToken: ''
+      });
+      console.log('/로 클라이언트가 이동시켜줌');
       navigate('/');
     }
   };
