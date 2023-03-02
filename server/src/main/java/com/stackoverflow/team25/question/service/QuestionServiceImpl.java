@@ -12,14 +12,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.stackoverflow.team25.exception.ExceptionCode.*;
-
 
 @Service
 @RequiredArgsConstructor
@@ -48,9 +49,7 @@ public class QuestionServiceImpl implements QuestionService {
             questionTag.setTag(tag);
         });
 
-        Question savedQuestion = questionRepository.save(question);
-
-        return savedQuestion;
+        return questionRepository.save(question);
     }
 
     @Override
@@ -58,7 +57,14 @@ public class QuestionServiceImpl implements QuestionService {
     public Question updateQuestion(Question question) {
         Long questionId = question.getQuestionId();
         Question verifiedQuestion = verifyQuestionById(questionId);
+        if (!Objects.equals(verifiedQuestion.getUser().getUserId(), question.getUser().getUserId())) {
+            throw new RuntimeException("수정할 수 있는 회원이 아닙니다.");
+        }
 
+        Optional.ofNullable(question.getTitle())
+                .ifPresent(verifiedQuestion::setTitle);
+        Optional.ofNullable(question.getContent())
+                .ifPresent(verifiedQuestion::setContent);
         question.getQuestionTags().forEach(questionTag -> {
             String name = questionTag.getTag().getName();
             Tag tag = tagService.verifyTag(name);
@@ -73,8 +79,13 @@ public class QuestionServiceImpl implements QuestionService {
         return verifiedQuestion;
     }
 
+//    public Question updateAnserCount(Question question) {
+//        return qR
+//    }
+
     @Override
     public Question findQuestion(long questionId) {
+
         return findVerifiedQuestion(questionId);
     }
 
@@ -90,6 +101,10 @@ public class QuestionServiceImpl implements QuestionService {
     @Transactional
     public void deleteQuestion(Long questionId) {
         Question question = verifyQuestionById(questionId);
+        Long userId = (Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!Objects.equals(question.getUser().getUserId(), userId)) {
+            throw new RuntimeException("삭제할 수 있는 회원이 아닙니다.");
+        }
         question.setQuestionType(Question.QuestionType.DELETED);
         questionRepository.save(question);
     }
@@ -103,20 +118,16 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public Question findVerifiedQuestion(long questionId) {
         Optional<Question> optionalQuestion = questionRepository.findById(questionId);
-        Question findQuestion =
-                optionalQuestion.orElseThrow(() ->
-                        new BusinessLogicException(QUESTION_NOT_FOUND));
 
-        return findQuestion;
+        return optionalQuestion.orElseThrow(() ->
+                new BusinessLogicException(QUESTION_NOT_FOUND));
     }
 
 
     //#### 내부 메서드 ###//
     private Question verifyQuestionById(Long questionId) {
         return questionRepository.findById(questionId)
-                .orElseThrow(() -> {
-                    throw new RuntimeException("해당 질문이 존재 하지 않음");
-                });
+                .orElseThrow(() -> new RuntimeException("해당 질문이 존재 하지 않음"));
     }
 
     private void verifyExistQuestion(String title) {
@@ -128,7 +139,7 @@ public class QuestionServiceImpl implements QuestionService {
     private void verifyExistTag(List<String> tagNames) {
         for (String tagName : tagNames) {
             Optional<Tag> tag = tagRepository.findByName(tagName);
-            if (!tag.isPresent()) tagService.createTag(tagName);
+            if (tag.isEmpty()) tagService.createTag(tagName);
         }
     }
 }

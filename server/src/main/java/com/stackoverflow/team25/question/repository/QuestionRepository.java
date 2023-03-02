@@ -11,8 +11,7 @@ import java.util.Optional;
 public interface QuestionRepository extends JpaRepository<Question, Long> {
     @Query("SELECT c FROM Question c WHERE c.title LIKE %:title%")
     Optional<Question> findByTitle(String title);
-    //question 조회(삭제X)
+
     @Query(value = "SELECT q FROM Question q WHERE q.questionType = 'ACTIVATE'")
     Page<Question> findQuestionPage(Pageable pageable);
-
 }

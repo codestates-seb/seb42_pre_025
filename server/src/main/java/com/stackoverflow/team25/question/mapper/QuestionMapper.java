@@ -11,6 +11,7 @@ import com.stackoverflow.team25.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,15 +31,18 @@ public class QuestionMapper {
         question.setTitle(post.getTitle());
         question.setContent(post.getContent());
         question.setUser(user);
-        List<QuestionTag> questionTags = post.getTagNames()
-                .stream()
-                .map(Tag::new)
-                .map(tag -> {
-                    QuestionTag questionTag = new QuestionTag();
-                    questionTag.setQuestion(question);
-                    questionTag.setTag(tag);
-                    return questionTag;
-                }).collect(Collectors.toList());
+        List<QuestionTag> questionTags = new ArrayList<>();
+        if (post.getTags() != null) {
+            questionTags = post.getTags()
+                    .stream()
+                    .map(Tag::new)
+                    .map(tag -> {
+                        QuestionTag questionTag = new QuestionTag();
+                        questionTag.setQuestion(question);
+                        questionTag.setTag(tag);
+                        return questionTag;
+                    }).collect(Collectors.toList());
+        }
         question.setQuestionTags(questionTags);
         return question;
     }
@@ -51,7 +55,7 @@ public class QuestionMapper {
         question.setTitle(patch.getTitle());
         question.setContent(patch.getContent());
         question.setUser(user);
-        List<QuestionTag> questionTags = patch.getTagNames()
+        List<QuestionTag> questionTags = patch.getTags()
                 .stream()
                 .map(Tag::new)
                 .map(tag -> {
@@ -78,7 +82,7 @@ public class QuestionMapper {
                 .content(question.getContent())
                 .answers(answerResponses)
                 .owner(userresponse)
-                .tagNames(tagNames)
+                .tags(tagNames)
                 .questionType(question.getQuestionType())
                 .build();
     }

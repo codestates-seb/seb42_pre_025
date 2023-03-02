@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 public class QuestionDto {
 
     @Getter
+    @Setter
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
@@ -20,7 +21,7 @@ public class QuestionDto {
         private String title;
         private String content;
         private Long userId;
-        private List<String> tagNames;
+        private List<String> tags;
 
     }
 
@@ -34,7 +35,7 @@ public class QuestionDto {
         private String title;
         private String content;
         private Long userId;
-        private List<String> tagNames;
+        private List<String> tags;
     }
 
     @Getter
@@ -49,7 +50,7 @@ public class QuestionDto {
         private String content;
         private List<AnswerDto.Response> answers;
         private UserDto.Response owner;
-        private List<String> tagNames;
+        private List<String> tags;
         private QuestionType questionType;
 
         public Response(Question question) {
@@ -77,7 +78,7 @@ public class QuestionDto {
                     .build();
 
             this.questionType = question.getQuestionType();
-            this.tagNames = question.getQuestionTags().stream().map(questionTag -> questionTag.getTag().getName()).collect(Collectors.toList());
+            this.tags = question.getQuestionTags().stream().map(questionTag -> questionTag.getTag().getName()).collect(Collectors.toList());
         }
     }
 }

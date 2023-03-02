@@ -36,7 +36,7 @@ public class Question extends Auditable {
     @ManyToOne(fetch = EAGER)
     @JoinColumn(name = "user_id")
     private User user;
-    @OneToMany(mappedBy = "question", cascade = ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "question", cascade = ALL, orphanRemoval = true, fetch = LAZY)
     private List<QuestionTag> questionTags;
     @Builder.Default
     @Enumerated(EnumType.STRING)
