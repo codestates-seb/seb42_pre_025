@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { userContext } from '../../App.js';
-import useCheckLogin from '../../util/useCheckLogin.js';
+// import useCheckLogin from '../../util/useCheckLogin.js';
 import { postFetch } from '../../util/API';
 import Editor from '../../components/UI/Editor.jsx';
 import Button from '../../components/UI/Button.jsx';
@@ -13,11 +13,11 @@ function CreateAnswer() {
   const [answerContent, setAnswerContent] = useState('');
 
   // 로그인되어 있지 않으면 로그인 페이지로 리디렉션
-  useCheckLogin();
+  // useCheckLogin();
 
   // * answer POST 요청
   const ANSWER_POST_URL = `${process.env.REACT_APP_URL}/questions/${id}/add`;
-  const { tokens } = useContext(userContext);
+  const { isLoggedIn, tokens } = useContext(userContext);
   const accessToken = tokens && tokens.accessToken;
 
   const onSubmit = async (e) => {
@@ -31,14 +31,22 @@ function CreateAnswer() {
     };
 
     const res = await postFetch(ANSWER_POST_URL, newData, accessToken);
-    const headerLocation = res.headers.get('Location').slice(4); // '/questions/49/add/37'
-    const location = headerLocation.slice(0, headerLocation.indexOf('/add')); // '/questions/49'
-    console.log(location);
+    // const headerLocation = res.headers.get('Location').slice(4); // '/questions/49/add/37'
+    // const location = headerLocation.slice(0, headerLocation.indexOf('/add')); // '/questions/49'
+    // console.log(location);
 
     if (res) {
       console.log('답변 등록 후 location 확인 필요');
       setAnswerContent('');
-      navigate(location);
+      // navigate(location);
+      window.history.go(0);
+    }
+  };
+
+  const checkLogin = () => {
+    if (!isLoggedIn) {
+      alert('Please log in first to post your answer.');
+      navigate('/users/login');
     }
   };
 
@@ -47,7 +55,7 @@ function CreateAnswer() {
       <h2 className={styles.answerHeader}>Your Answer</h2>
       <Editor content={answerContent} setInputs={setAnswerContent} />
       <div className={styles.submitBtn}>
-        <Button text='Post your question' />
+        <Button text='Post your question' handleClick={checkLogin} />
       </div>
     </form>
   );
