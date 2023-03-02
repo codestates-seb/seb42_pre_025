@@ -161,7 +161,18 @@ import styles from './컴포넌트명.module.css';
 
 :page_with_curl: 결과 화면
 -
-
-|화면|화면|화면|
+  
+|홈페이지|회원가입|로그인|
 |:---:|:---:|:---:|
-|스크린샷|스크린샷|스크린샷|
+|<img width="350" src="https://user-images.githubusercontent.com/48472652/222427422-09d3763b-f01c-4034-b2e2-2c6d5e043a56.png">|<img width="350" src="https://user-images.githubusercontent.com/48472652/222429119-c63919f4-1ca9-43e6-8f2b-21cdae22b551.png">|<img width="350" src="https://user-images.githubusercontent.com/48472652/222429273-dcf43886-901f-4394-8807-00543b641f58.png">|
+  
+|질문목록|질문등록|질문삭제|
+|:---:|:---:|:---:|
+|<img width="350" src="https://user-images.githubusercontent.com/48472652/222430512-537d642b-08b6-426e-bc5f-a2db6a1bdeed.png">|<img width="350" src="https://user-images.githubusercontent.com/48472652/222430875-c467af50-24b9-49e4-a1c2-800b2dce4d50.png">|<img width="350" src="https://user-images.githubusercontent.com/48472652/222433037-82f9680d-906d-4502-a987-14dd010b6f1c.png">|
+
+|질문수정|답변등록|답변삭제|
+|:---:|:---:|:---:|
+|<img width="350" src="https://user-images.githubusercontent.com/48472652/222431163-bd9c1dd6-1fc0-45e6-8719-c30857d0d2a7.png">|<img width="350" src="https://user-images.githubusercontent.com/48472652/222432133-7b260652-18ac-4599-8ceb-6da9f0ef0a7f.png">|<img width="350" src="https://user-images.githubusercontent.com/48472652/222432517-71a3bacc-8ad6-49e0-af36-97811197dec1.png">|
+
+
+
