@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 
+import java.util.Optional;
+
 public interface UserService {
 
     User createUser(User user);
@@ -17,7 +19,7 @@ public interface UserService {
 
     void deleteUser(long userId);
 
-    User findUserByEmail(String email);
+    Optional<User> findUserByEmail(String email);
 
     User getUser(Authentication authentication);
 

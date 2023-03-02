@@ -3,11 +3,17 @@ package com.stackoverflow.team25.user.dto;
 import com.stackoverflow.team25.user.entity.User;
 import lombok.*;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+
 public class UserDto {
     @Getter
     public static class Post {
+        @Email
         private String email;
+        @NotNull
         private String password;
+        @NotNull
         private String displayName;
     }
 
