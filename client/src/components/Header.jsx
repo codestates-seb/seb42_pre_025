@@ -1,14 +1,34 @@
-import { Link } from 'react-router-dom';
-import useLogoutLogic from '../util/useLogoutLogic.js';
+import { useEffect, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { userContext } from '../App.js';
+import { postFetch } from '../util/API.js';
 import Button from './UI/Button.jsx';
 import styles from './Header.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 function Header() {
+  const navigate = useNavigate();
+  const { setTokens, tokens, setIsLoggedIn, isLoggedIn } = useContext(userContext);
+
+  useEffect(() => {
+    localStorage.removeItem('login');
+    localStorage.removeItem('jwt');
+  }, [tokens, isLoggedIn]);
+
   const handleLogout = async () => {
-    const isLoggedIn = useLogoutLogic();
-    console.log('로그아웃 결과: ', isLoggedIn);
+    const LOGOUT_POST_URL = `${process.env.REACT_APP_URL}/logout`;
+    const res = await postFetch(LOGOUT_POST_URL);
+
+    if (res) {
+      setIsLoggedIn(false);
+      setTokens({
+        accessToken: '',
+        refreshToken: ''
+      });
+
+      navigate('/');
+    }
   };
 
   return (
