@@ -22,7 +22,8 @@ const postFetch = async (url, newData, jwt) => {
       // mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: jwt
+        Authorization: jwt,
+        withCredentials: true
       },
       body: JSON.stringify(newData)
     });
@@ -38,11 +39,15 @@ const postFetch = async (url, newData, jwt) => {
   }
 };
 
-const deleteFetch = async (url) => {
+const deleteFetch = async (url, jwt) => {
   try {
     const res = await fetch(url, {
-      method: 'DELETE'
+      method: 'DELETE',
       // mode: 'cors'
+      headers: {
+        Authorization: jwt,
+        withCredentials: true
+      }
     });
     // ! 새로고침 여부 확인
     // window.location.reload();
