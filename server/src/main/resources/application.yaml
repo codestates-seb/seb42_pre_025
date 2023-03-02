@@ -5,8 +5,7 @@ spring:
 spring:
   profiles: postgres
   datasource:
-#    url: jdbc:postgresql://newjeans-database.ctqi1goelh1j.ap-northeast-2.rds.amazonaws.com:5432/newjeans_database
-    url: jdbc:postgresql://localhost:5432/springboot
+    url: jdbc:postgresql://${AWS_DATABASE_URL}:5432/${AWS_DATABASE_NAME}
     password: ${POSTGRESQL_PASSWORD}
     username: ${POSTGRESQL_USERNAME}
   jpa:
@@ -16,11 +15,80 @@ spring:
     properties:
       hibernate:
         highlight_sql: true
-        format_sql: true
+#        format_sql: true
         show_sql: true
         jdbc:
           lob:
             non_contextual_creation: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  output:
+    ansi:
+      enabled: always
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${GITHUB_CLIENT_ID}
+            client-secret: ${GITHUB_CLIENT_SECRET}
+            scope:
+              - user:email
+              - user:profile
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            redirect-uri: https://dev.qushe8r.shop/login/oauth2/code/google
+            scope:
+              - email
+              - profile
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: INFO
+#      springframework:
+#        orm:
+#          jpa: INFO
+mail:
+  smtp:
+    host: smtp.gmail.com
+    port: 587
+    username: ${GMAIL_USERNAME}
+    password: ${GMAIL_PASSWORD}
+    auth: true
+    starttls:
+      enable: true
+  subject:
+    user:
+      registration: Thank you for registration!
+  template:
+    name:
+      user:
+        join: email-registration-member
+jwt:
+  key: ${JWT_SECRET_KEY}
+  access-token-expiration-minutes: 40
+  refresh-token-expiration-minutes: 420
+---
+spring:
+  profiles: h2
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
   output:
     ansi:
       enabled: always
@@ -40,21 +108,35 @@ spring:
             scope:
               - email
               - profile
----
-spring:
-  profiles: h2
-  h2:
-    console:
-      enabled: true
-      path: /h2
-  datasource:
-    url: jdbc:h2:mem:test
-    username: sa
-    password:
-  jpa:
-    hibernate:
-      ddl-auto: create
-    show-sql: true
-    properties:
+server:
+  servlet:
+    session:
+      cookie:
+        same-site: none
+        secure: true
+logging:
+  level:
+    org:
       hibernate:
-        format_sql: true
+        type:
+          descriptor:
+            sql: TRACE
+      springframework:
+        orm:
+          jpa: DEBUG
+mail:
+  smtp:
+    host: smtp.gmail.com
+    port: 587
+    username: ${GMAIL_USERNAME}
+    password: ${GMAIL_PASSWORD}
+    auth: true
+    starttls:
+      enable: true
+  subject:
+    user:
+      registration: Thank you for registration!
+  template:
+    name:
+      user:
+        join: email-registration-member

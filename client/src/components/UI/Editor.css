@@ -1,0 +1,19 @@
+.quill {
+  margin-top: 4px;
+}
+.ql-container {
+  min-height: 200px;
+  line-height: 1.5;
+}
+
+.ql-container p,
+.ql-container pre {
+  margin-bottom: 8px;
+}
+
+p strong {
+  font-weight: 600;
+}
+p em {
+  font-style: italic;
+}

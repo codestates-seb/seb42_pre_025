@@ -1,0 +1,115 @@
+#footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 278px;
+  background-color: var(--black-800);
+  padding: 32px 0px 12px 0px;
+}
+
+.container {
+  width: 90%;
+  max-width: 1280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.firstBox {
+  display: flex;
+  width: 72px;
+  height: 258px;
+  margin: -12px 0px 32px 0px;
+}
+
+.img {
+  width: 40px;
+  height: 37px;
+}
+
+.secondBox {
+  padding: 0px 12px 24px 0px;
+  height: 254px;
+  width: 15.7vw;
+}
+
+.thirdBox {
+  padding: 0px 12px 24px 0px;
+  height: 254px;
+  width: 11.3vw;
+}
+
+.forthBox {
+  padding: 0px 12px 24px 0px;
+  height: 254px;
+  width: 14vw;
+}
+
+.fifthBox {
+  padding: 0px 12px 24px 0px;
+  height: 254px;
+  width: 22.4vw;
+}
+
+.sixthBox {
+  width: 24vw;
+  height: 278px;
+  color: var(--black-400);
+}
+
+.sixthBoxSNS {
+  display: flex;
+  font-size: 11px;
+  height: 14.3px;
+  padding: 3px 0px 4px 0px;
+}
+
+.sixthDetail {
+  margin: 188px 0px 24px 0px;
+  height: 43px;
+  line-height: 14.3px;
+  font-size: 12px;
+}
+
+.snsFirst {
+  padding: 4px 0px;
+}
+
+.snsMargin {
+  padding: 4px 0px;
+  margin-left: 15px;
+}
+
+.title {
+  height: 17px;
+  line-height: 17px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--black-200);
+}
+
+.secondTitle {
+  margin-top: 12px;
+  height: 25px;
+  line-height: 25px;
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--black-400);
+}
+
+.third {
+  height: 25px;
+  line-height: 25px;
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--black-400);
+}
+
+.api {
+  height: 25px;
+  line-height: 25px;
+  margin-top: 16px;
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--black-400);
+}
