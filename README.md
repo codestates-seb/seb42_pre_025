@@ -37,20 +37,17 @@ BE : ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 
 
-[활동 기록, 회의기록 및 칸반보드]
-(https://www.notion.so/codestates/3df9b9ad27a749d687f360dff69ab7ef)
+## 활동 기록
 
-[Commit Convention]
-(https://www.notion.so/codestates/Commit-Convention-d8239314567e42da92cb958511e799af)
+ :scroll:[활동 기록, 회의기록 및 칸반보드](https://www.notion.so/codestates/3df9b9ad27a749d687f360dff69ab7ef)
 
-[요구사항 정의서]
-(https://docs.google.com/spreadsheets/d/1WHwyDLI1bqthNM4a_FT1rRkLSApj1W5WoN8jVh_OHOg/edit#gid=1661060620)
+:bookmark:[Commit Convention](https://www.notion.so/codestates/Commit-Convention-d8239314567e42da92cb958511e799af)
 
-[api 명세서]
-(https://docs.google.com/spreadsheets/d/1WHwyDLI1bqthNM4a_FT1rRkLSApj1W5WoN8jVh_OHOg/edit#gid=961764758)
+:incoming_envelope:[요구사항 정의서](https://docs.google.com/spreadsheets/d/1WHwyDLI1bqthNM4a_FT1rRkLSApj1W5WoN8jVh_OHOg/edit#gid=1661060620)
 
-[User flow]
-(https://www.figma.com/file/uNUbBMMRbvj1bIJcq6d0qG/User-Flow)
+:clipboard:[api 명세서](https://docs.google.com/spreadsheets/d/1WHwyDLI1bqthNM4a_FT1rRkLSApj1W5WoN8jVh_OHOg/edit#gid=961764758)
+
+:chart_with_upwards_trend:[User flow](https://www.figma.com/file/uNUbBMMRbvj1bIJcq6d0qG/User-Flow)
 
 
 
