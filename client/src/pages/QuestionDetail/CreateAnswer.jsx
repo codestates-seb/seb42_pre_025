@@ -47,7 +47,7 @@ function CreateAnswer() {
       <h2 className={styles.answerHeader}>Your Answer</h2>
       <Editor content={answerContent} setInputs={setAnswerContent} />
       <div className={styles.submitBtn}>
-        <Button text='Post your question' handleClick={checkLogin} />
+        <Button text='Post your answer' handleClick={checkLogin} />
       </div>
     </form>
   );
