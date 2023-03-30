@@ -1,55 +1,41 @@
-# IPillU project 
-## &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by team.🍙 양반김에 양조간장🥢
+# :headphones: 네? 뉴진스의 하입보이요 Team 입니다.
 
-## :bulb: 프로젝트 개요
-
-현대인들의 개인의 건강에 대한 관심이 증가함에 따라
-트렌드에 맞는 헬스 케어 관련된 서비스 기획하고, 영양제 영역에서 사용자 친화적 서비스 를 구상하였다.             									
-
-영양제의 종류와 복용법, 유통기한 등을 일일이 기억하는 일은 불편하므로,
-개인이 자신이 먹는 영양제와 약을 손쉽게 관리할 수 있는 서비스, 또한 적절한 영양제를 추천해 주는 맞춤형 서비스를 개발하였다.
-
-## 🥅 프로젝트 목표
-사용자가 자신이 복용하는 영양제나 처방약을 구분하여 등록하고 
-복용 시간, 기간 등을 입력하여 타임라인에 따라 체계적으로 관리하는 서비스를 개발한다.
-직접 입력한 건강 데이터를 바탕으로 적절한 영양제를 추천 받을 수 있고
-사용자가 보다 쉽고 효과적으로 건강 관리를 할 수 있도록 돕는 서비스를 개발한다.
-
+:bulb: 프로젝트 목표
 -
+부트캠프 기간동안 학습한 지식들을 응용하여 컴퓨터 프로그래밍의 다양한 주제에 대한 질문과 답변의 기능 서비스를 제공하는 스택 오버플로(Stack Overflow) 를 설계단계부터 프론트엔드-백엔드간 협업하며 프로젝트를 진행하며 진행에 필요한 상호간의 지식을 습득하고 요구사항을 조율하며 협업경험을 체득한다
 
 :paperclip: 배포 주소
 -
-+ [IPillU 배포 주소(AWS)](http://bucket-for-main13.s3-website.ap-northeast-2.amazonaws.com/)
+https://seb42-pre-025-seb42-pre-025.vercel.app/
+
+세부정보 -> 이 안전하지 않은 사이트를 방문 클릭해주세요.
+
+(Stack Overflow를 똑같이 구현한 사이트이므로, 브라우저에서 사기성 사이트 주의 메세지가 출력되고 있습니다.)
 
 :calendar: 프로젝트 기간
 -
-23.03.03 ~ 23.04.02
+23.02.13 ~ 23.03.02
 
 :file_folder: 문서함
 - 
-+ [사용자 요구사항 정의서](https://docs.google.com/spreadsheets/d/17eBM3l6ISMAeMXSSNHd_SefAwoWtXF-VQcBI1VOaVSE/edit#gid=0)
-+ [API 명세서](https://documenter.getpostman.com/view/24689794/2s93JtRQ54)
-+ [API 명세서2](https://documenter.getpostman.com/view/24689794/2s93JxsMP7)
-+ [화면 정의서](https://drive.google.com/file/d/1bUcgcAfQcFdfLkO6aKqS2vBGdcjgR91o/view)
-+ [개발자 테스트](https://drive.google.com/file/d/1WwghUac7BKHWVWvpLnS-HU8FGfN-wagt/view)
-+ [활동 기록, 회의기록](https://www.notion.so/codestates/51d619ec198340e0a317638e2cd85e04?p=ae3c8e6bbbcf49209378a560987a1f70&pm=s)
++ [사용자 요구사항 정의서](https://docs.google.com/spreadsheets/d/1WHwyDLI1bqthNM4a_FT1rRkLSApj1W5WoN8jVh_OHOg/edit#gid=1661060620)
++ [API 명세서](https://docs.google.com/spreadsheets/d/1WHwyDLI1bqthNM4a_FT1rRkLSApj1W5WoN8jVh_OHOg/edit#gid=961764758)
++ [User Flow](https://www.figma.com/file/uNUbBMMRbvj1bIJcq6d0qG/User-Flow?node-id=0%3A1&t=XcrCYRrGDkqZgcME-0)
++ [개발자 테스트](https://docs.google.com/spreadsheets/d/1WHwyDLI1bqthNM4a_FT1rRkLSApj1W5WoN8jVh_OHOg/edit#gid=1232042637)
++ [활동 기록, 회의기록 및 칸반보드](https://www.notion.so/codestates/3df9b9ad27a749d687f360dff69ab7ef)
 
 :family: 팀원 소개
 -
 
 ### Frontend
-|김민지|김태은|양예진|
-|------|---|---|
-|JOAAAAAAAAAAA|10xc|:---:|
-|------|---|---|
-|blueseablueskyblueme@gmail.com|01053702613a@gmail.com|topbuty97@gmail.com|
+|김아애|이현동|김지아|
+|:---:|:---:|:---:|
+|[Ah-ae](https://github.com/Ah-ae)|[benidene](https://github.com/benidene)|[jia222](https://github.com/jia222)|
 
 ### Backend
-|빈종현|조민기|
-|------|---|
-|JONGHYUNVAN|SEB-BE-42-mkcho|
-|------|---|
-|billlys2@gmail.com|withmove@gmail.com|
+|김규하|반종현|심현보|
+|:---:|:---:|:---:|
+|[steadykyu](https://github.com/steadykyu)|[JONGHYUNVAN](https://github.com/JONGHYUNVAN)|[qushe8r](https://github.com/qushe8r)|
 
 :computer: 기술 스택
 -
@@ -67,18 +53,20 @@
 -
 | 태그 이름 | 설명 |
 | --- | --- |
-| [Feat] | 새로운 기능 추가 |
-| [Fix] | 버그 수정 |
-| [Docs] | 문서 수정 |
-| [Refactor] | 코드 리팩토링 |
-| [Test] | 테스트 및 테스트 리팩토링 코드 작성(프로덕션 코드 변경 X) |
-| [Chore] | 빌드 업무 수정, 패키지 매니저 설정 및 수정(프로덕션 코드 변경 X) |
-| [Style] | 코드 수정은 없지만, 코드 포맷 변경시 작성 |
-| [Design] | CSS 등 사용자 UI 디자인 변경 |
-| [Comment] | 필요한 주석 추가 및 변경 |
-| [Rename] | 파일 및 폴더를 수정하는 작업 |
-| [Remove] | 파일 및 폴더를 삭제하는 작업 |
-
+| feat | 새로운 기능 추가 |
+| fix | 버그 수정 |
+| docs | 문서 수정 |
+| refactor | 코드 리팩토링 |
+| test | 테스트 및 테스트 리팩토링 코드 작성(프로덕션 코드 변경 X) |
+| chore | 빌드 업무 수정, 패키지 매니저 설정 및 수정(프로덕션 코드 변경 X) |
+| style | 코드 수정은 없지만, 코드 포맷 변경시 작성 |
+| design | CSS 등 사용자 UI 디자인 변경 |
+| comment | 필요한 주석 추가 및 변경 |
+| rename | 파일 및 폴더를 수정하는 작업 |
+| remove | 파일 및 폴더를 삭제하는 작업 |
+| init | 초기 환경설정 |
+| !BREAKING CHANGE | 커다란 API 변경의 경우 |
+| !HOTFIX |  급하게 치명적인 버그를 고쳐야 하는 경우 |
 
 
   <details>
@@ -170,6 +158,21 @@ import styles from './컴포넌트명.module.css';
 
 </div>
 </details>
+
+:page_with_curl: 결과 화면
+-
+  
+|홈페이지|회원가입|로그인|
+|:---:|:---:|:---:|
+|<img width="350" src="https://user-images.githubusercontent.com/48472652/222427422-09d3763b-f01c-4034-b2e2-2c6d5e043a56.png">|<img width="350" src="https://user-images.githubusercontent.com/48472652/222429119-c63919f4-1ca9-43e6-8f2b-21cdae22b551.png">|<img width="350" src="https://user-images.githubusercontent.com/48472652/222429273-dcf43886-901f-4394-8807-00543b641f58.png">|
+  
+|질문목록|질문등록|질문삭제|
+|:---:|:---:|:---:|
+|<img width="350" src="https://user-images.githubusercontent.com/48472652/222430512-537d642b-08b6-426e-bc5f-a2db6a1bdeed.png">|<img width="350" src="https://user-images.githubusercontent.com/48472652/222430875-c467af50-24b9-49e4-a1c2-800b2dce4d50.png">|<img width="350" src="https://user-images.githubusercontent.com/48472652/222433037-82f9680d-906d-4502-a987-14dd010b6f1c.png">|
+
+|질문수정|답변등록|답변삭제|
+|:---:|:---:|:---:|
+|<img width="350" src="https://user-images.githubusercontent.com/48472652/222431163-bd9c1dd6-1fc0-45e6-8719-c30857d0d2a7.png">|<img width="350" src="https://user-images.githubusercontent.com/48472652/222432133-7b260652-18ac-4599-8ceb-6da9f0ef0a7f.png">|<img width="350" src="https://user-images.githubusercontent.com/48472652/222432517-71a3bacc-8ad6-49e0-af36-97811197dec1.png">|
 
 
 
