@@ -5,7 +5,7 @@
 
 :paperclip: 배포 주소
 -
-트이므로, 브라우저에서 사기성 사이트 주의 메세지가 출력되고 있습니다.)
++ [배포 주소](http://bucket-for-main13.s3-website.ap-northeast-2.amazonaws.com/)
 
 :calendar: 프로젝트 기간
 -
