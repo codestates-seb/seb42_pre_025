@@ -1,11 +1,12 @@
-# IPillU project ## by team.🍙 양반김에 양조간장🥢
+# IPillU project 
+## &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by team.🍙 양반김에 양조간장🥢
 
 :bulb: 프로젝트 목표
 -목표
 
 :paperclip: 배포 주소
 -
-+ [배포 주소](http://bucket-for-main13.s3-website.ap-northeast-2.amazonaws.com/)
++ [IPillU 배포 주소(AWS)](http://bucket-for-main13.s3-website.ap-northeast-2.amazonaws.com/)
 
 :calendar: 프로젝트 기간
 -
@@ -13,11 +14,12 @@
 
 :file_folder: 문서함
 - 
-+ [사용자 요구사항 정의서](https://docs.google.com/spreadsheets/d/1WHwyDLI1bqthNM4a_FT1rRkLSApj1W5WoN8jVh_OHOg/edit#gid=1661060620)
-+ [API 명세서](https://docs.google.com/spreadsheets/d/1WHwyDLI1bqthNM4a_FT1rRkLSApj1W5WoN8jVh_OHOg/edit#gid=961764758)
-+ [User Flow](https://www.figma.com/file/uNUbBMMRbvj1bIJcq6d0qG/User-Flow?node-id=0%3A1&t=XcrCYRrGDkqZgcME-0)
-+ [개발자 테스트](https://docs.google.com/spreadsheets/d/1WHwyDLI1bqthNM4a_FT1rRkLSApj1W5WoN8jVh_OHOg/edit#gid=1232042637)
-+ [활동 기록, 회의기록 및 칸반보드](https://www.notion.so/codestates/3df9b9ad27a749d687f360dff69ab7ef)
++ [사용자 요구사항 정의서](https://docs.google.com/spreadsheets/d/17eBM3l6ISMAeMXSSNHd_SefAwoWtXF-VQcBI1VOaVSE/edit#gid=0)
++ [API 명세서](https://documenter.getpostman.com/view/24689794/2s93JtRQ54)
++ [API 명세서2](https://documenter.getpostman.com/view/24689794/2s93JxsMP7)
++ [화면 정의서](https://drive.google.com/file/d/1bUcgcAfQcFdfLkO6aKqS2vBGdcjgR91o/view)
++ [개발자 테스트](https://drive.google.com/file/d/1WwghUac7BKHWVWvpLnS-HU8FGfN-wagt/view)
++ [활동 기록, 회의기록](https://www.notion.so/codestates/51d619ec198340e0a317638e2cd85e04?p=ae3c8e6bbbcf49209378a560987a1f70&pm=s)
 
 :family: 팀원 소개
 -
