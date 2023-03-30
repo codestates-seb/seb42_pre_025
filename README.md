@@ -1,8 +1,21 @@
 # IPillU project 
-## &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by team.🍙 양반김에 양조간장🥢
+## &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; by team.🍙 양반김에 양조간장🥢
 
-:bulb: 프로젝트 목표
--목표
+## :bulb: 프로젝트 개요
+
+현대인들의 개인의 건강에 대한 관심이 증가함에 따라
+트렌드에 맞는 헬스 케어 관련된 서비스 기획하고, 영양제 영역에서 사용자 친화적 서비스 를 구상하였다.             									
+
+영양제의 종류와 복용법, 유통기한 등을 일일이 기억하는 일은 불편하므로,
+개인이 자신이 먹는 영양제와 약을 손쉽게 관리할 수 있는 서비스, 또한 적절한 영양제를 추천해 주는 맞춤형 서비스를 개발하였다.
+
+## 🥅 프로젝트 목표
+사용자가 자신이 복용하는 영양제나 처방약을 구분하여 등록하고 
+복용 시간, 기간 등을 입력하여 타임라인에 따라 체계적으로 관리하는 서비스를 개발한다.
+직접 입력한 건강 데이터를 바탕으로 적절한 영양제를 추천 받을 수 있고
+사용자가 보다 쉽고 효과적으로 건강 관리를 할 수 있도록 돕는 서비스를 개발한다.
+
+-
 
 :paperclip: 배포 주소
 -
@@ -26,13 +39,13 @@
 
 ### Frontend
 |김민지|김태은|양예진|
-|:---:|:---:|:---:|
-|:---:|:---:|:---:|
+|JOAAAAAAAAAAA|10xc|:---:|
+|blueseablueskyblueme@gmail.com|01053702613a@gmail.com|topbuty97@gmail.com|
 
 ### Backend
 |빈종현|조민기|
-|:---:|:---:|
-:---:|:---:|
+|JONGHYUNVAN|SEB-BE-42-mkcho|
+|billlys2@gmail.com|withmove@gmail.com|
 
 :computer: 기술 스택
 -
