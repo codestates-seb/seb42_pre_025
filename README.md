@@ -1,20 +1,15 @@
 🍙 양반김에 양조간장🥢
 
 :bulb: 프로젝트 목표
--
-부트캠프 기간동안 학습한 지식들을 응용하여 컴퓨터 프로그래밍의 다양한 주제에 대한 질문과 답변의 기능 서비스를 제공하는 스택 오버플로(Stack Overflow) 를 설계단계부터 프론트엔드-백엔드간 협업하며 프로젝트를 진행하며 진행에 필요한 상호간의 지식을 습득하고 요구사항을 조율하며 협업경험을 체득한다
+-목표
 
 :paperclip: 배포 주소
 -
-https://seb42-pre-025-seb42-pre-025.vercel.app/
-
-세부정보 -> 이 안전하지 않은 사이트를 방문 클릭해주세요.
-
-(Stack Overflow를 똑같이 구현한 사이트이므로, 브라우저에서 사기성 사이트 주의 메세지가 출력되고 있습니다.)
+트이므로, 브라우저에서 사기성 사이트 주의 메세지가 출력되고 있습니다.)
 
 :calendar: 프로젝트 기간
 -
-23.02.13 ~ 23.03.02
+23.03.03 ~ 23.04.02
 
 :file_folder: 문서함
 - 
@@ -28,14 +23,14 @@ https://seb42-pre-025-seb42-pre-025.vercel.app/
 -
 
 ### Frontend
-|김아애|이현동|김지아|
+|김민지|김태은|양예진|
 |:---:|:---:|:---:|
-|[Ah-ae](https://github.com/Ah-ae)|[benidene](https://github.com/benidene)|[jia222](https://github.com/jia222)|
+|:---:|:---:|:---:|
 
 ### Backend
-|김규하|반종현|심현보|
-|:---:|:---:|:---:|
-|[steadykyu](https://github.com/steadykyu)|[JONGHYUNVAN](https://github.com/JONGHYUNVAN)|[qushe8r](https://github.com/qushe8r)|
+|빈종현|조민기|
+|:---:|:---:|
+:---:|:---:|
 
 :computer: 기술 스택
 -
@@ -159,20 +154,6 @@ import styles from './컴포넌트명.module.css';
 </div>
 </details>
 
-:page_with_curl: 결과 화면
--
-  
-|홈페이지|회원가입|로그인|
-|:---:|:---:|:---:|
-|<img width="350" src="https://user-images.githubusercontent.com/48472652/222427422-09d3763b-f01c-4034-b2e2-2c6d5e043a56.png">|<img width="350" src="https://user-images.githubusercontent.com/48472652/222429119-c63919f4-1ca9-43e6-8f2b-21cdae22b551.png">|<img width="350" src="https://user-images.githubusercontent.com/48472652/222429273-dcf43886-901f-4394-8807-00543b641f58.png">|
-  
-|질문목록|질문등록|질문삭제|
-|:---:|:---:|:---:|
-|<img width="350" src="https://user-images.githubusercontent.com/48472652/222430512-537d642b-08b6-426e-bc5f-a2db6a1bdeed.png">|<img width="350" src="https://user-images.githubusercontent.com/48472652/222430875-c467af50-24b9-49e4-a1c2-800b2dce4d50.png">|<img width="350" src="https://user-images.githubusercontent.com/48472652/222433037-82f9680d-906d-4502-a987-14dd010b6f1c.png">|
-
-|질문수정|답변등록|답변삭제|
-|:---:|:---:|:---:|
-|<img width="350" src="https://user-images.githubusercontent.com/48472652/222431163-bd9c1dd6-1fc0-45e6-8719-c30857d0d2a7.png">|<img width="350" src="https://user-images.githubusercontent.com/48472652/222432133-7b260652-18ac-4599-8ceb-6da9f0ef0a7f.png">|<img width="350" src="https://user-images.githubusercontent.com/48472652/222432517-71a3bacc-8ad6-49e0-af36-97811197dec1.png">|
 
 
 
