@@ -39,12 +39,17 @@
 
 ### Frontend
 |김민지|김태은|양예진|
+
 |JOAAAAAAAAAAA|10xc|:---:|
+
 |blueseablueskyblueme@gmail.com|01053702613a@gmail.com|topbuty97@gmail.com|
 
 ### Backend
 |빈종현|조민기|
+
+
 |JONGHYUNVAN|SEB-BE-42-mkcho|
+
 |billlys2@gmail.com|withmove@gmail.com|
 
 :computer: 기술 스택
