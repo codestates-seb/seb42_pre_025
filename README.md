@@ -1,4 +1,4 @@
-🍙 양반김에 양조간장🥢
+IPillU project by team.🍙 양반김에 양조간장🥢
 
 :bulb: 프로젝트 목표
 -목표
